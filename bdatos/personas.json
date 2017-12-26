@@ -1,0 +1,88 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "direccion",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "telefono",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "tipodocumento",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "documento",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required|max:20"
+    },
+    {
+        "name": "expedicion",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required"
+    },
+    {
+        "name": "estado",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "max:10"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,archivospersonas"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,pnaturales"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,pjuridicas"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,contratos"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

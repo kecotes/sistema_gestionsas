@@ -1,0 +1,180 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "entidadcontratante",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "objetocontrato",
+        "dbType": "longtext"
+    },
+    {
+        "name": "nocontrato",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "ncontrato",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required"
+    },
+    {
+        "name": "apodocontrato",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "valorcontratol",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "valorcontrato",
+        "dbType": "double",
+        "validations": "required"
+    },
+    {
+        "name": "valoranticipol",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "valoranticipo",
+        "dbType": "double"
+    },
+    {
+        "name": "porcentajeanticipo",
+        "dbType": "double"
+    },
+    {
+        "name": "formapago",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "valoradicional",
+        "dbType": "double"
+    },
+    {
+        "name": "valoranticipoadicional",
+        "dbType": "double"
+    },
+    {
+        "name": "plazoinicial",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "fechainiciacion",
+        "dbType": "date"
+    },
+    {
+        "name": "fechafinalizacion",
+        "dbType": "date"
+    },
+    {
+        "name": "tipocontrato",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required"
+    },
+    {
+        "name": "estado",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,datosejecucionfisicofinanciera"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,subcontratos"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,polizas"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,estadopolizas"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,actividadescontratos"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,balancesfinancieros"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,novedadfecha"
+    },
+    {
+        "name": "idpersonas",
+        "dbType": "integer:unsigned:foreign,personas,id",
+        "htmlType": "text",
+        "relation": "mt1,personas,idpersonas,id"
+    },
+    {
+        "name": "identidadescontratantes",
+        "dbType": "integer:unsigned:foreign,entidadescontratantes,id",
+        "htmlType": "text",
+        "relation": "mt1,entidadescontratantes,identidadescontratantes,id"
+    },
+    {
+        "name": "idtiposcontratos",
+        "dbType": "integer:unsigned:foreign,tiposcontratos,id",
+        "htmlType": "text",
+        "relation": "mt1,tiposcontratos,idtiposcontratos,id"
+    },
+    {
+        "name": "idcontratistas",
+        "dbType": "string"
+    },
+    {
+        "name": "idrepresentante",
+        "dbType": "string"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

@@ -1,0 +1,109 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "item",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "tema",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "descripcion",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "unidad",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "valunitario",
+        "dbType": "double"
+    },
+    {
+        "name": "proyectadocantidad",
+        "dbType": "double"
+    },
+    {
+        "name": "proyectadototalunitario",
+        "dbType": "double"
+    },
+    {
+        "name": "proyectadoporcentaje",
+        "dbType": "double"
+    },
+    {
+        "name": "ejecutadocantidad",
+        "dbType": "double"
+    },
+    {
+        "name": "ejecutadototalunitario",
+        "dbType": "double"
+    },
+    {
+        "name": "ejecutadoporcentaje",
+        "dbType": "double"
+    },
+    {
+        "name": "porejecutarcantidad",
+        "dbType": "double"
+    },
+    {
+        "name": "porejecutartotalunitario",
+        "dbType": "double"
+    },
+    {
+        "name": "porejecutarporcentaje",
+        "dbType": "double"
+    },
+    {
+        "name": "iddatosejecucion",
+        "dbType": "integer:unsigned:foreign,datosejecucionfisicofinanciera,id",
+        "htmlType": "text",
+        "relation": "mt1,datosejecucionfisicofinanciera,iddatosejecucion,id"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

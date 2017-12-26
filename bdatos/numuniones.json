@@ -1,0 +1,60 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },   
+    {
+        "name": "porcentaje",
+        "dbType": "decimal",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "idpjuridicas",
+        "dbType": "integer:unsigned:foreign,pjuridicas,id",
+        "htmlType": "text",
+        "relation": "mt1,pjuridicas,idpjuridicas,id"
+    },
+    {
+        "name": "idunionestemporales",
+        "dbType": "integer:unsigned:foreign,unionestemporales,id",
+        "htmlType": "text",
+        "relation": "mt1,unionestemporales,idunionestemporales,id"
+    },
+    {
+        "name": "algo",
+        "type": "relation",
+        "relation": "mtm,numunion,pjuridicas_unionestemporales,idpjuridicas,idunionestemporales"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

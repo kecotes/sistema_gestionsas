@@ -1,0 +1,97 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "plazoinicial",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+      "name": "fechainiciacion",
+      "dbType": "dateTime",
+      "htmlType": "date",
+      "searchable": true
+    },
+    {
+        "name": "fechafinalizacion",
+        "dbType": "dateTime",
+        "htmlType": "date",
+        "searchable": true
+    },
+    {
+      "name": "fechasuspension",
+      "dbType": "dateTime",
+      "htmlType": "date",
+      "searchable": true
+    },
+    {
+        "name": "fechareinicio",
+        "dbType": "dateTime",
+        "htmlType": "date",
+        "searchable": true
+    },
+    {
+        "name": "adicciontiempo",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "fechafinalizacionadiccion",
+        "dbType": "dateTime",
+        "htmlType": "date",
+        "searchable": true
+    },
+    {
+        "name": "agregar",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "estado",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "idcontratos",
+        "dbType": "integer:unsigned:foreign,contratos,id",
+        "htmlType": "text",
+        "relation": "mt1,contratos,idcontratos,id"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

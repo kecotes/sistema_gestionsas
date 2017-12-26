@@ -1,0 +1,54 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "idpersonas",
+        "dbType": "integer:unsigned:foreign,personas,id",
+        "htmlType": "text",
+        "relation": "mt1,personas,idpersonas,id"
+    },
+    {
+        "name": "idcontratos",
+        "dbType": "integer:unsigned:foreign,contratos,id",
+        "htmlType": "text",
+        "relation": "mt1,contratos,idcontratos,id"
+    },
+    {
+        "name": "algo",
+        "type": "relation",
+        "relation": "mtm,usuariocontratado,personas_contratos,idpersonas,idcontratos"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

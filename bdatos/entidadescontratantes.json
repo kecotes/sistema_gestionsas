@@ -1,0 +1,68 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "nombre",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "telefono",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "direccion",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "ciudad",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "departamento",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,contratos"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]
