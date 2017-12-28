@@ -15,9 +15,7 @@ class CreateActividadescontratosTable extends Migration
     {
         Schema::create('actividadescontratos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->string('contenido');
-            $table->string('estado');
+            $table->integer('iduser');
             $table->integer('idcontratos')->unsigned();
             $table->integer('idtipoactividades')->unsigned();
             $table->timestamps();

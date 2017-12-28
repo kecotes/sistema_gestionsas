@@ -19,7 +19,7 @@ class CreatePolizasTable extends Migration
             $table->string('tipopoliza');
             $table->string('npoliza');
             $table->string('tipocertificado');
-            $table->string('observaciones');
+            $table->longtext('observaciones');
             $table->string('estado');
             $table->integer('idcontratos')->unsigned();
             $table->timestamps();

@@ -15,23 +15,21 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('entidadcontratante');
             $table->longtext('objetocontrato');
             $table->string('nocontrato');
             $table->string('ncontrato');
             $table->string('apodocontrato');
             $table->string('valorcontratol');
-            $table->double('valorcontrato');
+            $table->decimal('valorcontrato');
             $table->string('valoranticipol');
-            $table->double('valoranticipo');
-            $table->double('porcentajeanticipo');
+            $table->decimal('valoranticipo');
+            $table->decimal('porcentajeanticipo');
             $table->string('formapago');
-            $table->double('valoradicional');
-            $table->double('valoranticipoadicional');
+            $table->decimal('valoradicional');
+            $table->decimal('valoranticipoadicional');
             $table->string('plazoinicial');
             $table->date('fechainiciacion');
             $table->date('fechafinalizacion');
-            $table->string('tipocontrato');
             $table->string('estado');
             $table->integer('idpersonas')->unsigned();
             $table->integer('identidadescontratantes')->unsigned();
