@@ -93,7 +93,7 @@ class ResidentesController extends Controller
         $user->name=$request->get('nombre');
         $user->email=$request->get('usuario');
         $user->password=bcrypt($request->get('contrasena'));
-        $user->tipoUsuario='2';
+        $user->tipoUsuario=$request->get('tipofuncionario');
         $user->save();
     
         $residentes=new personas();
