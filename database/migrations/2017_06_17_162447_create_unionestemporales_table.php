@@ -15,7 +15,6 @@ class CreateUnionestemporalesTable extends Migration
     {
         Schema::create('unionestemporales', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('porcentaje');
             $table->timestamps();
             $table->softDeletes();
         });

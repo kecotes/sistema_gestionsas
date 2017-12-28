@@ -15,6 +15,7 @@ class CreateNumunionesTable extends Migration
     {
         Schema::create('numuniones', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('porcentaje');
             $table->integer('idpjuridicas')->unsigned();
             $table->integer('idunionestemporales')->unsigned();
             $table->timestamps();
