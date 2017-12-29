@@ -19,7 +19,6 @@ class CreateBalancesfinancierosTable extends Migration
             $table->decimal('pendientepagar');
             $table->string('estado');
             $table->integer('idcontratos')->unsigned();
-            $table->integer('idtipoactividades')->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('idcontratos')->references('id')->on('contratos');

@@ -70,17 +70,24 @@ Auth::routes();
     Route::resource('excel','ExcelController');
     Route::resource('/excel','ExcelController@index'); 
 
-//  Descargas
-Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa'); 
+//  Descargas 
 Route::get('descargar/{id}','ContratosController@descargar');
 Route::get('contratos/descargarb/{id}','ContratosController@descargarb');
 Route::get('contratos/descargarc/{id}','ContratosController@descargarc');
+
 Route::get('descargarBalances/{id}','BalancesfinancierosController@descargarBalances');
 
-//Route::get('show.descargar/{id}','ContratosController@descargar');  
-Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje'); 
-Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
 Route::get('descargarPoliza/{id}','PolizasController@descargarPoliza');
+
+Route::get('descargarCeV/{id}','ControlequiposController@descargarCeV');
+Route::get('descargarCsV/{id}','ControlseguridadController@descargarCsV');
+Route::get('descargarAsV/{id}','ActividadeSeguimientoController@descargarAsV');
+Route::get('descargarEtV/{id}','EstadotiempoController@descargarEtV');
+Route::get('descargarRfV/{id}','RegistroFotograficoController@descargarRfV');
+Route::get('descargarArV/{id}','AnalisisretrasosController@descargarArV');
+Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
+
+Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');
 
 
 

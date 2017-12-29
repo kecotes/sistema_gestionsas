@@ -86,9 +86,14 @@ class EjefisicofinancierasController extends AppBaseController
 
         $contratosh1=DB::table('contratos as c')->select('c.id','c.nocontrato')->where('c.id','LIKE','%'.$query.'%')->whereNull('deleted_at')->first();
 
-        $ultimaVersion=DB::table('actividadescontratos as ac')
-        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades')->where('aac.descripcion','=','admin')->where('ac.idtipoactividades','=',$idactividad)->latest()->first();
-        return view('ejefisicofinancieras.index',["ejefisicofinancieras"=>$ejefisicofinancieras,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"ultimaVersion"=>$ultimaVersion,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
+        //Descarga de archivos, obtiene el ID del contrato que el residente tiene asignado y dio click
+      //Luego se conulta por inenr Join que archivo esta para descargar y se descarga el formato
+      $contratoid=DB::table('users as u')
+      ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+      ->join('personas as p','uc.idpersonas','=','p.id')
+      ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
+      ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
+        return view('ejefisicofinancieras.index',["ejefisicofinancieras"=>$ejefisicofinancieras,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
 
     }
 
@@ -284,8 +289,14 @@ class EjefisicofinancierasController extends AppBaseController
         return response()->download($rutaarchivo);
       }
       public function descargarEjeV($id){
-        $archivosactividadescontratos=Archivosactividadescontratos::find($id);
-        $rutaarchivo= "storage/".$archivosactividadescontratos->archivo;
+        $contrate=DB::table('actividadescontratos as ac')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->where([
+            ['ac.idtipoactividades', '=', '7'],
+            ['aac.descripcion', '=', 'admin'],
+            ['ac.idcontratos', '=', $id],
+        ])->first();
+        $rutaarchivo= "storage/".$contrate->archivo;
         return response()->download($rutaarchivo);
       }
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Registro Fotografico <a class="btn btn-success" href="{!! route('registrofotografico.create') !!}">Nuevo</a><a class="btn btn-info" href="descargarEjeV/{{ $ultimaVersion->id }}">Descargar ultima version</a>
+      <h1>Registro Fotografico <a class="btn btn-success" href="{!! route('registrofotografico.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarRfV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

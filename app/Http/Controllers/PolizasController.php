@@ -1,4 +1,13 @@
 <?php
+/** 
+*
+*TODO:
+*
+*
+*FIXME:
+* - Al crear una poliza crea 2 en la BD automaticamente, almenos en la priemra interaccion confirmada.
+*
+*/
 
 namespace App\Http\Controllers;
 

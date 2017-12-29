@@ -64,13 +64,16 @@ class ControlSeguridadController extends Controller
       $contratosADM=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
 
       $contratosh1=DB::table('contratos as c')->select('c.id','c.nocontrato')->where('c.id','LIKE','%'.$query.'%')->whereNull('deleted_at')->first();
-      $ultimaVersion=DB::table('archivosactividadescontratos as ac')->select('ac.id','ac.descripcion')->where('descripcion','=','admin')->latest()->first();
+      
+      //Descarga de archivos, obtiene el ID del contrato que el residente tiene asignado y dio click
+      //Luego se conulta por inenr Join que archivo esta para descargar y se descarga el formato
+      $contratoid=DB::table('users as u')
+      ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+      ->join('personas as p','uc.idpersonas','=','p.id')
+      ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
+      ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
 
-      $contratos=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
-      $ultimaVersion=DB::table('actividadescontratos as ac')
-        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades')->where('aac.descripcion','=','admin')->where('ac.idtipoactividades','=',$idactividad)->latest()->first();
-
-      return view('controlseguridad.index',["controlseguridad"=>$controlseguridad,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"ultimaVersion"=>$ultimaVersion,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
+      return view('controlseguridad.index',["controlseguridad"=>$controlseguridad,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
     
     }
     
@@ -82,6 +85,7 @@ class ControlSeguridadController extends Controller
     public function create()
     {
         $idusers = Auth::id();
+        $idactividad=2;
         
         //Consulta para los Residentes - Solo pemite ver contratos el contrato de cada residente
         $contratosRdt=DB::table('users as u')
@@ -94,8 +98,16 @@ class ControlSeguridadController extends Controller
         $contratosADM=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
 
         $residentes=DB::table('personas as p') ->join('pnaturales as pn','p.id','=','pn.idpersonas')->select('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->groupBy('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->whereNull('p.deleted_at')->get();        
-        $idactividad=2;
-        return view("controlseguridad.create",["contratosRdt"=>$contratosRdt,"contratosADM"=>$contratosADM,"idactividad"=>$idactividad,"residentes"=>$residentes]);
+        
+        //Descarga de archivos, obtiene el ID del contrato que el residente tiene asignado y dio click
+        //Luego se conulta por inenr Join que archivo esta para descargar y se descarga el formato
+        $contratoid=DB::table('users as u')
+        ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+        ->join('personas as p','uc.idpersonas','=','p.id')
+        ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
+        ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
+        
+        return view("controlseguridad.create",["contratosRdt"=>$contratosRdt,"contratosADM"=>$contratosADM,"idactividad"=>$idactividad,"residentes"=>$residentes,"contratoid"=>$contratoid]);
     }
 
     /**
@@ -257,11 +269,17 @@ class ControlSeguridadController extends Controller
         return redirect(route('controlseguridad.index'));
     }
 
-    public function descargarEjeV($id){
-        $archivosactividadescontratos=Archivosactividadescontratos::find($id);
-        $rutaarchivo= "storage/".$archivosactividadescontratos->archivo;
+    public function descargarCsV($id){
+        $contrate=DB::table('actividadescontratos as ac')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->where([
+            ['ac.idtipoactividades', '=', '2'],
+            ['aac.descripcion', '=', 'admin'],
+            ['ac.idcontratos', '=', $id],
+        ])->get();
+        $rutaarchivo= "storage/".$contrate->archivo;
         return response()->download($rutaarchivo);
-      }
+    }
       
     /**
      * Remove the specified Actividadescontratos from storage.
