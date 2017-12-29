@@ -29,7 +29,6 @@ use App\Models\Actividadescontratos;
 use App\Models\Tipoactividades;
 use App\Models\Archivosactividadescontratos;
 use Illuminate\Support\Facades\Auth;
- 
 
 class EjefisicofinancierasController extends AppBaseController
 {

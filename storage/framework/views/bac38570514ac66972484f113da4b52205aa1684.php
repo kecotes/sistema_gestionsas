@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    <?php echo Form::open(['route' => 'residentes.store']); ?>
+                    <?php echo Form::open(['route' => 'residentes.store', 'enctype' => 'multipart/form-data'] ); ?>
 
 
                         <?php echo $__env->make('residentes.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

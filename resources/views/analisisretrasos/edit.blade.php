@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($analisisretrasos, ['route' => ['analisisretrasos.update', $analisisretrasos->id], 'method' => 'patch']) !!}
+                   {!! Form::model($analisisretrasos, ['route' => ['analisisretrasos.update', $analisisretrasos->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('analisisretrasos.fields_edit')
 

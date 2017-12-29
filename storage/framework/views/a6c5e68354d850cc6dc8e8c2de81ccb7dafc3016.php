@@ -43,7 +43,7 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="<?php echo e(asset('img/descarga.png')); ?>"
+                                <img src="storage/<?php echo e(Auth::user()->archivo); ?>"
                                      class="user-image" alt="User Image"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs"><?php echo Auth::user()->name; ?></span>
@@ -51,7 +51,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="<?php echo e(asset('img/descarga.png')); ?>"
+                                    <img src="storage/<?php echo e(Auth::user()->archivo); ?>"
                                          class="img-circle" alt="User Image"/>
                                     <p>
                                         <?php echo Auth::user()->name; ?>
@@ -62,7 +62,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                        <a href="/useredit/<?php echo e(Auth::user()->id); ?>/edit" class="btn btn-default btn-flat">Perfil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?php echo url('/logout'); ?>" class="btn btn-default btn-flat"

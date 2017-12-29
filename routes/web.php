@@ -20,21 +20,22 @@ Auth::routes();
 
 //rutas accessibles solo si el usuario esta autenticado y ha ingresado al sistema
 
-
+    //Personal
     Route::get('/home', 'HomeController@index');
     Route::resource('usuarioscreados', 'UsuarioscreadosController');
     Route::resource('personas', 'PersonasController');
     Route::resource('archivospersonas', 'ArchivospersonasController');
     Route::resource('pnaturales', 'PnaturalesController');
+    Route::resource('residentes', 'ResidentesController');
+    Route::resource('useredit', 'UserEditController');
+
+    //Personas Juridicas
+    Route::resource('funcionarios', 'FuncionariosController');
+    Route::resource('permisos', 'PermisosController');
+    Route::resource('pjuridicas', 'PjuridicasController');
+    Route::resource('unionestemporales', 'UnionestemporalesController');
     
     Route::resource('contratos', 'ContratosController');
-
-    Route::resource('archivosactividadescontratos', 'ArchivosactividadescontratosController');
-    Route::resource('novedadesfechas', 'NovedadesfechasController');
-    Route::resource('datosejecucionfisicofinancieras', 'DatosejecucionfisicofinancieraController');
-    Route::resource('anexosfisicofinancieras', 'AnexosfisicofinancieraController');
-    Route::resource('anexosejecucionfisicofinancieras', 'AnexosejecucionfisicofinancieraController');
-    Route::resource('residentes', 'ResidentesController');
 
     //Actividades contratos
     Route::resource('tipoactividades', 'TipoactividadesController');
@@ -46,14 +47,9 @@ Auth::routes();
     Route::resource('registrofotografico', 'RegistroFotograficoController');
     Route::resource('analisisretrasos', 'AnalisisRetrasosController');
     Route::resource('ejefisicofinancieras', 'EjefisicofinancierasController');
-    
+    Route::resource('archivosactividadescontratos', 'ArchivosactividadescontratosController');
 
-    Route::resource('funcionarios', 'FuncionariosController');
-    Route::resource('permisos', 'PermisosController');
-    Route::resource('pjuridicas', 'PjuridicasController');
-    Route::resource('unionestemporales', 'UnionestemporalesController');
-
-
+    //Documentos de Contratacion
     Route::resource('entidadescontratantes', 'EntidadescontratantesController');
     Route::resource('tiposcontratos', 'TiposcontratosController');
     Route::resource('subcontratos', 'SubcontratosController');
@@ -61,11 +57,14 @@ Auth::routes();
     Route::resource('polizas', 'PolizasController');
     Route::resource('archivospolizas', 'ArchivospolizasController');
     Route::resource('estadospolizas', 'EstadospolizasController');
-
-
+    Route::resource('novedadesfechas', 'NovedadesfechasController');
+    Route::resource('datosejecucionfisicofinancieras', 'DatosejecucionfisicofinancieraController');
+    Route::resource('anexosfisicofinancieras', 'AnexosfisicofinancieraController');
+    Route::resource('anexosejecucionfisicofinancieras', 'AnexosejecucionfisicofinancieraController');
     Route::resource('balancesfinancieros', 'BalancesfinancierosController');
     Route::resource('archivosbalancesfinancieros', 'ArchivosbalancesfinancierosController');
 
+    
     Route::resource('/pdf','PdfController@index'); 
     Route::resource('excel','ExcelController');
     Route::resource('/excel','ExcelController@index'); 
@@ -86,6 +85,8 @@ Route::get('descargarEtV/{id}','EstadotiempoController@descargarEtV');
 Route::get('descargarRfV/{id}','RegistroFotograficoController@descargarRfV');
 Route::get('descargarArV/{id}','AnalisisretrasosController@descargarArV');
 Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
+
+Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 
 Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');
 

@@ -276,7 +276,7 @@ class ControlSeguridadController extends Controller
             ['ac.idtipoactividades', '=', '2'],
             ['aac.descripcion', '=', 'admin'],
             ['ac.idcontratos', '=', $id],
-        ])->get();
+        ])->first();
         $rutaarchivo= "storage/".$contrate->archivo;
         return response()->download($rutaarchivo);
     }

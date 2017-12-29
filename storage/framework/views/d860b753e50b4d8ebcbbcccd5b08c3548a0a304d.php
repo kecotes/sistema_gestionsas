@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-      <h1>Nuevo Control de Equipos
+      <h1>Nuevo Estado Tiempo
         <small></small>
       </h1>
             <?php echo Breadcrumbs::render('actividadescontratos.create'); ?>  

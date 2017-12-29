@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($controlseguridad, ['route' => ['controlseguridad.update', $controlseguridad->id], 'method' => 'patch']) !!}
+                   {!! Form::model($controlseguridad, ['route' => ['controlseguridad.update', $controlseguridad->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('controlseguridad.fields_edit')
 

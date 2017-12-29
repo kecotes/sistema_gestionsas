@@ -256,7 +256,7 @@ class ActividadeSeguimientoController extends Controller
                     $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
                 $archivosactividadescontratos->archivo=$ruta;
 
-            $archivosactividadescontratos->titulo=$request->get('titulo');
+            $archivosactividadescontratos->titulo="$request->get('titulo')";
             $archivosactividadescontratos->descripcion=$request->get('descripcion');
             $archivosactividadescontratos->idactividadescontratos=$actividadescontratos->id;
             $archivosactividadescontratos->update();

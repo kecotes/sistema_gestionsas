@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($controlequipos, ['route' => ['controlequipos.update', $controlequipos->id], 'method' => 'patch']) !!}
+                   {!! Form::model($controlequipos, ['route' => ['controlequipos.update', $controlequipos->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('controlequipos.fields_edit')
 

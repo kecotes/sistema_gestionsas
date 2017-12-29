@@ -25,13 +25,16 @@ use App\Models\Residentes;
 use App\Models\Pnaturales;
 use App\Models\Funcionarios;
 use App\Models\Permisos;
+use App\Models\Archivospersonas;
 
 use DB;
+use Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Illuminate\Support\Facades\Auth;
 //use App\Http\Requests;
 
 class ResidentesController extends Controller
@@ -55,6 +58,7 @@ class ResidentesController extends Controller
 
   public function index(Request $request){
 
+    $idusers = Auth::id();
       $query=trim($request->GET('searchText'));
 
       $residentes=DB::table('personas as p')
@@ -62,11 +66,11 @@ class ResidentesController extends Controller
       ->join('funcionarios as f','pn.id','=','f.idpnaturales')
       ->select('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')
       ->where('pn.nombre','LIKE','%'.$query.'%')
-     // ->where('p.deleted_at', 'IS NOT',' NULL') muchos intentos xP
       ->whereNull('p.deleted_at')
       ->orderBy('p.id','desc')
       ->groupBy('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')
       ->paginate(7);
+
       return view('residentes.index',["residentes"=>$residentes,"searchText"=>$query]);
 
   }
@@ -89,12 +93,24 @@ class ResidentesController extends Controller
    */
   public function store(CreateResidentesRequest $request, CreatePnaturalesRequest $request1){
 
+        $archivo=Input::file('file');
+
         $user=new user();
         $user->name=$request->get('nombre');
         $user->email=$request->get('usuario');
         $user->password=bcrypt($request->get('contrasena'));
         $user->tipoUsuario=$request->get('tipofuncionario');
-        $user->save();
+        
+        $carpeta = '1';
+        if($archivo != null) {
+            $ruta=$carpeta."/".$archivo->getClientOriginalName();
+            $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+            $user->archivo=$ruta;
+            $user->save();
+        }else{
+            $user->archivo="";
+            $user->save(); 
+        }
     
         $residentes=new personas();
         $residentes->direccion=$request->get('direccion');
@@ -168,11 +184,13 @@ class ResidentesController extends Controller
    */
   public function edit($id)
   {
-      $residentes=DB::table('personas as p')
+      $residentes=DB::table('users as u')
+      ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+      ->join('personas as p','uc.idpersonas','=','p.id')
       ->join('pnaturales as pn','p.id','=','pn.idpersonas')
       ->join('funcionarios as f','pn.id','=','f.idpnaturales')
       ->join('permisos as per','f.id','=','per.idfuncionarios')
-      ->select('p.id','p.direccion','p.telefono','p.tipodocumento','p.expedicion','p.documento','pn.nombre','pn.apellido','pn.tipopnatural','f.usuario','f.contrasena','f.tipofuncionario','per.tipopermiso')
+      ->select('p.id','u.id as idusuarios','p.direccion','p.telefono','p.tipodocumento','p.expedicion','p.documento','pn.nombre','pn.apellido','pn.tipopnatural','f.usuario','f.contrasena','f.tipofuncionario','per.tipopermiso')
       ->where('p.id','=',$id)
       ->first();    
       return view('residentes.edit')->with('residentes', $residentes);
@@ -188,6 +206,37 @@ class ResidentesController extends Controller
    */
   public function update($id, UpdateResidentesRequest $request)
   {
+    $archivo=Input::file('file');
+
+    $carpeta = '1';
+        if($archivo != null) {
+            $useri=DB::table('users as u')
+            ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+            ->join('personas as p','uc.idpersonas','=','p.id')
+            ->select('u.id','u.name','u.email','u.password','u.archivo','uc.idpersonas')
+            ->where('uc.idpersonas','=',$id)->first();
+            $user=user::findOrFail($useri->id);
+            $user->name=$request->get('nombre');
+            $user->email=$request->get('usuario');
+            $user->password=bcrypt($request->get('contrasena'));
+
+                $ruta=$carpeta."/".$archivo->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+                $user->archivo=$ruta;
+                $user->update();
+        }else{
+            $useri=DB::table('users as u')
+            ->join('usuarioscreados as uc','u.id','=','uc.idusers')
+            ->join('personas as p','uc.idpersonas','=','p.id')
+            ->select('u.id','u.name','u.email','u.password','u.archivo','uc.idpersonas')
+            ->where('uc.idpersonas','=',$id)->first();
+            $user=user::findOrFail($useri->id);
+            $user->name=$request->get('nombre');
+            $user->email=$request->get('usuario');
+            $user->password=bcrypt($request->get('contrasena'));
+
+                $user->update();
+        }
 
         $residentes=personas::findOrFail($id);
         $residentes->direccion=$request->get('direccion');

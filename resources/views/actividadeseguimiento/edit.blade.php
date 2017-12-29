@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($actividadeseguimiento, ['route' => ['actividadeseguimiento.update', $actividadeseguimiento->id], 'method' => 'patch']) !!}
+                   {!! Form::model($actividadeseguimiento, ['route' => ['actividadeseguimiento.update', $actividadeseguimiento->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('actividadeseguimiento.fields_edit')
 

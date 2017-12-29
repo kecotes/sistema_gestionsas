@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($registrofotografico, ['route' => ['registrofotografico.update', $registrofotografico->id], 'method' => 'patch']) !!}
+                   {!! Form::model($registrofotografico, ['route' => ['registrofotografico.update', $registrofotografico->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('registrofotografico.fields_edit')
 
