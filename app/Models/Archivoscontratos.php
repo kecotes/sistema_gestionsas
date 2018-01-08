@@ -47,7 +47,6 @@ class Archivoscontratos extends Model
      * @var array
      */
     public static $rules = [
-        'archivo' => 'required'
     ];
 
     /**

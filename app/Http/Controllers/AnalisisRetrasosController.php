@@ -283,11 +283,12 @@ class AnalisisRetrasosController extends Controller
     public function descargarArV($id){
         $contrate=DB::table('actividadescontratos as ac')
         ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades','ac.idcontratos','aac.archivo')
         ->where([
             ['ac.idtipoactividades', '=', '6'],
             ['aac.descripcion', '=', 'admin'],
             ['ac.idcontratos', '=', $id],
-        ])->first();
+        ])->latest()->first();
         $rutaarchivo= "storage/".$contrate->archivo;
         return response()->download($rutaarchivo);
   }

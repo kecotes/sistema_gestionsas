@@ -105,8 +105,7 @@ class ControlSeguridadController extends Controller
         ->join('usuarioscreados as uc','u.id','=','uc.idusers')
         ->join('personas as p','uc.idpersonas','=','p.id')
         ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
-        ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
-        
+        ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();  
         return view("controlseguridad.create",["contratosRdt"=>$contratosRdt,"contratosADM"=>$contratosADM,"idactividad"=>$idactividad,"residentes"=>$residentes,"contratoid"=>$contratoid]);
     }
 
@@ -272,15 +271,16 @@ class ControlSeguridadController extends Controller
     public function descargarCsV($id){
         $contrate=DB::table('actividadescontratos as ac')
         ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades','ac.idcontratos','aac.archivo')
         ->where([
             ['ac.idtipoactividades', '=', '2'],
             ['aac.descripcion', '=', 'admin'],
             ['ac.idcontratos', '=', $id],
-        ])->first();
+        ])->latest()->first();
         $rutaarchivo= "storage/".$contrate->archivo;
         return response()->download($rutaarchivo);
-    }
-      
+      }
+
     /**
      * Remove the specified Actividadescontratos from storage.
      *

@@ -88,7 +88,6 @@ class ControlEquiposController extends Controller
       ->join('personas as p','uc.idpersonas','=','p.id')
       ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
       ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
-
       return view('controlequipos.index',["controlequipos"=>$controlequipos,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
     }
     
@@ -279,17 +278,19 @@ class ControlEquiposController extends Controller
         return redirect(route('controlequipos.index'));
     }
 
-      public function descargarCeV($id){
-            $contrate=DB::table('actividadescontratos as ac')
-            ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
-            ->where([
-                ['ac.idtipoactividades', '=', '1'],
-                ['aac.descripcion', '=', 'admin'],
-                ['ac.idcontratos', '=', $id],
-            ])->first();
-            $rutaarchivo= "storage/".$contrate->archivo;
-            return response()->download($rutaarchivo);
+    public function descargarYoli($id){
+        $contrate=DB::table('actividadescontratos as ac')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades','ac.idcontratos','aac.archivo')
+        ->where([
+            ['ac.idtipoactividades', '=', '1'],
+            ['aac.descripcion', '=', 'admin'],
+            ['ac.idcontratos', '=', $id],
+        ])->latest()->first();
+        $rutaarchivo= "storage/".$contrate->archivo;
+        return response()->download($rutaarchivo);
       }
+
     /**
      * Remove the specified Actividadescontratos from storage.
      *

@@ -5,7 +5,8 @@
 TODO:
 [x] - Subir Imagenes a usuarios
 [x] - Editar imagenes de usuarios
-[] - Pode subir archivos pesados y que solo se puedan word img pdf ecxel
+[x] - Pode subir archivos pesados y que solo se puedan word img pdf ecxel
+[] - Que solo se puedan subir word img pdf excel
 [] - Que las vistas index no muestren datos hasta que se seleccione un contrato
 [] - Poner observaciones, alertar informacion detallada en todos los formularios (Contratos, Balances Financieros).
 [] - Que los residentes vean solo la ficha tecnica del contrato.
@@ -18,10 +19,10 @@ TODO:
 
 FIXME:
 [x] - Corregir en Polizas pasar Observaciones a longtext
-
 [x] - No se estan subiendo archivos en polizas
 [] - Que se quede en la misma pagina al hacer click en el boton Estados polizas
 
 
 BUG:
+[x] - Descargar archivos ultima version de cada contrato especifico
 [] - (?) Al crear una poliza crea 2 en la BD automaticamente, almenos en la priemra interaccion confirmada.

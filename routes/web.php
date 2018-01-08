@@ -78,8 +78,8 @@ Route::get('descargarBalances/{id}','BalancesfinancierosController@descargarBala
 
 Route::get('descargarPoliza/{id}','PolizasController@descargarPoliza');
 
-Route::get('descargarCeV/{id}','ControlequiposController@descargarCeV');
-Route::get('descargarCsV/{id}','ControlseguridadController@descargarCsV');
+Route::get('descargarYoli/{id}','ControlEquiposController@descargarYoli');
+Route::get('descargarCsV/{id}','ControlSeguridadController@descargarCsV');
 Route::get('descargarAsV/{id}','ActividadeSeguimientoController@descargarAsV');
 Route::get('descargarEtV/{id}','EstadotiempoController@descargarEtV');
 Route::get('descargarRfV/{id}','RegistroFotograficoController@descargarRfV');
