@@ -58,7 +58,11 @@ class EjefisicofinancierasController extends AppBaseController
         $idactividad=7;
         $query=trim($request->GET('searchText'));
 
-        //Consulta
+        //Inicia el select buscador en 0
+        if($query == ""){
+            $query = 0;
+        }
+    
         $ejefisicofinancieras=DB::table('personas as p')
         ->join('contratos as c','p.id','=','c.idpersonas')
         ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
@@ -83,8 +87,6 @@ class EjefisicofinancierasController extends AppBaseController
         //Consulta para los Administradores - Permite ver todos los archivos
         $contratosADM=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
 
-        $contratosh1=DB::table('contratos as c')->select('c.id','c.nocontrato')->where('c.id','LIKE','%'.$query.'%')->whereNull('deleted_at')->first();
-
         //Descarga de archivos, obtiene el ID del contrato que el residente tiene asignado y dio click
       //Luego se conulta por inenr Join que archivo esta para descargar y se descarga el formato
       $contratoid=DB::table('users as u')
@@ -92,7 +94,7 @@ class EjefisicofinancierasController extends AppBaseController
       ->join('personas as p','uc.idpersonas','=','p.id')
       ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
       ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
-        return view('ejefisicofinancieras.index',["ejefisicofinancieras"=>$ejefisicofinancieras,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
+        return view('ejefisicofinancieras.index',["ejefisicofinancieras"=>$ejefisicofinancieras,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"idusers"=>$idusers,"users"=>$users]);
 
     }
 

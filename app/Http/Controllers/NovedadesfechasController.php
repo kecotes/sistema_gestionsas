@@ -42,6 +42,11 @@ class NovedadesfechasController extends AppBaseController
     public function index(Request $request)
     {
         $query=trim($request->GET('searchText'));
+
+        //Inicia el select buscador en 0
+        if($query == ""){
+            $query = 0;
+        }
         
         $novedadesfechas=DB::table('personas as p')
       ->join('contratos as c','p.id','=','c.idpersonas')

@@ -8,7 +8,7 @@
         <th>Telefono</th>
         <th>Documento</th>
         <th colspan="3">Accion</th>
-    </thead>s
+    </thead>
     <tbody>
     @foreach($residentes as $residentes)
         <tr>

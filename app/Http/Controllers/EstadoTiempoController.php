@@ -57,6 +57,11 @@ class EstadoTiempoController extends Controller
       $idactividad=4;
       $query=trim($request->GET('searchText'));
 
+      //Inicia el select buscador en 0
+      if($query == ""){
+        $query = 0;
+      }
+
       $estadotiempo=DB::table('personas as p')
       ->join('contratos as c','p.id','=','c.idpersonas')
       ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')

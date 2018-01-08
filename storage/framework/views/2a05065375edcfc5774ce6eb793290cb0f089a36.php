@@ -8,7 +8,7 @@
         <th>Telefono</th>
         <th>Documento</th>
         <th colspan="3">Accion</th>
-    </thead>s
+    </thead>
     <tbody>
     <?php $__currentLoopData = $residentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $residentes): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <tr>

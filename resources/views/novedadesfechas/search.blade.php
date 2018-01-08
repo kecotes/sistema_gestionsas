@@ -2,6 +2,7 @@
 <div class="form-group">
 	<div class="input-group">
 			<select name="searchText" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
+				<option value="">Buscar...</option>
 				@foreach ($contratos as $contratos)
 						<option value="{{$contratos->id}}"> {{$contratos->nocontrato}} </option>
 				@endforeach

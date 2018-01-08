@@ -41,6 +41,11 @@ class EstadospolizasController extends AppBaseController
     {
       $query=trim($request->GET('searchText'));
 
+      //Inicia el select buscador en 0
+      if($query == ""){
+        $query = 0;
+      }
+
       $estadospolizas=DB::table('personas as p')
       ->join('contratos as c','p.id','=','c.idpersonas')
       ->join('estadospolizas as ep','c.id','=','ep.idcontratos')

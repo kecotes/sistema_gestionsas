@@ -2,7 +2,7 @@
 /** 
 *
 *TODO:
-*
+* 
 *
 *FIXME:
 * - Al crear una poliza crea 2 en la BD automaticamente, almenos en la priemra interaccion confirmada.
@@ -56,6 +56,11 @@ class PolizasController extends AppBaseController
     public function index(Request $request)
     {
       $query=trim($request->GET('searchText'));
+
+      //Inicia el select buscador en 0
+      if($query == ""){
+          $query = 0;
+      }
 
       $polizas=DB::table('personas as p')
       ->join('contratos as c','p.id','=','c.idpersonas')

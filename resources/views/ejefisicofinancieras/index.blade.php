@@ -18,7 +18,6 @@
                 <h1 class="pull-right">
                     @include('ejefisicofinancieras.search')
                  </h1>
-                 <!-- <center><h3>{{ $contratosh1->nocontrato }}</h3></center> -->
                     @include('ejefisicofinancieras.table')
             </div>
             {{$ejefisicofinancieras->render()}} 

@@ -16,7 +16,6 @@
                 <h1 class="pull-right">
                     <?php echo $__env->make('ejefisicofinancieras.search', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                  </h1>
-                 <!-- <center><h3><?php echo e($contratosh1->nocontrato); ?></h3></center> -->
                     <?php echo $__env->make('ejefisicofinancieras.table', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
             <?php echo e($ejefisicofinancieras->render()); ?> 

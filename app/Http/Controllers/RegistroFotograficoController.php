@@ -57,6 +57,11 @@ class RegistroFotograficoController extends Controller
       $idactividad=5;
       $query=trim($request->GET('searchText'));
 
+      //Inicia el select buscador en 0
+      if($query == ""){
+        $query = 0;
+      }
+
       $registrofotografico=DB::table('personas as p')
       ->join('contratos as c','p.id','=','c.idpersonas')
       ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
