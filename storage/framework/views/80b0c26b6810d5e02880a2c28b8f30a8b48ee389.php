@@ -15,6 +15,19 @@
                 </div>
             </div>
             </div>
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Archivos de Contratacion</h3>
+              <div class="box-body">
+                <?php echo $__env->make('contratos.fields_edit_archivos', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+              </div>
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+          <!-- /.box -->
+
             <?php echo Form::close(); ?>
 
    </div>

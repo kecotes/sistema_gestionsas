@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($polizas, ['route' => ['polizas.update', $polizas->id], 'method' => 'patch']) !!}
+                   {!! Form::model($polizas, ['route' => ['polizas.update', $polizas->id], 'method' => 'patch', 'files'=>'true']) !!}
 
                         @include('polizas.fields_edit')
 

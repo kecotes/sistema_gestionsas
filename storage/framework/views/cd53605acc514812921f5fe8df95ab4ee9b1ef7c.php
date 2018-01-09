@@ -1,16 +1,16 @@
 <table class="table table-responsive" id="balancesfinancieros-table">
     <thead>
-        <th>Acta parcial</th>
+        <th>Acta Parcial</th>
+        <th>Valor</th>
         <th>Pendiente por pagar</th>
-        <th>Estado</th>
         <th colspan="3">Accion</th>
     </thead>
     <tbody>
     <?php $__currentLoopData = $balancesfinancieros; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $balancesfinancieros): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <tr>
+            <td><?php echo $balancesfinancieros->estado; ?></td>
             <td><?php echo $balancesfinancieros->actaparcial; ?></td>
             <td><?php echo $balancesfinancieros->pendientepagar; ?></td>
-            <td><?php echo $balancesfinancieros->estado; ?></td>
             <td>
                 <?php echo Form::open(['route' => ['balancesfinancieros.destroy', $balancesfinancieros->id], 'method' => 'delete']); ?>
 

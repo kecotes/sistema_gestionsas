@@ -195,20 +195,47 @@ class PolizasController extends AppBaseController
     public function update($id, UpdatePolizasRequest $request)
     {
 
-        $polizas= polizas::findOrFail($id);
-        $polizas->tipopoliza=$request->get('tipopoliza');
-        $polizas->npoliza=$request->get('npoliza');
-        $polizas->tipocertificado=$request->get('tipocertificado');
-        $polizas->observaciones=$request->get('observaciones');
-        $polizas->update();
+        $archivo=Input::file('file');
 
-        if (empty($polizas)) {
-            Flash::error('Polizas not found');
+        if($archivo != null) {
 
-            return redirect(route('polizas.index'));
+            $polizas=polizas::findOrFail($id);
+            $polizas->fechaexpedicion=$request->get('fechaexpedicion');
+            $polizas->tipopoliza=$request->get('tipopoliza');
+            $polizas->npoliza=$request->get('npoliza');
+            $polizas->tipocertificado=$request->get('tipocertificado');
+            $polizas->observaciones=$request->get('observaciones');
+            $polizas->estado="Vigente";
+            $polizas->update();
+
+            $archivospolizas = Archivospolizas::where('idpolizas', $polizas->id)->first();
+            $carpeta="20";
+            $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                  $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+              $archivospolizas->archivo=$ruta;
+
+           $archivospolizas->titulo="";
+           $archivospolizas->descripcion="xs";
+           $archivospolizas->idpolizas=$polizas->id;
+           $archivospolizas->update();
+
+        } else {
+            $polizas=polizas::findOrFail($id);
+            $polizas->fechaexpedicion=$request->get('fechaexpedicion');
+            $polizas->tipopoliza=$request->get('tipopoliza');
+            $polizas->npoliza=$request->get('npoliza');
+            $polizas->tipocertificado=$request->get('tipocertificado');
+            $polizas->observaciones=$request->get('observaciones');
+            $polizas->estado="Vigente";
+            $polizas->update();
+
+            $archivospolizas=Archivospolizas::where('idpolizas', $polizas->id)->first();
+            $archivospolizas->titulo="xd";
+            $archivospolizas->descripcion="";
+            $archivospolizas->idpolizas=$polizas->id;
+            $archivospolizas->update();
         }
 
-        Flash::success('Poliza Editada correctamente.');
 
         return redirect(route('polizas.index'));
     }

@@ -178,7 +178,7 @@ class ContratosController extends AppBaseController
         $balancesfinancieros=new balancesfinancieros();
         $balancesfinancieros->actaparcial=$request->get('valoranticipo');
         $balancesfinancieros->pendientepagar=$pendiente;
-        $balancesfinancieros->estado="En ejecucion";
+        $balancesfinancieros->estado="Acta parcial Inicial";
         $balancesfinancieros->idcontratos=$contratos->id;  
         $balancesfinancieros->save();
 
@@ -194,6 +194,22 @@ class ContratosController extends AppBaseController
 
            return redirect(route('contratos.index'));
   
+    }
+
+    public function crear_archivo_contrato(CreateContratosRequest $request){
+
+        $archivo=Input::file('file');
+
+            $archivoscontratos = new archivoscontratos();
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo=$nombre;
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
     }
 
     /**

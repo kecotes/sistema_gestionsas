@@ -41,6 +41,11 @@
 
 </div>
 
+<div class="form-group col-sm-6">
+    <label for="exampleInputFile">Adjuntar Archivo</label>
+    <input type="file" name="file">
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     <?php echo Form::submit('Save', ['class' => 'btn btn-primary']); ?>

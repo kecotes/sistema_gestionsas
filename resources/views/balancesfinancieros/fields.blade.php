@@ -11,16 +11,16 @@
     </div>
 </div>
 
-<!-- Actaparcial Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('actaparcial', 'Actaparcial:') !!}
-    {!! Form::text('actaparcial', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Estado Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('estado', 'Estado:') !!}
+    {!! Form::label('estado', 'Descripcion del Acta Parcial:') !!}
     {!! Form::text('estado', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Actaparcial Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('actaparcial', 'Valor:') !!}
+    {!! Form::text('actaparcial', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-6">

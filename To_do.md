@@ -7,11 +7,11 @@ TODO:
 [x] - Editar imagenes de usuarios
 [x] - Pode subir archivos pesados y que solo se puedan word img pdf ecxel
 [x] - Que las vistas index no muestren datos hasta que se seleccione un contrato
+[x] - Subir archivos modificados o por primera vez editando un item x, en todas las vistas.
+[] - Subir varios archivos y ordenarlos en Contratos
+[] - Listar todos los documentos adjuntos del Contrato
 [] - Poner observaciones, alertar informacion detallada en todos los formularios (Contratos, Balances Financieros)
 [] - Que los residentes vean solo la ficha tecnica del contrato.
-[] - Subir archivos modificados o por primera vez editando un item x, en todas las vistas.
-[] - Subir varios archiivos y ordenarlos en Contratos
-[] - Listar todos los documentos adjuntos del Contrato
 [] - Nueva vista: Correspondencia Enviada y Recivida.
 [] - Nueva vista: Laboratorio, certificado y pruebas de campo
 
@@ -21,6 +21,7 @@ FIXME:
 [x] - No se estan subiendo archivos en polizas
 [] - Que se quede en la misma pagina al hacer click en el boton Estados polizas
 [] - Que solo se puedan subir word img pdf excel
+[] - Corregir la ediccion de archivos en balances financieros, que modifique valores y se modifique el contrato
 
 
 BUG:

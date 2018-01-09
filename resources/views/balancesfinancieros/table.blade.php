@@ -1,16 +1,16 @@
 <table class="table table-responsive" id="balancesfinancieros-table">
     <thead>
-        <th>Acta parcial</th>
+        <th>Acta Parcial</th>
+        <th>Valor</th>
         <th>Pendiente por pagar</th>
-        <th>Estado</th>
         <th colspan="3">Accion</th>
     </thead>
     <tbody>
     @foreach($balancesfinancieros as $balancesfinancieros)
         <tr>
+            <td>{!! $balancesfinancieros->estado !!}</td>
             <td>{!! $balancesfinancieros->actaparcial !!}</td>
             <td>{!! $balancesfinancieros->pendientepagar !!}</td>
-            <td>{!! $balancesfinancieros->estado !!}</td>
             <td>
                 {!! Form::open(['route' => ['balancesfinancieros.destroy', $balancesfinancieros->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

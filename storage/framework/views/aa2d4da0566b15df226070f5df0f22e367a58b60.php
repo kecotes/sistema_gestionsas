@@ -153,9 +153,9 @@
 </div>
 
 
-        <!-- Submit Field -->
-        <div class="form-group col-sm-12">
-            <?php echo Form::submit('Guardar', ['class' => 'btn btn-success']); ?>
+<!-- Submit Field -->
+<div class="form-group col-sm-12">
+    <?php echo Form::submit('Guardar', ['class' => 'btn btn-success']); ?>
 
-            <a href="<?php echo route('contratos.index'); ?>" class="btn btn-default">Cancelar</a>
-        </div>
+    <a href="<?php echo route('contratos.index'); ?>" class="btn btn-default">Cancelar</a>
+</div>

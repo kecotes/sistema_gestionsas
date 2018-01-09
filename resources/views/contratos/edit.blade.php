@@ -16,6 +16,16 @@
                 </div>
             </div>
             </div>
-            {!! Form::close() !!}
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Archivos de Contratacion</h3>
+              <div class="box-body">
+                @include('contratos.fields_edit_archivos')
+              </div>
+            </div>
+          </div>
+
+        {!! Form::close() !!}
    </div>
 @endsection
