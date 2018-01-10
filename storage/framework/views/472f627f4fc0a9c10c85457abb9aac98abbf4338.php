@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
         <h1>

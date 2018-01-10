@@ -28,6 +28,7 @@
       <ul class="treeview-menu">
         <li><a href="<?php echo route('novedadesfechas.index'); ?>"><i class="fa fa-clock-o"></i> Novedades en Fechas</a></li>
         <li><a href="<?php echo route('balancesfinancieros.index'); ?>"><i class="fa fa-money"></i> Blances Financieros</a></li>
+        <li><a href="<?php echo route('correspondencia.index'); ?>"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
         </ul>
     </li>
 
@@ -50,6 +51,7 @@
         <li><a href="<?php echo route('registrofotografico.index'); ?>"><i class="fa fa-file-image-o"></i> Registro Fotografico</a></li>
         <li><a href="<?php echo route('analisisretrasos.index'); ?>"><i class="fa fa-line-chart"></i> Analisis Retrasos</a></li>
     <li><a href="<?php echo route('ejefisicofinancieras.index'); ?>"><i class="fa fa-file-excel-o"></i> Ejecuciones Fisico Financieras</a></li>
+    <li><a href="<?php echo route('laboratorios.index'); ?>"><i class="fa fa-flask"></i> Laboratorio, certificado y p.</a></li>
   </ul>
 </li>
 <li class="treeview">

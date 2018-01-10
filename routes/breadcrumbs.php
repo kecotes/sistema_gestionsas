@@ -278,3 +278,49 @@ Breadcrumbs::register('entidadescontratantes.show', function($breadcrumbs)
     $breadcrumbs->parent('entidadescontratantes');
     $breadcrumbs->push($resi->direccion, route('entidadescontratantes.show',$resi->id));
 });
+
+
+// Correspondencia
+Breadcrumbs::register('correspondencia', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Correspondencia', route('correspondencia.index'));
+});
+
+// Correspondencia.create
+Breadcrumbs::register('correspondencia.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('correspondencia');
+    $breadcrumbs->push('Nueva Correspondencia', route('correspondencia.create'));
+});
+
+// Correspondencia.show
+Breadcrumbs::register('correspondencia.show', function($breadcrumbs)
+{
+    $resi = App\Models\personas::find($resi);
+    $breadcrumbs->parent('correspondencia');
+    $breadcrumbs->push($resi->direccion, route('correspondencia.show',$resi->id));
+});
+
+
+// Laboratorio
+Breadcrumbs::register('laboratorio', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Laboratorio, certificado y pruebas de campo', route('laboratorio.index'));
+});
+
+// Laboratorio.create
+Breadcrumbs::register('laboratorio.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('laboratorio');
+    $breadcrumbs->push('Nuevo Laboratorio, certificado y pruebas de campo', route('laboratorio.create'));
+});
+
+// Laboratorio.show
+Breadcrumbs::register('laboratorio.show', function($breadcrumbs)
+{
+    $resi = App\Models\personas::find($resi);
+    $breadcrumbs->parent('laboratorio');
+    $breadcrumbs->push($resi->direccion, route('laboratorio.show',$resi->id));
+});

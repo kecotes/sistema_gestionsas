@@ -48,6 +48,8 @@ Auth::routes();
     Route::resource('analisisretrasos', 'AnalisisRetrasosController');
     Route::resource('ejefisicofinancieras', 'EjefisicofinancierasController');
     Route::resource('archivosactividadescontratos', 'ArchivosactividadescontratosController');
+    Route::resource('laboratorios', 'LaboratorioController');
+    Route::resource('correspondencia', 'CorrespondenciaController');
 
     //Documentos de Contratacion
     Route::resource('entidadescontratantes', 'EntidadescontratantesController');
@@ -89,11 +91,6 @@ Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
 Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 
 Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');
-
-
-
-
-
 
 
 

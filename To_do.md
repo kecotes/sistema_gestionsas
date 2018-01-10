@@ -11,7 +11,7 @@ TODO:
 [x] - Subir varios archivos y ordenarlos en Contratos
 [x] - Listar todos los documentos adjuntos del Contrato
 [x] - Poner observaciones, alertar informacion detallada en todos los formularios (Contratos, Balances Financieros)
-[] - Nueva vista: Correspondencia Enviada y Recivida.
+[x] - Nueva vista: Correspondencia Enviada y Recivida.
 [] - Nueva vista: Laboratorio, certificado y pruebas de campo
 [] - Que los residentes vean solo la ficha tecnica del contratoxd
 
