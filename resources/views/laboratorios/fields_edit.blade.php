@@ -39,7 +39,7 @@
 @endif
 
 <!-- Idtipoactividades Field -->
-<input type="hidden" name="idactividad" value="1"/>
+<input type="hidden" name="idactividad" value="9"/>
 <input type="hidden" name="idresidentes" value="{{ Auth::user()->id }}">
 
 <!-- Titulo Field -->

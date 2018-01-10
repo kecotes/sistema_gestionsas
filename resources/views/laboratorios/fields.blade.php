@@ -32,7 +32,7 @@
 
 
 <!-- Idtipoactividades Field -->
-<input type="hidden" name="idactividad" value="1"/>
+<input type="hidden" name="idactividad" value="9"/>
 <input type="hidden" name="idresidentes" value="{{ Auth::user()->id }}">
 
 <!-- Titulo Field -->
@@ -70,6 +70,6 @@
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('controlequipos.index') !!}" class="btn btn-default">Cancelar</a>
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('laboratorios.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

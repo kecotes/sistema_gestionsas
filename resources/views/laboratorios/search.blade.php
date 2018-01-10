@@ -1,7 +1,7 @@
 
 <!-- Administrador -->
 @if(Auth::user()->tipoUsuario == '1')
-{!! Form::open(array('url'=>'controlequipos','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
+{!! Form::open(array('url'=>'laboratorios','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 	<div class="input-group">
 		<select name="searchText" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
@@ -20,7 +20,7 @@
 
 <!-- Resiente -->
 @if(Auth::user()->tipoUsuario == '2')
-{!! Form::open(array('url'=>'controlequipos','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
+{!! Form::open(array('url'=>'laboratorios','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 	<div class="input-group">
 		<select name="searchText" class="form-control select2" class="form-control selectpicker"  data-live-search="true">

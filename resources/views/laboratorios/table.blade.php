@@ -9,23 +9,23 @@
         <th colspan="3">Action</th>
     </thead>
     <tbody>
-    @foreach($controlequipos as $controlequipos)
-        @if($controlequipos->descripcion != 'admin')
+    @foreach($laboratorios as $laboratorios)
+        @if($laboratorios->descripcion != 'admin')
         <tr>
-        <td>{!! $controlequipos->titulo !!}</td>
-        <td>{!! $controlequipos->descripcion !!}</td>
+        <td>{!! $laboratorios->titulo !!}</td>
+        <td>{!! $laboratorios->descripcion !!}</td>
         @foreach($users as $user)
-            @if($controlequipos->iduser == $user->id)
+            @if($laboratorios->iduser == $user->id)
             <td>{!! $user->name !!}</td>
             @endif
         @endforeach
-        <td>{!! $controlequipos->created_at !!}</td>
+        <td>{!! $laboratorios->created_at !!}</td>
             <td>
-                {!! Form::open(['route' => ['controlequipos.destroy', $controlequipos->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['laboratorios.destroy', $laboratorios->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('controlequipos.show', [$controlequipos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('controlequipos.edit', [$controlequipos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="descargarEje/{{ $controlequipos->idejecuarch }}" class='btn btn-default btn btn-xs' target="_blank"><i class="glyphicon glyphicon-download"></i></a> 
+                    <a href="{!! route('laboratorios.show', [$laboratorios->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('laboratorios.edit', [$laboratorios->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="descargarEje/{{ $laboratorios->idejecuarch }}" class='btn btn-default btn btn-xs' target="_blank"><i class="glyphicon glyphicon-download"></i></a> 
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Esta usted seguro?')"]) !!}
                 </div>
                 {!! Form::close() !!}
@@ -47,22 +47,22 @@
         <th colspan="3">Action</th>
     </thead>
     <tbody>
-    @foreach($controlequipos as $controlequipos)
+    @foreach($laboratorios as $laboratorios)
         <!-- Condicion no permite mostrar los archivos con descripcion admin, y solo muestra los archivos del usuario logeado -->
         <?php 
-        if(($controlequipos->descripcion != 'admin') && ($controlequipos->iduser == $idusers)) { 
+        if(($laboratorios->descripcion != 'admin') && ($laboratorios->iduser == $idusers)) { 
         ?> 
 
         <tr>
-        <td>{!! $controlequipos->titulo !!}</td>
-        <td>{!! $controlequipos->descripcion !!}</td>
-        <td>{!! $controlequipos->created_at !!}</td>
+        <td>{!! $laboratorios->titulo !!}</td>
+        <td>{!! $laboratorios->descripcion !!}</td>
+        <td>{!! $laboratorios->created_at !!}</td>
             <td>
-                {!! Form::open(['route' => ['controlequipos.destroy', $controlequipos->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['laboratorios.destroy', $laboratorios->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('controlequipos.show', [$controlequipos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('controlequipos.edit', [$controlequipos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="descargarEje/{{ $controlequipos->idejecuarch }}" class='btn btn-default btn btn-xs' target="_blank"><i class="glyphicon glyphicon-download"></i></a> 
+                    <a href="{!! route('laboratorios.show', [$laboratorios->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('laboratorios.edit', [$laboratorios->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="descargarEje/{{ $laboratorios->idejecuarch }}" class='btn btn-default btn btn-xs' target="_blank"><i class="glyphicon glyphicon-download"></i></a> 
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Esta usted seguro?')"]) !!}
                 </div>
                 {!! Form::close() !!}

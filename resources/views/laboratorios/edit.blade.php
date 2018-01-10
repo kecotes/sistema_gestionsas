@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Control de Equipos
+         Laboratorios, certificado y pruebas de campo
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($controlequipos, ['route' => ['controlequipos.update', $controlequipos->id], 'method' => 'patch', 'files'=>'true']) !!}
+                   {!! Form::model($laboratorios, ['route' => ['laboratorios.update', $laboratorios->id], 'method' => 'patch', 'files'=>'true']) !!}
 
-                        @include('controlequipos.fields_edit')
+                        @include('laboratorios.fields_edit')
 
                    {!! Form::close() !!}
                </div>

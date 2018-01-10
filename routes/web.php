@@ -87,6 +87,7 @@ Route::get('descargarEtV/{id}','EstadotiempoController@descargarEtV');
 Route::get('descargarRfV/{id}','RegistroFotograficoController@descargarRfV');
 Route::get('descargarArV/{id}','AnalisisretrasosController@descargarArV');
 Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
+Route::get('descargarLab/{id}','LaboratorioController@descargarLab');
 
 Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 

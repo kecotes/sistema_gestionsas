@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Nuevo Control de Equipos
+      <h1>Nuevo laboratorio, certificado y pruebas de campo
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos.create') !!}  
@@ -13,9 +13,9 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'controlequipos.store', 'enctype' => 'multipart/form-data']) !!}
+                    {!! Form::open(['route' => 'laboratorios.store', 'enctype' => 'multipart/form-data']) !!}
 
-                        @include('controlequipos.fields')
+                        @include('laboratorios.fields')
 
                     {!! Form::close() !!}
                 </div>
