@@ -55,7 +55,7 @@
 
 <!-- Expedicion Field -->
 <div class="form-group col-sm-6">
-  <?php echo Form::label('expedicion', 'Expedicion:'); ?>
+  <?php echo Form::label('expedicion', 'Lugar de Expedicion:'); ?>
 
   <?php echo Form::text('expedicion', null, ['class' => 'form-control']); ?>
 

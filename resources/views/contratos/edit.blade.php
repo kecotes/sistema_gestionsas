@@ -25,10 +25,6 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> Añade cargar archivos de contraatacion y realzia cambios menores
         {!! Form::close() !!}
    </div>
 @endsection

@@ -22,6 +22,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('porcentaje', 'Porcentaje:') !!}
     {!! Form::text('porcentaje', null, ['class' => 'form-control']) !!}
+    <span class="help-block">*Valor en decimales (Ej. 0.20 que equivale al 20%)</span>
 </div>
 
 <!-- Submit Field -->

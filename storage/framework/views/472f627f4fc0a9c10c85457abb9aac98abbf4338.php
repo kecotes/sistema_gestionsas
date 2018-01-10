@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
         <h1>

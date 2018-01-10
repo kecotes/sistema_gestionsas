@@ -18,13 +18,13 @@
 <!-- Nocontrato Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nocontrato', 'Nombre del contrato:') !!}
-    {!! Form::text('nocontrato', null, ['class' => 'form-control']) !!}
+    {!! Form::text('nocontrato', null, ['class' => 'form-control', 'placeholder' => '*Por lo general es el que aparece en el titulo del contrato']) !!}
 </div>
 
 <!-- Ncontrato Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ncontrato', 'Numero del contrato:') !!}
-    {!! Form::text('ncontrato', null, ['class' => 'form-control']) !!}
+    {!! Form::text('ncontrato', null, ['class' => 'form-control', 'placeholder' => '*Solo el numero del contrato (Ej. 006)']) !!}
 </div>
 
 <!-- Apodocontrato Field -->
@@ -42,7 +42,7 @@
 <!-- Valorcontrato Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valorcontrato', 'Valor del contrato:') !!}
-    {!! Form::text('valorcontrato', null, ['class' => 'form-control']) !!}
+    {!! Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']) !!}
 </div>
 
 <!-- Valoranticipol Field -->
@@ -54,13 +54,13 @@
 <!-- Valoranticipo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoranticipo', 'Valor del anticipo:') !!}
-    {!! Form::text('valoranticipo', null, ['class' => 'form-control']) !!}
+    {!! Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay aticipo']) !!}
 </div>
 
 <!-- Porcentajeanticipo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('porcentajeanticipo', 'Porcentaje del anticipo:') !!}
-    {!! Form::text('porcentajeanticipo', null, ['class' => 'form-control']) !!}
+    {!! Form::text('porcentajeanticipo', null, ['class' => 'form-control','placeholder' => '*Valor en decimales (Ej. 0.50 que equivale al 50%)']) !!}
 </div>
 
 <!-- idcontratista Field -->
@@ -101,14 +101,14 @@
 
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('valoradicional', 'Valora dicional:') !!}
-    {!! Form::text('valoradicional', null, ['class' => 'form-control']) !!}
+    {!! Form::label('valoradicional', 'Valor adicional:') !!}
+    {!! Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay valor adicional']) !!}
 </div>
 
 <!-- Valoranticipoadicional Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('valoranticipoadicional', 'Valor ddel anticipo adicional:') !!}
-    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control']) !!}
+    {!! Form::label('valoranticipoadicional', 'Valor del anticipo adicional:') !!}
+    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay anticipo adicional']) !!}
 </div>
 
 <!-- Plazoinicial Field -->
@@ -132,7 +132,7 @@
 <!-- Estado Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('estado', 'Estado:') !!}
-    {!! Form::text('estado', null, ['class' => 'form-control']) !!}
+    {!! Form::text('estado', null, ['class' => 'form-control','placeholder' => '*Ej. En ejecucion, En espera']) !!}
 </div>
 
 <!-- tiposcontratos Field -->
@@ -155,14 +155,8 @@
     </select>
 </div>
 
-<!-- Tipoarchivo Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tipoarchivo', 'Que archivo adjunto va a subir:') !!}
-    {!! Form::select('tipoarchivo', ['15' => 'Copia del Contrato','16' => 'Acta de Inicio','17' => 'CDP'], null, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group col-sm-6">
-    <label for="exampleInputFile">Adjuntar Archivo</label>
+    <label for="exampleInputFile">Adjuntar Copia del Contrato</label>
     <input type="file" name="file">
 </div>
 

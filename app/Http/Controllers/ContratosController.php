@@ -137,16 +137,8 @@ class ContratosController extends AppBaseController
         $contratos->save();
 
         if($archivo != null) {
-            $carpeta = $request->input("tipoarchivo");
-            if($carpeta == "15"){
-                $nombre = "Copia del Contrato";
-            }elseif($carpeta == "16"){
-                $nombre = "Acta de Inicio";
-            }elseif($carpeta == "17"){
-                $nombre = "CDP";
-            }else{
-                $nombre = $request->input("tipoarchivo");
-            }
+            $carpeta = "15";
+            $nombre = "Copia del Contrato";
 
             $archivoscontratos = new archivoscontratos();
                 $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();

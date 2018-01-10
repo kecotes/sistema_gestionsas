@@ -122,13 +122,3 @@
         @endforeach
     </select>
 </div>
-<<<<<<< HEAD
-
-
-<!-- Submit Field -->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
-    <a href="{!! route('contratos.index') !!}" class="btn btn-default">Cancelar</a>
-</div>
-=======
->>>>>>> Añade cargar archivos de contraatacion y realzia cambios menores

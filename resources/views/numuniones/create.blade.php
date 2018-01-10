@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Relacion entre Contratista y Union Temporal
+            Añadir Contratista a su Union Temporal
         </h1>
         {!! Breadcrumbs::render('numuniones.create') !!} 
     </section>

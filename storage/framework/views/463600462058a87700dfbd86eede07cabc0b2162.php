@@ -2,7 +2,7 @@
     <thead>
         <th>Fecha de expedicion</th>
         <th>Tipo de poliza</th>
-        <th>Nuemero de poliza</th>
+        <th>Numero de poliza</th>
         <th>Tipo de certificado</th>
         <th>Observaciones</th>
         <th colspan="3">Accion</th>

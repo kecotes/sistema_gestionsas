@@ -43,7 +43,7 @@
 
 <!-- Expedicion Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('expedicion', 'Expedicion:') !!}
+  {!! Form::label('expedicion', 'Lugar de Expedicion:') !!}
   {!! Form::text('expedicion', null, ['class' => 'form-control']) !!}
 </div>
 

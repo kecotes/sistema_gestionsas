@@ -21,7 +21,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('nocontrato', 'Nombre del contrato:'); ?>
 
-    <?php echo Form::text('nocontrato', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('nocontrato', null, ['class' => 'form-control', 'placeholder' => '*Por lo general es el que aparece en el titulo del contrato']); ?>
 
 </div>
 
@@ -29,7 +29,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('ncontrato', 'Numero del contrato:'); ?>
 
-    <?php echo Form::text('ncontrato', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('ncontrato', null, ['class' => 'form-control', 'placeholder' => '*Solo el numero del contrato (Ej. 006)']); ?>
 
 </div>
 
@@ -53,7 +53,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valorcontrato', 'Valor del contrato:'); ?>
 
-    <?php echo Form::text('valorcontrato', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
 
 </div>
 
@@ -69,7 +69,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoranticipo', 'Valor del anticipo:'); ?>
 
-    <?php echo Form::text('valoranticipo', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay aticipo']); ?>
 
 </div>
 
@@ -77,7 +77,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('porcentajeanticipo', 'Porcentaje del anticipo:'); ?>
 
-    <?php echo Form::text('porcentajeanticipo', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('porcentajeanticipo', null, ['class' => 'form-control','placeholder' => '*Valor en decimales (Ej. 0.50 que equivale al 50%)']); ?>
 
 </div>
 
@@ -121,17 +121,17 @@
 
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
-    <?php echo Form::label('valoradicional', 'Valora dicional:'); ?>
+    <?php echo Form::label('valoradicional', 'Valor adicional:'); ?>
 
-    <?php echo Form::text('valoradicional', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay valor adicional']); ?>
 
 </div>
 
 <!-- Valoranticipoadicional Field -->
 <div class="form-group col-sm-6">
-    <?php echo Form::label('valoranticipoadicional', 'Valor ddel anticipo adicional:'); ?>
+    <?php echo Form::label('valoranticipoadicional', 'Valor del anticipo adicional:'); ?>
 
-    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay anticipo adicional']); ?>
 
 </div>
 
@@ -163,7 +163,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('estado', 'Estado:'); ?>
 
-    <?php echo Form::text('estado', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('estado', null, ['class' => 'form-control','placeholder' => '*Ej. En ejecucion, En espera']); ?>
 
 </div>
 
@@ -187,16 +187,8 @@
     </select>
 </div>
 
-<!-- Tipoarchivo Field -->
 <div class="form-group col-sm-6">
-    <?php echo Form::label('tipoarchivo', 'Que archivo adjunto va a subir:'); ?>
-
-    <?php echo Form::select('tipoarchivo', ['15' => 'Copia del Contrato','16' => 'Acta de Inicio','17' => 'CDP'], null, ['class' => 'form-control']); ?>
-
-</div>
-
-<div class="form-group col-sm-6">
-    <label for="exampleInputFile">Adjuntar Archivo</label>
+    <label for="exampleInputFile">Adjuntar Copia del Contrato</label>
     <input type="file" name="file">
 </div>
 
