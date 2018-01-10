@@ -316,7 +316,7 @@ class ContratosController extends AppBaseController
         $contratos->update();
 
         //Insetando los nuevos archivos de contrato
-        //Copia del Contrato
+        //Copia del Contratoxd
         if($archivo != null) {
 
             $archivoscontratos = archivoscontratos::where('idcontratos', $contratos->id)->first();
