@@ -27,7 +27,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="{!! route('novedadesfechas.index') !!}"><i class="fa fa-clock-o"></i> Novedades en Fechas</a></li>
-        <li><a href="{!! route('balancesfinancieros.index') !!}"><i class="fa fa-money"></i> Actas Parciales</a></li>
+        <li><a href="{!! route('balancesfinancieros.index') !!}"><i class="fa fa-money"></i> Blances Financieros</a></li>
         </ul>
     </li>
 
@@ -64,7 +64,7 @@
     <li><a href="{!! route('pjuridicas.index') !!}"><i class="fa fa-institution"></i> Contratistas</a></li>
     <li><a href="{!! route('unionestemporales.index') !!}"><i class="fa fa-cubes"></i> Uniones Temporales</a></li>
      <li><a href="{!! route('numuniones.index') !!}"><i class="fa fa-comments"></i> Relacion Contratista y Uniones</a></li>
-    <li><a href="{!! route('residentes.index') !!}"><i class="fa fa-user"></i> Residentes</a></li>
+    <li><a href="{!! route('residentes.index') !!}"><i class="fa fa-user"></i> Personal</a></li>
     <li><a href="{!! route('entidadescontratantes.index') !!}"><i class="fa fa-flag"></i> Entidades Contratantes</a></li>
     <li><a href="{!! route('tiposcontratos.index') !!}"><i class="fa fa-file-text"></i> Tipos de Contratos</a></li>
   </ul>

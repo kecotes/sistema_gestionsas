@@ -178,7 +178,7 @@ class ContratosController extends AppBaseController
         $balancesfinancieros=new balancesfinancieros();
         $balancesfinancieros->actaparcial=$request->get('valoranticipo');
         $balancesfinancieros->pendientepagar=$pendiente;
-        $balancesfinancieros->estado="En ejecucion";
+        $balancesfinancieros->estado="Acta parcial Inicial";
         $balancesfinancieros->idcontratos=$contratos->id;  
         $balancesfinancieros->save();
 
@@ -281,6 +281,10 @@ class ContratosController extends AppBaseController
      */
     public function update($id, UpdateContratosRequest $request)
     {
+        //Obteniendo los archivos
+        $archivo=Input::file('file');
+        $archivo2=Input::file('file2');
+        $archivo3=Input::file('file3');
 
         $contratos= contratos::findOrFail($id);
         $contratos->objetocontrato=$request->get('objetocontrato');
@@ -302,56 +306,57 @@ class ContratosController extends AppBaseController
         $contratos->idpersonas=$request->get('idresidentes');
         $contratos->update();
 
+        //Insetando los nuevos archivos de contrato
+        //Copia del Contrato
         if($archivo != null) {
-            $archivoscontratos = archivoscontratos::where('idcontratos', $contratos->id)->first();
-            $carpeta=$request->input("tipoarchivo");
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="15";
                 $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
                 $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
             $archivoscontratos->archivo=$ruta;
 
             $archivoscontratos->titulo="";
             $archivoscontratos->descripcion="";
-            $archivoscontratos->tipo=$request->get('tipoarchivo');
+            $archivoscontratos->tipo="Copia del Contrato";
             $archivoscontratos->idcontratos=$contratos->id;
-            $archivoscontratos->update();
+            $archivoscontratos->save();
+        }   
 
+        //Acta de Inicio
+        if($archivo2 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="16";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo2->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo2) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Acta de Inicio";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //CDP
+        if($archivo3 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo3->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo3) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="CDP";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
         }
            
         Flash::success('Contrato Modificado Satisfactoriamente.');
         return redirect(route('contratos.index'));
 
     }
-
-    public function subirchivos($id, CreateContratosRequest $request){
-        
-        $archivo=Input::file('file');
-
-        if($archivo != null) {
-            $carpeta = $request->input("tipoarchivo");
-            if($carpeta == "15"){
-                $nombre = "Copia del Contrato";
-            }elseif($carpeta == "16"){
-                $nombre = "Acta de Inicio";
-            }elseif($carpeta == "17"){
-                $nombre = "CDP";
-            }else{
-                $nombre = $request->input("tipoarchivo");
-            }
-
-            $archivoscontratos = new archivoscontratos();
-                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
-                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
-            $archivoscontratos->archivo=$ruta;
-
-            $archivoscontratos->titulo="";
-            $archivoscontratos->descripcion="";
-            $archivoscontratos->tipo=$nombre;
-            $archivoscontratos->idcontratos=$contratos->id;
-            $archivoscontratos->save();
-
-        } 
-    }
-
+    
     //Descargar Archivos Contratos desde Show_Fields
     public function descargarb($id){
         $Archivoscontratos=Archivoscontratos::find($id);

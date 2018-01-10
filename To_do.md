@@ -26,3 +26,6 @@ FIXME:
 BUG:
 [x] - Descargar archivos ultima version de cada contrato especifico
 [] - (?) Al crear una poliza crea 2 en la BD automaticamente, almenos en la priemra interaccion confirmada.
+
+Observaciones:
+

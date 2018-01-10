@@ -47,6 +47,11 @@ class BalancesfinancierosController extends AppBaseController
 
         $query=trim($request->GET('searchText'));
 
+        //Inicia el select buscador en 0
+        if($query == ""){
+            $query = 0;
+        }
+
         $balancesfinancieros=DB::table('personas as p')
             ->join('contratos as c','p.id','=','c.idpersonas')
             ->join('balancesfinancieros as bf','c.id','=','bf.idcontratos')
