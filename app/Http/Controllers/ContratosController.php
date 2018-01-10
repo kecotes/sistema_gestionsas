@@ -196,6 +196,7 @@ class ContratosController extends AppBaseController
   
     }
 
+
     /**
      * Display the specified Contratos.
      *
@@ -281,8 +282,6 @@ class ContratosController extends AppBaseController
     public function update($id, UpdateContratosRequest $request)
     {
 
-        $archivo=Input::file('file');
-
         $contratos= contratos::findOrFail($id);
         $contratos->objetocontrato=$request->get('objetocontrato');
         $contratos->nocontrato=$request->get('nocontrato');
@@ -304,7 +303,6 @@ class ContratosController extends AppBaseController
         $contratos->update();
 
         if($archivo != null) {
-
             $archivoscontratos = archivoscontratos::where('idcontratos', $contratos->id)->first();
             $carpeta=$request->input("tipoarchivo");
                 $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
@@ -322,6 +320,36 @@ class ContratosController extends AppBaseController
         Flash::success('Contrato Modificado Satisfactoriamente.');
         return redirect(route('contratos.index'));
 
+    }
+
+    public function subirchivos($id, CreateContratosRequest $request){
+        
+        $archivo=Input::file('file');
+
+        if($archivo != null) {
+            $carpeta = $request->input("tipoarchivo");
+            if($carpeta == "15"){
+                $nombre = "Copia del Contrato";
+            }elseif($carpeta == "16"){
+                $nombre = "Acta de Inicio";
+            }elseif($carpeta == "17"){
+                $nombre = "CDP";
+            }else{
+                $nombre = $request->input("tipoarchivo");
+            }
+
+            $archivoscontratos = new archivoscontratos();
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo=$nombre;
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+
+        } 
     }
 
     //Descargar Archivos Contratos desde Show_Fields
