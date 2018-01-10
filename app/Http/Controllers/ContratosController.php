@@ -188,6 +188,7 @@ class ContratosController extends AppBaseController
   
     }
 
+<<<<<<< HEAD
     public function crear_archivo_contrato(CreateContratosRequest $request){
 
         $archivo=Input::file('file');
@@ -203,6 +204,8 @@ class ContratosController extends AppBaseController
             $archivoscontratos->idcontratos=$contratos->id;
             $archivoscontratos->save();
     }
+=======
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
     /**
      * Display the specified Contratos.
@@ -289,11 +292,16 @@ class ContratosController extends AppBaseController
     public function update($id, UpdateContratosRequest $request)
     {
         //Obteniendo los archivos
+<<<<<<< HEAD
         $archivo=Input::file('file');
         $archivo2=Input::file('file2');
         $archivo3=Input::file('file3');
 
+=======
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
         $archivo=Input::file('file');
+        $archivo2=Input::file('file2');
+        $archivo3=Input::file('file3');
 
         $contratos= contratos::findOrFail($id);
         $contratos->objetocontrato=$request->get('objetocontrato');
@@ -318,9 +326,12 @@ class ContratosController extends AppBaseController
         //Insetando los nuevos archivos de contrato
         //Copia del Contratoxd
         if($archivo != null) {
+<<<<<<< HEAD
 
             $archivoscontratos = archivoscontratos::where('idcontratos', $contratos->id)->first();
             $carpeta=$request->input("tipoarchivo");
+=======
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
             $archivoscontratos = new archivoscontratos();
             $carpeta="15";
                 $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
@@ -330,6 +341,7 @@ class ContratosController extends AppBaseController
             $archivoscontratos->titulo="";
             $archivoscontratos->descripcion="";
             $archivoscontratos->tipo="Copia del Contrato";
+<<<<<<< HEAD
             $archivoscontratos->idcontratos=$contratos->id;
             $archivoscontratos->save();
         }   
@@ -357,6 +369,35 @@ class ContratosController extends AppBaseController
                 $r1=Storage::disk('local')->put($ruta,  \File::get($archivo3) );
             $archivoscontratos->archivo=$ruta;
 
+=======
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }   
+
+        //Acta de Inicio
+        if($archivo2 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="16";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo2->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo2) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Acta de Inicio";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //CDP
+        if($archivo3 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo3->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo3) );
+            $archivoscontratos->archivo=$ruta;
+
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
             $archivoscontratos->titulo="";
             $archivoscontratos->descripcion="";
             $archivoscontratos->tipo="CDP";

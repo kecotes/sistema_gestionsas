@@ -1,7 +1,11 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
         <h1>
+<<<<<<< HEAD
             Añadir Contratista a su Union Temporal
+=======
+            Crear Relacion entre Contratista y Union Temporal
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
         </h1>
         <?php echo Breadcrumbs::render('numuniones.create'); ?> 
     </section>

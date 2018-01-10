@@ -24,7 +24,10 @@
 
     <?php echo Form::text('porcentaje', null, ['class' => 'form-control']); ?>
 
+<<<<<<< HEAD
     <span class="help-block">*Valor en decimales (Ej. 0.20 que equivale al 20%)</span>
+=======
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 </div>
 
 <!-- Submit Field -->

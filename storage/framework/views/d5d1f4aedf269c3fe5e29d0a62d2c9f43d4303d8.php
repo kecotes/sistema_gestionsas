@@ -21,7 +21,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('nocontrato', 'Nombre del contrato:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('nocontrato', null, ['class' => 'form-control', 'placeholder' => '*Por lo general es el que aparece en el titulo del contrato']); ?>
+=======
+    <?php echo Form::text('nocontrato', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -29,7 +33,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('ncontrato', 'Numero del contrato:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('ncontrato', null, ['class' => 'form-control', 'placeholder' => '*Solo el numero del contrato (Ej. 006)']); ?>
+=======
+    <?php echo Form::text('ncontrato', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -53,7 +61,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valorcontrato', 'Valor del contrato:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
+=======
+    <?php echo Form::text('valorcontrato', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -69,7 +81,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoranticipo', 'Valor del anticipo:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay aticipo']); ?>
+=======
+    <?php echo Form::text('valoranticipo', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -77,7 +93,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('porcentajeanticipo', 'Porcentaje del anticipo:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('porcentajeanticipo', null, ['class' => 'form-control','placeholder' => '*Valor en decimales (Ej. 0.50 que equivale al 50%)']); ?>
+=======
+    <?php echo Form::text('porcentajeanticipo', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -121,17 +141,29 @@
 
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
+<<<<<<< HEAD
     <?php echo Form::label('valoradicional', 'Valor adicional:'); ?>
 
     <?php echo Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay valor adicional']); ?>
+=======
+    <?php echo Form::label('valoradicional', 'Valora dicional:'); ?>
+
+    <?php echo Form::text('valoradicional', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
 <!-- Valoranticipoadicional Field -->
 <div class="form-group col-sm-6">
+<<<<<<< HEAD
     <?php echo Form::label('valoranticipoadicional', 'Valor del anticipo adicional:'); ?>
 
     <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay anticipo adicional']); ?>
+=======
+    <?php echo Form::label('valoranticipoadicional', 'Valor ddel anticipo adicional:'); ?>
+
+    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -163,7 +195,11 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('estado', 'Estado:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('estado', null, ['class' => 'form-control','placeholder' => '*Ej. En ejecucion, En espera']); ?>
+=======
+    <?php echo Form::text('estado', null, ['class' => 'form-control']); ?>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 </div>
 
@@ -187,8 +223,21 @@
     </select>
 </div>
 
+<<<<<<< HEAD
 <div class="form-group col-sm-6">
     <label for="exampleInputFile">Adjuntar Copia del Contrato</label>
+=======
+<!-- Tipoarchivo Field -->
+<div class="form-group col-sm-6">
+    <?php echo Form::label('tipoarchivo', 'Que archivo adjunto va a subir:'); ?>
+
+    <?php echo Form::select('tipoarchivo', ['15' => 'Copia del Contrato','16' => 'Acta de Inicio','17' => 'CDP'], null, ['class' => 'form-control']); ?>
+
+</div>
+
+<div class="form-group col-sm-6">
+    <label for="exampleInputFile">Adjuntar Archivo</label>
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
     <input type="file" name="file">
 </div>
 

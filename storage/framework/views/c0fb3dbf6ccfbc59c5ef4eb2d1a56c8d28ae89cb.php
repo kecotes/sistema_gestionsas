@@ -11,7 +11,11 @@
 <dd><input type="file" name="file3"></dd><br>
 
 </dl>
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
