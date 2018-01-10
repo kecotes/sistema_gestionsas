@@ -1,9 +1,9 @@
 <table class="table table-responsive" id="pjuridicas-table">
     <thead>
         <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Ciudad</th>
-        <th>Departamento</th>
+        <th>Tipo de Identificacion</th>
+        <th>No</th>
+        <th>Expedida</th>
         <th>Tipo de persona juridica</th>
         <th colspan="3">Accion</th>
     </thead>
@@ -11,9 +11,9 @@
     @foreach($pjuridicas as $pjuridicas)
         <tr>
             <td>{!! $pjuridicas->nombre !!}</td>
-            <td>{!! $pjuridicas->apellido !!}</td>
-            <td>{!! $pjuridicas->ciudad !!}</td>
-            <td>{!! $pjuridicas->departamento !!}</td>
+            <td>{!! $pjuridicas->tipodocumento !!}</td>
+            <td>{!! $pjuridicas->documento !!}</td>
+            <td>{!! $pjuridicas->expedicion !!}</td>
             <td>{!! $pjuridicas->tipopjuridica !!}</td>
             <td>
                 {!! Form::open(['route' => ['pjuridicas.destroy', $pjuridicas->id], 'method' => 'delete']) !!}

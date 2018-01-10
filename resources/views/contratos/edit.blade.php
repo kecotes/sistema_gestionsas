@@ -8,7 +8,7 @@
    </section>
    <div class="content">
         @include('adminlte-templates::common.errors')
-            {!! Form::model($contratos, ['route' => ['contratos.update', $contratos->id], 'method' => 'patch']) !!}
+            {!! Form::model($contratos, ['route' => ['contratos.update', $contratos->id], 'method' => 'patch', 'files'=>'true']) !!}
             <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
@@ -25,7 +25,10 @@
               </div>
             </div>
           </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> Añade cargar archivos de contraatacion y realzia cambios menores
         {!! Form::close() !!}
    </div>
 @endsection

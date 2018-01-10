@@ -46,7 +46,7 @@ class PjuridicasController extends AppBaseController
 
       $pjuridicas=DB::table('personas as p')
       ->join('pjuridicas as pj','p.id','=','pj.idpersonas')
-      ->select('p.id','p.direccion','p.telefono','p.documento','pj.nombre','pj.apellido','pj.ciudad','pj.departamento','pj.tipopjuridica')
+      ->select('p.id','p.direccion','p.telefono','p.documento','pj.nombre','pj.apellido','pj.ciudad','pj.departamento','pj.tipopjuridica','p.expedicion','p.tipodocumento')
       //->where('pj.nombre','LIKE','%'.$query.'%')
       ->where('pj.tipopjuridica','=','contratista')
       ->orwhere('pj.tipopjuridica','=','representante')
