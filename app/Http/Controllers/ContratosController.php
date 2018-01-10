@@ -307,7 +307,7 @@ class ContratosController extends AppBaseController
         $contratos->update();
 
         //Insetando los nuevos archivos de contrato
-        //Copia del Contrato
+        //Copia del Contratoxd
         if($archivo != null) {
             $archivoscontratos = new archivoscontratos();
             $carpeta="15";
