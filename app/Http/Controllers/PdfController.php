@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use  App\Models\contratos;
+use  App\Models\Contratos;
 use App\Models\Tiposcontratos;
 use App\Models\Entidadescontratantes;
 use App\Models\Pnaturales;
@@ -17,7 +17,8 @@ class PdfController extends Controller
 {
     public function index()
     {
-        return view("pdf.index");
+        $contratos = Contratos::all();
+        return view("pdf.index")->with('contratos', $contratos);
     } 
 
 
@@ -29,7 +30,7 @@ class PdfController extends Controller
       ->join('contratos as c','p.id','=','c.idpersonas')
       ->join('entidadescontratantes as ec','ec.id','=','c.identidadescontrates')
       ->join('tiposcontratos as tc','tc.id','=','c.idtiposcontratos')
-      ->where('p.id','=',$uh);
+      ->where('c.id','=',$tipo);
 
         $date = date('Y-m-d');
         $view =  \View::make($vistaurl, compact('data', 'date', 'contratos'))->render();
@@ -42,7 +43,7 @@ class PdfController extends Controller
     public function crear_reporte_porventa($tipo){
      //$persona->idventa=$venta->idventa;
      $vistaurl="pdf.reporte_por_venta";
-     $contratos=contratos::all();
+     $contratos=Contratos::all();
      return $this->crearPDF($contratos, $vistaurl,$tipo);
 //venta = datos;
     }

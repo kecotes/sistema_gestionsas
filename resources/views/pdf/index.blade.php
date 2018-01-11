@@ -16,22 +16,19 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
-                   
                     <thead><tr>
-                      <th>ID</th>
-                      <th>reporte</th>
+                      <th>Numero del Contrato</th>
+                      <th>Apodo del Contrato</th>
                       <th>ver</th>
-                      <th>descargar</th>
                     </tr></thead>
                     <tbody>
+                    @foreach($contratos as $contratos)
                     <tr>
-                      <td>1</td>
-                      <!-- Para hacerlo recursivo simplement hago un foreach y cambio el /1 por el id del foreach-->
-                      <td>Reporte de Contratos en PDF</td>
-                      <td><a href="crear_reporte_porventa/1" target="_blank" ><button class="btn btn-block btn-primary btn-xs">Ver</button></a></td>
-                      <td><a href="crear_reporte_porventa/2" target="_blank" ><button class="btn btn-block btn-success btn-xs">Descargar</button></a></td>
+                      <td>{{ $contratos->ncontrato }}</td>
+                      <td>{{ $contratos->apodocontrato }}</td>
+                      <td><a href="crear_reporte_porventa/{{ $contratos->id }}" target="_blank" ><button class="btn btn-block btn-primary btn-xs">Ver</button></a></td>
                     </tr>
-                   
+                   @endforeach
                   </tbody></table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

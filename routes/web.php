@@ -52,6 +52,7 @@ Auth::routes();
     Route::resource('correspondencia', 'CorrespondenciaController');
 
     //Documentos de Contratacion
+    Route::resource('usuarioscontratados', 'UsuarioscontratadosController');
     Route::resource('entidadescontratantes', 'EntidadescontratantesController');
     Route::resource('tiposcontratos', 'TiposcontratosController');
     Route::resource('subcontratos', 'SubcontratosController');
@@ -70,6 +71,8 @@ Auth::routes();
     Route::resource('/pdf','PdfController@index'); 
     Route::resource('excel','ExcelController');
     Route::resource('/excel','ExcelController@index'); 
+
+
 
 //  Descargas 
 Route::get('descargar/{id}','ContratosController@descargar');
@@ -94,6 +97,7 @@ Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');
 
 
+Route::get('home', 'GraficasController@index');
+Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
+Route::get('grafica_publicaciones', 'GraficasController@total_publicaciones');
 
-
-Route::resource('usuarioscontratados', 'UsuarioscontratadosController');

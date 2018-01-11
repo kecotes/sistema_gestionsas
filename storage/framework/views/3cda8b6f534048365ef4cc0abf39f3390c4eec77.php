@@ -21,7 +21,7 @@
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    <?php echo Form::submit('Save', ['class' => 'btn btn-primary']); ?>
+    <?php echo Form::submit('Guardar', ['class' => 'btn btn-success']); ?>
 
-    <a href="<?php echo route('usuarioscontratados.index'); ?>" class="btn btn-default">Cancel</a>
+    <a href="<?php echo route('usuarioscontratados.index'); ?>" class="btn btn-default">Cancelar</a>
 </div>
