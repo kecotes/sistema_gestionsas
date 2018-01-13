@@ -23,8 +23,13 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('actaparcial', 'Valor:'); ?>
 
+<<<<<<< HEAD
     <?php echo Form::text('actaparcial', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
 
+=======
+    <?php echo Form::text('actaparcial', null, ['class' => 'form-control']); ?>
+
+>>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 </div>
 
 <div class="form-group col-sm-6">

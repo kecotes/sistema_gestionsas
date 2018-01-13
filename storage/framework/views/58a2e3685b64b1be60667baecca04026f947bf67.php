@@ -15,7 +15,7 @@
 <?php endif; ?>
 
 <!-- Idtipoactividades Field -->
-<input type="hidden" name="idactividad" value="1"/>
+<input type="hidden" name="idactividad" value="8"/>
 <input type="hidden" name="idresidentes" value="<?php echo e(Auth::user()->id); ?>">
 
 <!-- Titulo Field -->

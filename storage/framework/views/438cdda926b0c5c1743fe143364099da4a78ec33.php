@@ -21,7 +21,7 @@
                 <div class='btn-group'>
                     <a href="<?php echo route('estadospolizas.show', [$estadospolizas->id]); ?>" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="<?php echo route('estadospolizas.edit', [$estadospolizas->id]); ?>" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="<?php echo route('polizas.index'); ?>" class='btn btn-default btn-xs' target="_blank"><i class="fa fa-mail-reply"></i></a> 
+                    <a href="<?php echo route('polizas.index'); ?>" class='btn btn-default btn-xs'><i class="fa fa-mail-reply"></i></a> 
                     <?php echo Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]); ?>
 
                 </div>

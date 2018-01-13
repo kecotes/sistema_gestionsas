@@ -13,15 +13,16 @@ TODO:
 [x] - Poner observaciones, alertar informacion detallada en todos los formularios (Contratos, Balances Financieros)
 [x] - Nueva vista: Correspondencia Enviada y Recivida.
 [x] - Nueva vista: Laboratorio, certificado y pruebas de campo
-[] - Que los residentes vean solo la ficha tecnica del contratoxd
-
+[x] - Agregar gafricas a la vista home (Muy basico aun)
+[x] - Agregar Reportes Pdf (Muy basico aun)
 
 FIXME:
 [x] - Corregir en Polizas pasar Observaciones a longtext
 [x] - No se estan subiendo archivos en polizas
-[] - Que se quede en la misma pagina al hacer click en el boton Estados polizas
+[x] - Que se quede en la misma pagina al hacer click en el boton Estados polizas
 [] - Que solo se puedan subir word img pdf excel
 [] - Mejorar la vista show contrato en archivos
+[] - Que los residentes vean solo la ficha tecnica del contratoxd
 [] - Corregir la ediccion de archivos en balances financieros, que modifique valores y se modifique el contrato
 
 
