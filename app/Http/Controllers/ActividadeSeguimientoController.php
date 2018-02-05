@@ -55,7 +55,7 @@ class ActividadeSeguimientoController extends Controller
       $idusers = Auth::id();
 
       $idactividad=3;
-      $query=trim($request->GET('searchText'));
+      $query=trim($request->GET('query'));
 
       //Inicia el select buscador en 0
       if($query == ""){
@@ -93,7 +93,7 @@ class ActividadeSeguimientoController extends Controller
       ->join('personas as p','uc.idpersonas','=','p.id')
       ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
       ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
-      return view('actividadeseguimiento.index',["actividadeseguimiento"=>$actividadeseguimiento,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
+      return view('actividadeseguimiento.index',["actividadeseguimiento"=>$actividadeseguimiento,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"query"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
     }
     
     /**
@@ -101,24 +101,36 @@ class ActividadeSeguimientoController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function createactividadeseguimiento($idcontrato)
     {
+        $idactividad=10;
         // Obtiene el ID del Usuario Autenticado
         $idusers = Auth::id();
         
-        //Consulta para los Residentes - Solo pemite ver contratos el contrato de cada residente
-        $contratosRdt=DB::table('users as u')
+        $informesADM=DB::table('contratos as c')
+        ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
+        ->join('tipoactividades as ta','ta.id','=','ac.idtipoactividades')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('aac.titulo','ac.id')
+        ->where('c.id','=',$idcontrato)
+        ->where('ac.idtipoactividades','=',$idactividad)
+        ->whereNull('c.deleted_at')->get();
+
+        $informesRdt=DB::table('users as u')
         ->join('usuarioscreados as uc','u.id','=','uc.idusers')
         ->join('personas as p','uc.idpersonas','=','p.id')
         ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
-        ->join('contratos as c','c.id','=','usc.idcontratos')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->get();
-
-        //Consulta para los Administradores - Permite ver todos los archivos
-        $contratosADM=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
+        ->join('contratos as c','c.id','=','usc.idcontratos')
+        ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
+        ->join('tipoactividades as ta','ta.id','=','ac.idtipoactividades')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('ac.id','aac.titulo')
+        ->where('u.id','=',$idusers)
+        ->where('ac.idtipoactividades','=',$idactividad)
+        ->whereNull('ac.deleted_at')->get();
 
         $residentes=DB::table('personas as p') ->join('pnaturales as pn','p.id','=','pn.idpersonas')->select('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->groupBy('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->whereNull('p.deleted_at')->get();        
-        $idactividad=3;
-		return view("actividadeseguimiento.create",["contratosRdt"=>$contratosRdt,"contratosADM"=>$contratosADM,"idactividad"=>$idactividad,"residentes"=>$residentes]);
+		return view("actividadeseguimiento.createactividadeseguimiento",["idcontrato"=>$idcontrato,"idactividad"=>$idactividad,"residentes"=>$residentes,"informesADM"=>$informesADM,"informesRdt"=>$informesRdt]);
     }
 
     /**
@@ -131,6 +143,16 @@ class ActividadeSeguimientoController extends Controller
     public function store(CreateActividadescontratosRequest $request)
     {
         $archivo=Input::file('file');
+
+        //Que decision toma y de ahi se decide que montar
+        $decision = $request->get('decision');
+        if($decision == 'formato' || $decision == 'archivo'){
+            $idtipoactividad = 3; //Significa que se va a tomar como tipoactividad 3 que es actividad seguimiento
+        }
+        
+        if($decision == 'informe'){
+            $idtipoactividad = 10;
+        }
         
         if($archivo != null) {
         
@@ -138,19 +160,26 @@ class ActividadeSeguimientoController extends Controller
     
             $actividadescontratos=new actividadescontratos();
             $actividadescontratos->idcontratos=$request->get('idcontratos');
-            $actividadescontratos->idtipoactividades=$request->get('idactividad');
+            if(Auth::user()->tipoUsuario == '1'){
+                $actividadescontratos->idtipoactividades=$idtipoactividad;
+            }else{
+                $actividadescontratos->idtipoactividades=3;
+            }
             $actividadescontratos->iduser=$request->get('idresidentes');
+            $actividadescontratos->idinforme=$request->get('idinformes');
             $actividadescontratos->save();
 
             $archivosactividadescontratos = new archivosactividadescontratos();
+            
+                // La composicion esta: IDContrato / IDInforme / IDUser / IDTipo Actividad contrato
                 $carpeta="5";
-                    $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                    $ruta=$request->get('idcontratos')."/".$request->get('idinformes')."/".$request->get("idresidentes")."/".$carpeta."/".$archivo->getClientOriginalName();
                     $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
                 $archivosactividadescontratos->archivo=$ruta;
     
             $archivosactividadescontratos->titulo=$request->get('titulo');
             
-            if(Auth::user()->tipoUsuario == '1'){
+            if($decision == 'formato'){
                 $archivosactividadescontratos->descripcion=$request->get('descripcionArch');
             }else{
                 $archivosactividadescontratos->descripcion=$request->get('contenido');
@@ -162,14 +191,19 @@ class ActividadeSeguimientoController extends Controller
         } else {
             $actividadescontratos=new actividadescontratos();
             $actividadescontratos->idcontratos=$request->get('idcontratos');
-            $actividadescontratos->idtipoactividades=$request->get('idactividad');
+            if(Auth::user()->tipoUsuario == '1'){
+                $actividadescontratos->idtipoactividades=$idtipoactividad;
+            }else{
+                $actividadescontratos->idtipoactividades=3;
+            }
             $actividadescontratos->iduser=$request->get('idresidentes');
+            $actividadescontratos->idinforme=$request->get('idinformes');
             $actividadescontratos->save();
 
             $archivosactividadescontratos = new archivosactividadescontratos();
             $archivosactividadescontratos->archivo="";
             $archivosactividadescontratos->titulo=$request->get('titulo');
-            if(Auth::user()->tipoUsuario == '1'){
+            if($decision == 'formato'){
                 $archivosactividadescontratos->descripcion=$request->get('descripcionArch');
             }else{
                 $archivosactividadescontratos->descripcion=$request->get('contenido');
@@ -178,7 +212,7 @@ class ActividadeSeguimientoController extends Controller
             $archivosactividadescontratos->save();
         }
     
-            Flash::success('Control de Equipos Agregado Satisfatoriamente.');
+            Flash::success('Actividad Seguimiento Agregada Satisfatoriamente.');
     
             return redirect(route('actividadeseguimiento.index'));
     }
@@ -250,18 +284,17 @@ class ActividadeSeguimientoController extends Controller
 
         if($archivo != null) {
             $actividadescontratos= actividadescontratos::findOrFail($id);
-            $actividadescontratos->idcontratos=$request->get('idcontratos');
-            $actividadescontratos->idtipoactividades=$request->get('idactividad');
             $actividadescontratos->iduser=$request->get('idresidentes');
             $actividadescontratos->update();
 
             $archivosactividadescontratos = archivosactividadescontratos::where('idactividadescontratos', $actividadescontratos->id)->first();
+                // La composicion esta: IDContrato / IDInforme / IDUser / IDTipo Actividad contrato
                 $carpeta="5";
-                    $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                    $ruta=$request->get('idcontratos')."/".$request->get('idinformes')."/".$request->get("idresidentes")."/".$carpeta."/".$archivo->getClientOriginalName();
                     $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
                 $archivosactividadescontratos->archivo=$ruta;
 
-            $archivosactividadescontratos->titulo="$request->get('titulo')";
+            $archivosactividadescontratos->titulo=$request->get('titulo');
             $archivosactividadescontratos->descripcion=$request->get('descripcion');
             $archivosactividadescontratos->idactividadescontratos=$actividadescontratos->id;
             $archivosactividadescontratos->update();
@@ -279,12 +312,12 @@ class ActividadeSeguimientoController extends Controller
             $archivosactividadescontratos->update();
         }
 
-        Flash::success('Control de Equipos actualizada.');
+        Flash::success('Actividad Seguimiento actualizada.');
 
         return redirect(route('actividadeseguimiento.index'));
     }
 
-    public function descargarAsV($id){
+    public function noo($id){
         $contrate=DB::table('actividadescontratos as ac')
         ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
         ->select('aac.id','aac.descripcion','aac.created_at','ac.idtipoactividades','ac.idcontratos','aac.archivo')
@@ -315,7 +348,7 @@ class ActividadeSeguimientoController extends Controller
 
         $this->actividadescontratosRepository->delete($id);
 
-        Flash::success('Control Equipo Eliminado.');
+        Flash::success('Actividad Seguimiento Eliminada.');
 
         return redirect(route('actividadeseguimiento.index'));
     }

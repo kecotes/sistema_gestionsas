@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Registro Fotografico <a class="btn btn-success" href="{!! route('registrofotografico.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarRfV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Registro Fotografico @if($query != null) <a class="btn btn-success" href="createregistrofotografico/{{ $query }}">Nuevo</a>  
+       @if($contratoid != null) <a class="btn btn-info" href="registrofoto/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

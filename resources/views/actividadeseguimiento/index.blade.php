@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Actividades de Seguimiento <a class="btn btn-success" href="{!! route('actividadeseguimiento.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarAsV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Actividades de Seguimiento @if($query != null) <a class="btn btn-success" href="createactividadeseguimiento/{{ $query }}">Nuevo</a>
+       @if($contratoid != null) <a class="btn btn-info" href="noo/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

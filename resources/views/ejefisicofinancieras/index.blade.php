@@ -2,7 +2,8 @@
 
 @section('content')
 <section class="content-header">
-<h1>Ejecuciones Fisico Financieras  <a class="btn btn-success" href="{!! route('ejefisicofinancieras.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarEjeV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+<h1>Ejecuciones Fisico Financieras  @if($query != null) <a class="btn btn-success" href="createejefisicofinancieras/{{ $query }}">Nuevo</a> 
+ @if($contratoid != null) <a class="btn btn-info" href="eje/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
   <small></small>
 </h1>
       {!! Breadcrumbs::render('actividadescontratos') !!}  

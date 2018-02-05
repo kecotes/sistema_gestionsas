@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-      <h1>Control de Seguridad <a class="btn btn-success" href="<?php echo route('controlseguridad.create'); ?>">Nuevo</a> <?php if($contratoid != null): ?> <a class="btn btn-info" href="descargarCsV/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?>
+      <h1>Control de Seguridad  <?php if($query != null): ?> <a class="btn btn-success" href="createcontrolseguridad/<?php echo e($query); ?>">Nuevo</a>  
+       <?php if($contratoid != null): ?> <a class="btn btn-info" href="descargarCsV/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?> <?php endif; ?>
         <small></small>
       </h1>
             <?php echo Breadcrumbs::render('actividadescontratos'); ?>  

@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Control de Seguridad <a class="btn btn-success" href="{!! route('controlseguridad.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarCsV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Control de Seguridad  @if($query != null) <a class="btn btn-success" href="createcontrolseguridad/{{ $query }}">Nuevo</a>  
+       @if($contratoid != null) <a class="btn btn-info" href="descargarCsV/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

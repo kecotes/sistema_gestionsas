@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Laboratorios, certificado y pruebas de campo <a class="btn btn-success" href="{!! route('laboratorios.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarLab/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Laboratorios, certificado y pruebas de campo @if($query != null) <a class="btn btn-success" href="createlaboratorios/{{ $query }}">Nuevo</a> 
+       @if($contratoid != null) <a class="btn btn-info" href="khe/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
 

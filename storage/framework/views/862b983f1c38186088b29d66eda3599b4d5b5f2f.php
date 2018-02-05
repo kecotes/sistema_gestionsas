@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-      <h1>Laboratorios, certificado y pruebas de campo <a class="btn btn-success" href="<?php echo route('laboratorios.create'); ?>">Nuevo</a> <?php if($contratoid != null): ?> <a class="btn btn-info" href="descargarLab/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?>
+      <h1>Laboratorios, certificado y pruebas de campo <?php if($query != null): ?> <a class="btn btn-success" href="createlaboratorios/<?php echo e($query); ?>">Nuevo</a> 
+       <?php if($contratoid != null): ?> <a class="btn btn-info" href="khe/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?> <?php endif; ?>
         <small></small>
       </h1>
 

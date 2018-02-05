@@ -55,7 +55,7 @@ class AnalisisRetrasosController extends Controller
       $idusers = Auth::id();
 
       $idactividad=6;
-      $query=trim($request->GET('searchText'));
+      $query=trim($request->GET('query'));
 
       //Inicia el select buscador en 0
       if($query == ""){
@@ -93,7 +93,7 @@ class AnalisisRetrasosController extends Controller
       ->join('personas as p','uc.idpersonas','=','p.id')
       ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
       ->join('contratos as c','c.id','=','usc.idcontratos')->select('c.id','c.created_at')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->latest()->first();
-      return view('analisisretrasos.index',["analisisretrasos"=>$analisisretrasos,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"searchText"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
+      return view('analisisretrasos.index',["analisisretrasos"=>$analisisretrasos,"contratosADM"=>$contratosADM,"contratosRdt"=>$contratosRdt,"contratoid"=>$contratoid,"query"=>$query,"contratosh1"=>$contratosh1,"idusers"=>$idusers,"users"=>$users]);
     }
     
     /**
@@ -101,24 +101,37 @@ class AnalisisRetrasosController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function createanalisisretrasos($idcontrato)
     {
         // Obtiene el ID del Usuario Autenticado
         $idusers = Auth::id();
+        $idactividad=10;
         
-        //Consulta para los Residentes - Solo pemite ver contratos el contrato de cada residente
-        $contratosRdt=DB::table('users as u')
+        $informesADM=DB::table('contratos as c')
+        ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
+        ->join('tipoactividades as ta','ta.id','=','ac.idtipoactividades')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('aac.titulo','ac.id')
+        ->where('c.id','=',$idcontrato)
+        ->where('ac.idtipoactividades','=',$idactividad)
+        ->whereNull('c.deleted_at')->get();
+
+        $informesRdt=DB::table('users as u')
         ->join('usuarioscreados as uc','u.id','=','uc.idusers')
         ->join('personas as p','uc.idpersonas','=','p.id')
         ->join('usuarioscontratados as usc','usc.idpersonas','=','p.id')
-        ->join('contratos as c','c.id','=','usc.idcontratos')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->where('u.id','=',$idusers)->whereNull('c.deleted_at')->get();
-
-        //Consulta para los Administradores - Permite ver todos los archivos
-        $contratosADM=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
+        ->join('contratos as c','c.id','=','usc.idcontratos')
+        ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
+        ->join('tipoactividades as ta','ta.id','=','ac.idtipoactividades')
+        ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+        ->select('ac.id','aac.titulo')
+        ->where('u.id','=',$idusers)
+        ->where('ac.idtipoactividades','=',$idactividad)
+        ->whereNull('ac.deleted_at')->get();
 
         $residentes=DB::table('personas as p') ->join('pnaturales as pn','p.id','=','pn.idpersonas')->select('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->groupBy('p.id','p.direccion','p.telefono','p.documento','pn.nombre','pn.apellido')->whereNull('p.deleted_at')->get();        
-        $idactividad=6;
-		return view("analisisretrasos.create",["contratosRdt"=>$contratosRdt,"contratosADM"=>$contratosADM,"idactividad"=>$idactividad,"residentes"=>$residentes]);
+
+		return view("analisisretrasos.createanalisisretrasos",["idcontrato"=>$idcontrato,"informesADM"=>$informesADM,"informesRdt"=>$informesRdt,"residentes"=>$residentes]);
     }
 
     /**
@@ -140,17 +153,20 @@ class AnalisisRetrasosController extends Controller
             $actividadescontratos->idcontratos=$request->get('idcontratos');
             $actividadescontratos->idtipoactividades=$request->get('idactividad');
             $actividadescontratos->iduser=$request->get('idresidentes');
+            $actividadescontratos->idinforme=$request->get('idinformes');
             $actividadescontratos->save();
 
             $archivosactividadescontratos = new archivosactividadescontratos();
+                
+                // La composicion esta: IDContrato / IDInforme / IDUser / IDTipo Actividad contrato
                 $carpeta="8";
-                    $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                    $ruta=$request->get('idcontratos')."/".$request->get('idinformes')."/".$request->get("idresidentes")."/".$carpeta."/".$archivo->getClientOriginalName();
                     $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
                 $archivosactividadescontratos->archivo=$ruta;
     
             $archivosactividadescontratos->titulo=$request->get('titulo');
             
-            if(Auth::user()->tipoUsuario == '1'){
+            if($request->get('decision') == 'formato'){
                 $archivosactividadescontratos->descripcion=$request->get('descripcionArch');
             }else{
                 $archivosactividadescontratos->descripcion=$request->get('contenido');
@@ -169,7 +185,7 @@ class AnalisisRetrasosController extends Controller
             $archivosactividadescontratos = new archivosactividadescontratos();
             $archivosactividadescontratos->archivo="";
             $archivosactividadescontratos->titulo=$request->get('titulo');
-            if(Auth::user()->tipoUsuario == '1'){
+            if($request->get('decision') == 'formato'){
                 $archivosactividadescontratos->descripcion=$request->get('descripcionArch');
             }else{
                 $archivosactividadescontratos->descripcion=$request->get('contenido');
@@ -250,14 +266,14 @@ class AnalisisRetrasosController extends Controller
 
         if($archivo != null) {
             $actividadescontratos= actividadescontratos::findOrFail($id);
-            $actividadescontratos->idcontratos=$request->get('idcontratos');
-            $actividadescontratos->idtipoactividades=$request->get('idactividad');
             $actividadescontratos->iduser=$request->get('idresidentes');
             $actividadescontratos->update();
 
             $archivosactividadescontratos = archivosactividadescontratos::where('idactividadescontratos', $actividadescontratos->id)->first();
+                
+                // La composicion esta: IDContrato / IDInforme / IDUser / IDTipo Actividad contrato
                 $carpeta="8";
-                    $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                    $ruta=$request->get('idcontratos')."/".$request->get('idinformes')."/".$request->get("idresidentes")."/".$carpeta."/".$archivo->getClientOriginalName();
                     $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
                 $archivosactividadescontratos->archivo=$ruta;
 

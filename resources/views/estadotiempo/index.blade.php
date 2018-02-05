@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Estado de Tiempo <a class="btn btn-success" href="{!! route('estadotiempo.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarEtV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Estado de Tiempo @if($query != null) <a class="btn btn-success" href="createestadotiempo/{{ $query }}">Nuevo</a>
+      @if($contratoid != null) <a class="btn btn-info" href="descargarEtV/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

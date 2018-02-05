@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-      <h1>Actividades de Seguimiento <a class="btn btn-success" href="<?php echo route('actividadeseguimiento.create'); ?>">Nuevo</a> <?php if($contratoid != null): ?> <a class="btn btn-info" href="descargarAsV/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?>
+      <h1>Actividades de Seguimiento <?php if($query != null): ?> <a class="btn btn-success" href="createactividadeseguimiento/<?php echo e($query); ?>">Nuevo</a> <?php endif; ?>
+       <?php if($contratoid != null): ?> <a class="btn btn-info" href="noo/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?>
         <small></small>
       </h1>
             <?php echo Breadcrumbs::render('actividadescontratos'); ?>  

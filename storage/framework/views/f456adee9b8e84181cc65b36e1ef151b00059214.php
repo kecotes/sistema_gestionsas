@@ -68,5 +68,5 @@
 <div class="form-group col-sm-12">
     <?php echo Form::submit('Save', ['class' => 'btn btn-primary']); ?>
 
-    <a href="<?php echo route('controlequipos.index'); ?>" class="btn btn-default">Cancelar</a>
+    <a href="<?php echo route('laboratorios.index'); ?>" class="btn btn-default">Cancelar</a>
 </div>

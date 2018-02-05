@@ -37,20 +37,6 @@ Auth::routes();
     
     Route::resource('contratos', 'ContratosController');
 
-    //Actividades contratos
-    Route::resource('tipoactividades', 'TipoactividadesController');
-    Route::resource('actividadescontratos', 'ActividadescontratosController');
-    Route::resource('controlequipos', 'ControlEquiposController');
-    Route::resource('controlseguridad', 'ControlSeguridadController');
-    Route::resource('actividadeseguimiento', 'ActividadeSeguimientoController');
-    Route::resource('estadotiempo', 'EstadoTiempoController');
-    Route::resource('registrofotografico', 'RegistroFotograficoController');
-    Route::resource('analisisretrasos', 'AnalisisRetrasosController');
-    Route::resource('ejefisicofinancieras', 'EjefisicofinancierasController');
-    Route::resource('archivosactividadescontratos', 'ArchivosactividadescontratosController');
-    Route::resource('laboratorios', 'LaboratorioController');
-    Route::resource('correspondencia', 'CorrespondenciaController');
-
     //Documentos de Contratacion
     Route::resource('usuarioscontratados', 'UsuarioscontratadosController');
     Route::resource('entidadescontratantes', 'EntidadescontratantesController');
@@ -67,7 +53,33 @@ Auth::routes();
     Route::resource('balancesfinancieros', 'BalancesfinancierosController');
     Route::resource('archivosbalancesfinancieros', 'ArchivosbalancesfinancierosController');
 
+
+    //Actividades contratos
+    Route::resource('tipoactividades', 'TipoactividadesController');
+    Route::resource('actividadescontratos', 'ActividadescontratosController');
+    Route::resource('controlequipos', 'ControlEquiposController');
+    Route::resource('controlseguridad', 'ControlSeguridadController');
+    Route::resource('actividadeseguimiento', 'ActividadeSeguimientoController');
+    Route::resource('estadotiempo', 'EstadoTiempoController');
+    Route::resource('registrofotografico', 'RegistroFotograficoController');
+    Route::resource('analisisretrasos', 'AnalisisRetrasosController');
+    Route::resource('ejefisicofinancieras', 'EjefisicofinancierasController');
+    Route::resource('archivosactividadescontratos', 'ArchivosactividadescontratosController');
+    Route::resource('laboratorios', 'LaboratorioController');
+    Route::resource('correspondencia', 'CorrespondenciaController');
     
+    // Vista Create con id del contrato
+    Route::get('createcontrolequipos/{id}', 'ControlEquiposController@createcontrolequipos');
+    Route::get('createcontrolseguridad/{id}', 'ControlSeguridadController@createcontrolseguridad');
+    Route::get('createactividadeseguimiento/{id}', 'ActividadeSeguimientoController@createactividadeseguimiento');
+    Route::get('createestadotiempo/{id}', 'EstadoTiempoController@createestadotiempo');
+    Route::get('createregistrofotografico/{id}', 'RegistroFotograficoController@createregistrofotografico');
+    Route::get('createanalisisretrasos/{id}', 'AnalisisRetrasosController@createanalisisretrasos');
+    Route::get('createejefisicofinancieras/{id}', 'EjefisicofinancierasController@createejefisicofinancieras');
+    Route::get('createlaboratorios/{id}', 'LaboratorioController@createlaboratorios');
+
+    
+    //Generador de pdf
     Route::resource('/pdf','PdfController@index'); 
     Route::resource('excel','ExcelController');
     Route::resource('/excel','ExcelController@index'); 
@@ -83,15 +95,18 @@ Route::get('descargarBalances/{id}','BalancesfinancierosController@descargarBala
 
 Route::get('descargarPoliza/{id}','PolizasController@descargarPoliza');
 
+
+//Descargar formato inicial para cada contrato
 Route::get('descargarYoli/{id}','ControlEquiposController@descargarYoli');
 Route::get('descargarCsV/{id}','ControlSeguridadController@descargarCsV');
-Route::get('descargarAsV/{id}','ActividadeSeguimientoController@descargarAsV');
-Route::get('descargarEtV/{id}','EstadotiempoController@descargarEtV');
-Route::get('descargarRfV/{id}','RegistroFotograficoController@descargarRfV');
-Route::get('descargarArV/{id}','AnalisisretrasosController@descargarArV');
-Route::get('descargarEjeV/{id}','EjefisicofinancierasController@descargarEjeV');
-Route::get('descargarLab/{id}','LaboratorioController@descargarLab');
+Route::get('noo/{id}','ActividadeSeguimientoController@noo');
+Route::get('descargarEtV/{id}','EstadoTiempoController@descargarEtV');
+Route::get('registrofoto/{id}','RegistroFotograficoController@registrofoto');
+Route::get('descargarArV/{id}','AnalisisRetrasosController@descargarArV');
+Route::get('eje/{id}','EjefisicofinancierasController@eje');
+Route::get('khe/{id}','LaboratorioController@khe');
 
+//Descargar archivos que se meustran en la lista
 Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 
 Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');

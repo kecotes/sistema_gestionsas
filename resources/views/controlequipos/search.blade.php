@@ -4,7 +4,7 @@
 {!! Form::open(array('url'=>'controlequipos','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 	<div class="input-group">
-		<select name="searchText" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
+		<select name="query" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
 					<option value="">Buscar...</option>
 					@foreach ($contratosADM as $contratosADM)
 						<option value="{{$contratosADM->id}}" > {{$contratosADM->contratos}} </option>
@@ -23,7 +23,7 @@
 {!! Form::open(array('url'=>'controlequipos','method'=>'get','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 	<div class="input-group">
-		<select name="searchText" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
+		<select name="query" class="form-control select2" class="form-control selectpicker"  data-live-search="true">
 					<option value="">Buscar...</option>
 					@foreach ($contratosRdt as $contratosRdt)
 						<option value="{{$contratosRdt->id}}" > {{$contratosRdt->contratos}} </option>

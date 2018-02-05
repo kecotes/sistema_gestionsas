@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="content-header">
-      <h1>Analisis de Retrasos <a class="btn btn-success" href="{!! route('analisisretrasos.create') !!}">Nuevo</a> @if($contratoid != null) <a class="btn btn-info" href="descargarArV/{{ $contratoid->id }}">Descargar ultima version</a> @endif
+      <h1>Analisis de Retrasos @if($query != null) <a class="btn btn-success" href="createanalisisretrasos/{{ $query }}">Nuevo</a>  
+       @if($contratoid != null) <a class="btn btn-info" href="descargarArV/{{ $contratoid->id }}">Descargar ultima version</a> @endif @endif
         <small></small>
       </h1>
             {!! Breadcrumbs::render('actividadescontratos') !!}  

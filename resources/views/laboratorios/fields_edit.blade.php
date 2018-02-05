@@ -63,5 +63,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('controlequipos.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('laboratorios.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
