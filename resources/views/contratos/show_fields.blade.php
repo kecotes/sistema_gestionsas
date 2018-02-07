@@ -199,9 +199,10 @@
                     <td><p>{!! $contratos->valoranticipoadicional !!}</p></td>
                 <tr>
                 @foreach($balancesfinancieros as $balancesfinancieros) 
-                  @if($balancesfinancieros->estado != "En ejecucion")
+                  @if($balancesfinancieros->estado != "Acta parcial inicial")
                   </tr>
-                      <td>Acta Parcial # {!! $i++ !!} </td>
+                      <!-- <td>Acta Parcial # {!! $i++ !!} </td> -->
+                      <td>{!! $balancesfinancieros->estado  !!}</td> 
                       <td><p>{!! $balancesfinancieros->actaparcial  !!}</p></td>
                       <td><a href="descargarc/{{ $balancesfinancieros->id }}" target="_blank"><button class="btn btn-info">Descargar</button></a></td>
                   </tr>

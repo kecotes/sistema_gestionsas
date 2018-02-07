@@ -199,9 +199,10 @@
                     <td><p><?php echo $contratos->valoranticipoadicional; ?></p></td>
                 <tr>
                 <?php $__currentLoopData = $balancesfinancieros; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $balancesfinancieros): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> 
-                  <?php if($balancesfinancieros->estado != "En ejecucion"): ?>
+                  <?php if($balancesfinancieros->estado != "Acta parcial inicial"): ?>
                   </tr>
-                      <td>Acta Parcial # <?php echo $i++; ?> </td>
+                      <!-- <td>Acta Parcial # <?php echo $i++; ?> </td> -->
+                      <td><?php echo $balancesfinancieros->estado; ?></td> 
                       <td><p><?php echo $balancesfinancieros->actaparcial; ?></p></td>
                       <td><a href="descargarc/<?php echo e($balancesfinancieros->id); ?>" target="_blank"><button class="btn btn-info">Descargar</button></a></td>
                   </tr>

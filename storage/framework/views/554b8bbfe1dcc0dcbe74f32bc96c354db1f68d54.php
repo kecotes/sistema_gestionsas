@@ -9,7 +9,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   <?php echo Form::model($balancesfinancieros, ['route' => ['balancesfinancieros.update', $balancesfinancieros->id], 'method' => 'patch']); ?>
+                   <?php echo Form::model($balancesfinancieros, ['route' => ['balancesfinancieros.update', $balancesfinancieros->id], 'method' => 'patch', 'files'=>'true']); ?>
 
 
                         <?php echo $__env->make('balancesfinancieros.fields_edit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -16,10 +16,10 @@
 
 </div>
 
-<!-- <div class="form-group col-sm-6">
+<div class="form-group col-sm-6">
     <label for="exampleInputFile">Adjuntar Archivo</label>
     <input type="file" name="file">
-</div> -->
+</div>
 
 <input type="hidden" name="idresidentes" value="<?php echo e(Auth::user()->id); ?>">
 <input type="hidden" name="pendiente" value="<?php echo e($pendiente->pendientepagar); ?>">

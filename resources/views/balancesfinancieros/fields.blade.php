@@ -4,6 +4,7 @@
     Contrato:</label>
     <div class="col-lg-10">
     <select name="idcontratos" class="form-control">
+        <option value="0">Buscar...</option>
         @foreach ($contratos as $contratos)
                 <option value="{{$contratos->id}}"> {{$contratos->nocontrato}} </option>
         @endforeach
@@ -20,11 +21,7 @@
 <!-- Actaparcial Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('actaparcial', 'Valor:') !!}
-<<<<<<< HEAD
     {!! Form::text('actaparcial', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']) !!}
-=======
-    {!! Form::text('actaparcial', null, ['class' => 'form-control']) !!}
->>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 </div>
 
 <div class="form-group col-sm-6">
@@ -33,7 +30,6 @@
 </div>
 
 <input type="hidden" name="idresidentes" value="{{ Auth::user()->id }}">
-<input type="hidden" name="pendiente" value="{{ $pendiente->pendientepagar }}">
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

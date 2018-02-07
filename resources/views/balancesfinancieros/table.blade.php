@@ -1,16 +1,15 @@
 <table class="table table-responsive" id="balancesfinancieros-table">
     <thead>
-        <th>Acta Parcial</th>
+        <th>Concepto</th>
         <th>Valor</th>
-        <th>Pendiente por pagar</th>
         <th colspan="3">Accion</th>
     </thead>
     <tbody>
     @foreach($balancesfinancieros as $balancesfinancieros)
+        @if($balancesfinancieros->estado != 'Acta parcial inicial')
         <tr>
             <td>{!! $balancesfinancieros->estado !!}</td>
             <td>{!! $balancesfinancieros->actaparcial !!}</td>
-            <td>{!! $balancesfinancieros->pendientepagar !!}</td>
             <td>
                 {!! Form::open(['route' => ['balancesfinancieros.destroy', $balancesfinancieros->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
@@ -22,6 +21,10 @@
                 {!! Form::close() !!}
             </td>
         </tr>
+        @endif
     @endforeach
     </tbody>
 </table>
+</br></br>
+    <b>Pendiente por pagar:<b> <h2><b>{!! $ultimo_pendientepagar->pendientepagar !!}</b></h2>
+    <br>

@@ -166,11 +166,11 @@ class ContratosController extends AppBaseController
         $novedadesfechas->idcontratos=$contratos->id;
         $novedadesfechas->save();
 
-        $pendiente = $request->get('valorcontrato') - $request->get('valoranticipo');
+        $pendiente = $request->get('valorcontrato') - $request->get('valoranticipo') - $request->get('valoradicional') - $request->get('valoranticipoadicional');
         $balancesfinancieros=new balancesfinancieros();
         $balancesfinancieros->actaparcial=$request->get('valoranticipo');
         $balancesfinancieros->pendientepagar=$pendiente;
-        $balancesfinancieros->estado="Acta parcial Inicial";
+        $balancesfinancieros->estado="Acta parcial inicial";
         $balancesfinancieros->idcontratos=$contratos->id;  
         $balancesfinancieros->save();
 

@@ -4,6 +4,7 @@
     Contrato:</label>
     <div class="col-lg-10">
     <select name="idcontratos" class="form-control">
+        <option value="0">Buscar...</option>
         <?php $__currentLoopData = $contratos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $contratos): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                 <option value="<?php echo e($contratos->id); ?>"> <?php echo e($contratos->nocontrato); ?> </option>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
@@ -23,13 +24,8 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('actaparcial', 'Valor:'); ?>
 
-<<<<<<< HEAD
     <?php echo Form::text('actaparcial', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
 
-=======
-    <?php echo Form::text('actaparcial', null, ['class' => 'form-control']); ?>
-
->>>>>>> 09008b5a2ccac7b724849fb424ed165022bbbcfb
 </div>
 
 <div class="form-group col-sm-6">
@@ -38,7 +34,6 @@
 </div>
 
 <input type="hidden" name="idresidentes" value="<?php echo e(Auth::user()->id); ?>">
-<input type="hidden" name="pendiente" value="<?php echo e($pendiente->pendientepagar); ?>">
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

@@ -60,12 +60,14 @@ class BalancesfinancierosController extends AppBaseController
             ->where('c.id','LIKE','%'.$query.'%')
             // ->where('p.deleted_at', 'IS NOT',' NULL') muchos intentos xP
             ->whereNull('bf.deleted_at')
-            ->orderBy('bf.id','desc')
+            ->orderBy('bf.id','asc')
             ->paginate(7);
         
         $contratos=DB::table('contratos')->whereNull('deleted_at')->get();
 
-        return view('balancesfinancieros.index',["balancesfinancieros"=>$balancesfinancieros,"contratos"=>$contratos,"query"=>$query]);
+        $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $query)->latest()->first();
+
+        return view('balancesfinancieros.index',["balancesfinancieros"=>$balancesfinancieros,"contratos"=>$contratos,"query"=>$query,"ultimo_pendientepagar"=>$ultimo_pendientepagar]);
     }
 
     /**
@@ -76,12 +78,8 @@ class BalancesfinancierosController extends AppBaseController
     public function create()
     {
         $contratos=DB::table('contratos')->whereNull('deleted_at')->get();
-        $pendiente=DB::table('contratos as c')
-        ->join('balancesfinancieros as bf','c.id','=','bf.idcontratos')
-        ->select('bf.*')
-        ->latest()->first();
 
-		return view("balancesfinancieros.create",["contratos"=>$contratos,"pendiente"=>$pendiente]);
+		return view("balancesfinancieros.create",["contratos"=>$contratos]);
     }
 
     /**
@@ -96,7 +94,12 @@ class BalancesfinancierosController extends AppBaseController
 
         $archivo=Input::file('file');
 
-        $pendiente = $request->get('pendiente') - $request->get('actaparcial');
+        //Consulta el ultimo pendientepagar del contrato
+        $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $request->get('idcontratos'))->latest()->first();
+
+        //Almacena la resta de la acta parcial ingresada menos el ultimo pendiente pagar
+        //Da como resultado el ultimo pendientepagar
+        $pendiente = $ultimo_pendientepagar->pendientepagar - $request->get('actaparcial') ;
 
         $balancesfinancieros=new balancesfinancieros();
         $balancesfinancieros->actaparcial=$request->get('actaparcial');
@@ -180,17 +183,46 @@ class BalancesfinancierosController extends AppBaseController
      */
     public function update($id, UpdateBalancesfinancierosRequest $request)
     {
-        $balancesfinancieros = $this->balancesfinancierosRepository->findWithoutFail($id);
+        $archivo=Input::file('file');
 
-        if (empty($balancesfinancieros)) {
-            Flash::error('Balancesfinancieros not found');
+        //Se edita la acta parcial indicada
+        $balancesfinancieros=balancesfinancieros::findOrFail($id);
+        
+        //Almacena la acta parcial sin modificar
+        $actaparcial_sinmodificar = $balancesfinancieros->actaparcial;
 
-            return redirect(route('balancesfinancieros.index'));
+        $balancesfinancieros->actaparcial=$request->get('actaparcial');
+        $balancesfinancieros->estado=$request->get('estado');
+        $balancesfinancieros->update();
+
+        // --- MODIFICAR EL ULTIMO PENDIENTE POR PAGAR ---
+        //Consulta el ultimo pendientepagar del contrato
+        $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $balancesfinancieros->idcontratos)->latest()->first();
+
+        //Almacena la Suma del ultimo pendientepagar con el acta que no esta modificado
+        //Se obtiene un pendientepagar sin el actaparcial antiguo
+        $suma = $ultimo_pendientepagar->pendientepagar + $actaparcial_sinmodificar;
+
+        //Se le resta al pendientepagar creado la nueva actaparcial ingresada
+        $nuevo_pendientepagar = $suma - $request->get('actaparcial');
+ 
+        //Se le agrega a la ultima actaparcial su pendientepagar actualizado
+        $balancesfinancieros2=balancesfinancieros::where('idcontratos', $balancesfinancieros->idcontratos)->latest()->first();
+        $balancesfinancieros2->pendientepagar=$nuevo_pendientepagar;
+        $balancesfinancieros2->update();
+
+        if($archivo != null) {
+        $archivosbalancesfinancieros = archivosbalancesfinancieros::where('idbalancesfinancieros', $id)->first();
+            $carpeta="14";
+            $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                  $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+              $archivosbalancesfinancieros->archivo=$ruta;      
+
+            $archivosbalancesfinancieros->titulo="";
+            $archivosbalancesfinancieros->descripcion="";
+            $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
+            $archivosbalancesfinancieros->update();
         }
-
-        $balancesfinancieros = $this->balancesfinancierosRepository->update($request->all(), $id);
-
-        Flash::success('Balancesfinancieros updated successfully.');
 
         return redirect(route('balancesfinancieros.index'));
     }
