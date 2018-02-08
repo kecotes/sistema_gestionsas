@@ -53,7 +53,6 @@ Auth::routes();
     Route::resource('balancesfinancieros', 'BalancesfinancierosController');
     Route::resource('archivosbalancesfinancieros', 'ArchivosbalancesfinancierosController');
 
-
     //Actividades contratos
     Route::resource('tipoactividades', 'TipoactividadesController');
     Route::resource('actividadescontratos', 'ActividadescontratosController');
@@ -118,3 +117,6 @@ Route::get('grafica_publicaciones', 'GraficasController@total_publicaciones');
 
 
 Route::resource('actividadeseguimientos', 'ActividadeseguimientoController');
+
+
+Route::resource('adicciones', 'AdiccionesController');

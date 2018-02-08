@@ -82,6 +82,7 @@ class BalancesfinancierosController extends AppBaseController
 		return view("balancesfinancieros.create",["contratos"=>$contratos]);
     }
 
+
     /**
      * Store a newly created Balancesfinancieros in storage.
      *
@@ -92,41 +93,41 @@ class BalancesfinancierosController extends AppBaseController
     public function store(CreateBalancesfinancierosRequest $request)
     {
 
-        $archivo=Input::file('file');
+            $archivo=Input::file('file');
 
-        //Consulta el ultimo pendientepagar del contrato
-        $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $request->get('idcontratos'))->latest()->first();
+            //Consulta el ultimo pendientepagar del contrato
+            $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $request->get('idcontratos'))->latest()->first();
 
-        //Almacena la resta de la acta parcial ingresada menos el ultimo pendiente pagar
-        //Da como resultado el ultimo pendientepagar
-        $pendiente = $ultimo_pendientepagar->pendientepagar - $request->get('actaparcial') ;
+            //Almacena la resta de la acta parcial ingresada menos el ultimo pendiente pagar
+            //Da como resultado el ultimo pendientepagar
+            $pendiente = $ultimo_pendientepagar->pendientepagar - $request->get('actaparcial') ;
 
-        $balancesfinancieros=new balancesfinancieros();
-        $balancesfinancieros->actaparcial=$request->get('actaparcial');
-        $balancesfinancieros->pendientepagar=$pendiente;
-        $balancesfinancieros->estado=$request->get('estado');
-        $balancesfinancieros->idcontratos=$request->get('idcontratos');  
-        $balancesfinancieros->save();
+            $balancesfinancieros=new balancesfinancieros();
+            $balancesfinancieros->actaparcial=$request->get('actaparcial');
+            $balancesfinancieros->pendientepagar=$pendiente;
+            $balancesfinancieros->estado=$request->get('estado');
+            $balancesfinancieros->idcontratos=$request->get('idcontratos');  
+            $balancesfinancieros->save();
 
-        if($archivo != null) {
-        $archivosbalancesfinancieros = new archivosbalancesfinancieros();
-            $carpeta="14";
-            $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
-                  $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
-              $archivosbalancesfinancieros->archivo=$ruta;      
-
-            $archivosbalancesfinancieros->titulo="";
-            $archivosbalancesfinancieros->descripcion="";
-            $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
-            $archivosbalancesfinancieros->save();
-        }else{
+            if($archivo != null) {
             $archivosbalancesfinancieros = new archivosbalancesfinancieros();
-            $archivosbalancesfinancieros->archivo="";      
-            $archivosbalancesfinancieros->titulo="";
-            $archivosbalancesfinancieros->descripcion="";
-            $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
-            $archivosbalancesfinancieros->save();
-        }
+                $carpeta="14";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo->getClientOriginalName();
+                    $r1=Storage::disk('local')->put($ruta,  \File::get($archivo) );
+                $archivosbalancesfinancieros->archivo=$ruta;      
+
+                $archivosbalancesfinancieros->titulo="";
+                $archivosbalancesfinancieros->descripcion="";
+                $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
+                $archivosbalancesfinancieros->save();
+            }else{
+                $archivosbalancesfinancieros = new archivosbalancesfinancieros();
+                $archivosbalancesfinancieros->archivo="";      
+                $archivosbalancesfinancieros->titulo="";
+                $archivosbalancesfinancieros->descripcion="";
+                $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
+                $archivosbalancesfinancieros->save();
+            }
 
         Flash::success('Acta Parcial Agregada Satisfactoriamente.');
 

@@ -14,9 +14,14 @@ TODO:
 [x] - Nueva vista: Correspondencia Enviada y Recivida.
 [x] - Nueva vista: Laboratorio, certificado y pruebas de campo
 [x] - Agregar gafricas a la vista home (Muy basico aun)
-[x] - Agregar Reportes Pdf (Muy basico aun)
+[x] - Agregar Reportes Pdf (Muy basico aun)}
+[x] - Crear una nueva tabbla que se llame adicciones para ahi almacenar las adicciones ingresadas, y al final solo modifico el ultimo pendiente por pagar - 7 feb
 
 FIXME:
+->Los balances y las adicciones no se eliminan del contrato el valor
+->Las adicciones no se modifican hasta ahora
+
+
 [x] - Corregir en Polizas pasar Observaciones a longtext
 [x] - No se estan subiendo archivos en polizas
 [x] - Que se quede en la misma pagina al hacer click en el boton Estados polizas

@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Listado de Balances Financieros  <a class="btn btn-success" href="{!! route('balancesfinancieros.create') !!}">Nuevo</a>
+        <h1>Listado de Balances Financieros  <a class="btn btn-success" href="{!! route('balancesfinancieros.create') !!}">Nuevo</a> 
     </h1>
         {!! Breadcrumbs::render('balancesfinancieros') !!}  
     </section>

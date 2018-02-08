@@ -29,5 +29,7 @@
     </tbody>
 </table>
 </br></br>
+<?php if($ultimo_pendientepagar != null): ?>
     <b>Pendiente por pagar:<b> <h2><b><?php echo $ultimo_pendientepagar->pendientepagar; ?></b></h2>
     <br>
+<?php endif; ?>

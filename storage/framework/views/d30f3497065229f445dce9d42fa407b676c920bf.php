@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-        <h1>Listado de Balances Financieros  <a class="btn btn-success" href="<?php echo route('balancesfinancieros.create'); ?>">Nuevo</a>
+        <h1>Listado de Balances Financieros  <a class="btn btn-success" href="<?php echo route('balancesfinancieros.create'); ?>">Nuevo</a> 
     </h1>
         <?php echo Breadcrumbs::render('balancesfinancieros'); ?>  
     </section>

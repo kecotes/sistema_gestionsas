@@ -28,6 +28,7 @@
       <ul class="treeview-menu">
         <li><a href="{!! route('novedadesfechas.index') !!}"><i class="fa fa-clock-o"></i> Novedades en Fechas</a></li>
         <li><a href="{!! route('balancesfinancieros.index') !!}"><i class="fa fa-money"></i> Blances Financieros</a></li>
+        <li><a href="{!! route('adicciones.index') !!}"><i class="fa fa-money"></i> Adiciones</a></li>
         <li><a href="{!! route('correspondencia.index') !!}"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
         </ul>
     </li>

@@ -26,5 +26,7 @@
     </tbody>
 </table>
 </br></br>
+@if($ultimo_pendientepagar != null)
     <b>Pendiente por pagar:<b> <h2><b>{!! $ultimo_pendientepagar->pendientepagar !!}</b></h2>
     <br>
+@endif

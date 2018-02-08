@@ -33,7 +33,7 @@
     <input type="file" name="file">
 </div>
 
-<input type="hidden" name="idresidentes" value="<?php echo e(Auth::user()->id); ?>">
+<input type="hidden" name="idresidentes" value="<?php echo e(Auth::user()->id); ?>"> 
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
