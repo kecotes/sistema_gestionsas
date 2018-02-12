@@ -19,6 +19,7 @@
     <li><a href="{!! route('usuarioscontratados.index') !!}"><i class="fa fa-user"></i> Personal Contratado</a></li>
     <li><a href="{!! route('polizas.index') !!}"><i class="fa fa-file"></i> Polizas</a></li>
     <li><a href="{!! route('estadospolizas.index') !!}"><i class="fa fa-file-o"></i> Estados de Polizas</a></li>
+    <li><a href="{!! route('correspondencia.index') !!}"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
     <li>
       <a href="#"><i class="fa fa-newspaper-o"></i> Novedades del Contrato
         <span class="pull-right-container">
@@ -29,7 +30,6 @@
         <li><a href="{!! route('novedadesfechas.index') !!}"><i class="fa fa-clock-o"></i> Novedades en Fechas</a></li>
         <li><a href="{!! route('balancesfinancieros.index') !!}"><i class="fa fa-money"></i> Blances Financieros</a></li>
         <li><a href="{!! route('adicciones.index') !!}"><i class="fa fa-money"></i> Adiciones</a></li>
-        <li><a href="{!! route('correspondencia.index') !!}"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
         </ul>
     </li>
 

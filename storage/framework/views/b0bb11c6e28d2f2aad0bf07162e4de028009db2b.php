@@ -10,11 +10,19 @@
     </div>
 </div>
 
+<!-- Estado Field -->
+<div class="form-group col-sm-6">
+    <?php echo Form::label('estado', 'Descripcion de la Adiccion:'); ?>
+
+    <?php echo Form::text('estado', null, ['class' => 'form-control' , 'placeholder' => '*Ej: Adicíon 1']); ?>
+
+</div>
+
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoradicional', 'Valora dicional:'); ?>
 
-    <?php echo Form::text('valoradicional', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valoradicional', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
 
 </div>
 
@@ -22,7 +30,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoranticipoadicional', 'Valor anticipo adicional:'); ?>
 
-    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
 
 </div>
 

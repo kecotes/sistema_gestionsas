@@ -93,7 +93,6 @@ class AdiccionesController extends AppBaseController
             $adicciones->idcontratos=$request->get('idcontratos');
             $adicciones->save();
 
-
             //Consulta el ultimo pendientepagar del contrato
             $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $request->get('idcontratos'))->latest()->first();
 
@@ -104,9 +103,16 @@ class AdiccionesController extends AppBaseController
             $balancesfinancieros=new balancesfinancieros();
             $balancesfinancieros->actaparcial="0";
             $balancesfinancieros->pendientepagar=$nuevo_pendientepagar;
-            $balancesfinancieros->estado="Adiccion";
+            $balancesfinancieros->estado=$request->get('estado');
             $balancesfinancieros->idcontratos=$request->get('idcontratos');  
             $balancesfinancieros->save();
+
+            $archivosbalancesfinancieros = new archivosbalancesfinancieros();
+            $archivosbalancesfinancieros->archivo="";      
+            $archivosbalancesfinancieros->titulo="";
+            $archivosbalancesfinancieros->descripcion="";
+            $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
+            $archivosbalancesfinancieros->save();
 
         Flash::success('Adicciones Agregada.');
 
@@ -143,6 +149,7 @@ class AdiccionesController extends AppBaseController
     public function edit($id)
     {
         $adicciones = $this->adiccionesRepository->findWithoutFail($id);
+        $contratos=DB::table('contratos')->whereNull('deleted_at')->get();
 
         if (empty($adicciones)) {
             Flash::error('Adicciones not found');
@@ -150,7 +157,7 @@ class AdiccionesController extends AppBaseController
             return redirect(route('adicciones.index'));
         }
 
-        return view('adicciones.edit')->with('adicciones', $adicciones);
+        return view('adicciones.edit',["adicciones"=>$adicciones,"contratos"=>$contratos]);
     }
 
     /**
@@ -163,17 +170,33 @@ class AdiccionesController extends AppBaseController
      */
     public function update($id, UpdateAdiccionesRequest $request)
     {
-        $adicciones = $this->adiccionesRepository->findWithoutFail($id);
+        $adicciones=adicciones::findOrFail($id);
 
-        if (empty($adicciones)) {
-            Flash::error('Adicciones not found');
+        //Almacena los datos sin modificar sin modificar
+        $valoradicional_sinmodificar = $adicciones->valoradicional;
+        $valoranticipoadicional_sinmodificar = $adicciones->valoranticipoadicional;
+        $idcontrato = $adicciones->idcontratos;
 
-            return redirect(route('adicciones.index'));
-        }
+        $adicciones->valoradicional=$request->get('valoradicional');
+        $adicciones->valoranticipoadicional=$request->get('valoranticipoadicional');
+        $adicciones->update();
 
-        $adicciones = $this->adiccionesRepository->update($request->all(), $id);
+        //Consulta el ultimo pendientepagar del contrato
+        $ultimo_pendientepagar=balancesfinancieros::where('idcontratos', $idcontrato)->latest()->first();
 
-        Flash::success('Adicciones updated successfully.');
+        // pendientepagar (viejo) - valor adicional sin modificar + anticipo adicion sin modificar
+        // Obtiene el pendientepagar antiguo, el anterior al actual
+        $pendientepagar_antiguo = $ultimo_pendientepagar->pendientepagar - $valoradicional_sinmodificar + $valoranticipoadicional_sinmodificar;
+        
+
+        //Se crea el nuevo pendiente pagar con los nuevos datos
+        $nuevo_pendientepagar = $pendientepagar_antiguo + $request->get('valoradicional')  - $request->get('valoranticipoadicional');
+        
+        $epa=balancesfinancieros::where('idcontratos', $idcontrato)->latest()->first();
+        $epa->pendientepagar=$nuevo_pendientepagar;
+        $epa->update();
+
+        Flash::success('Adicciones Actualizada.');
 
         return redirect(route('adicciones.index'));
     }

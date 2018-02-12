@@ -15,7 +15,7 @@
 <!-- Estado Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('estado', 'Descripcion del Acta Parcial:') !!}
-    {!! Form::text('estado', null, ['class' => 'form-control']) !!}
+    {!! Form::text('estado', null, ['class' => 'form-control' , 'placeholder' => '*Ej: Acta parcial 1']) !!}
 </div>
 
 <!-- Actaparcial Field -->

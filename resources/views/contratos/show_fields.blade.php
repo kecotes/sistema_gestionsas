@@ -204,7 +204,7 @@
                       <!-- <td>Acta Parcial # {!! $i++ !!} </td> -->
                       <td>{!! $balancesfinancieros->estado  !!}</td> 
                       <td><p>{!! $balancesfinancieros->actaparcial  !!}</p></td>
-                    @if($balancesfinancieros->id != null)
+                    @if($balancesfinancieros->archivo != '')
                       <td><a href="descargarc/{{ $balancesfinancieros->id }}" target="_blank"><button class="btn btn-info">Descargar</button></a></td>
                     @endif
                   </tr>

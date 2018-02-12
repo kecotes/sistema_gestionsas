@@ -10,16 +10,22 @@
     </div>
 </div>
 
+<!-- Estado Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('estado', 'Descripcion de la Adiccion:') !!}
+    {!! Form::text('estado', null, ['class' => 'form-control' , 'placeholder' => '*Ej: Adicíon 1']) !!}
+</div>
+
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoradicional', 'Valora dicional:') !!}
-    {!! Form::text('valoradicional', null, ['class' => 'form-control']) !!}
+    {!! Form::text('valoradicional', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']) !!}
 </div>
 
 <!-- Valoranticipoadicional Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoranticipoadicional', 'Valor anticipo adicional:') !!}
-    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control']) !!}
+    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']) !!}
 </div>
 
 

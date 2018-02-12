@@ -23,6 +23,7 @@ use App\Models\Archivoscontratos;
 use App\Models\Novedadesfechas;
 use App\Models\Balancesfinancieros;
 use App\Models\Archivosbalancesfinancieros;
+use App\Models\Adicciones;
 
 use DB;
 use Storage;
@@ -166,7 +167,7 @@ class ContratosController extends AppBaseController
         $novedadesfechas->idcontratos=$contratos->id;
         $novedadesfechas->save();
 
-        $pendiente = $request->get('valorcontrato') - $request->get('valoranticipo') - $request->get('valoradicional') - $request->get('valoranticipoadicional');
+        $pendiente = $request->get('valorcontrato') - $request->get('valoranticipo') + $request->get('valoradicional') - $request->get('valoranticipoadicional');
         $balancesfinancieros=new balancesfinancieros();
         $balancesfinancieros->actaparcial=$request->get('valoranticipo');
         $balancesfinancieros->pendientepagar=$pendiente;
@@ -180,6 +181,12 @@ class ContratosController extends AppBaseController
         $archivosbalancesfinancieros->descripcion="";
         $archivosbalancesfinancieros->idbalancesfinancieros=$balancesfinancieros->id;
         $archivosbalancesfinancieros->save();
+
+        $adicciones=new adicciones();
+        $adicciones->valoradicional=$request->get('valoradicional');
+        $adicciones->valoranticipoadicional=$request->get('valoranticipoadicional');
+        $adicciones->idcontratos=$contratos->id;  
+        $adicciones->save();
 
         Flash::success('Contrato Agregado Satisfactoriamente.');
 
@@ -212,7 +219,7 @@ class ContratosController extends AppBaseController
       //Balancesfinancieros
       $balancesfinancieros=DB::table('balancesfinancieros as bf')
       ->join('archivosbalancesfinancieros as abf','bf.id','=','abf.idbalancesfinancieros')
-      ->select('bf.id','abf.id as idarchbalances','bf.actaparcial','bf.estado','bf.pendientepagar')
+      ->select('bf.id','abf.id as idarchbalances','abf.archivo','bf.actaparcial','bf.estado','bf.pendientepagar')
       ->where('idcontratos','=',$id)->whereNull('bf.deleted_at')->get();
 
       //Detalles

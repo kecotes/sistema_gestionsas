@@ -16,7 +16,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('estado', 'Descripcion del Acta Parcial:'); ?>
 
-    <?php echo Form::text('estado', null, ['class' => 'form-control']); ?>
+    <?php echo Form::text('estado', null, ['class' => 'form-control' , 'placeholder' => '*Ej: Acta parcial 1']); ?>
 
 </div>
 

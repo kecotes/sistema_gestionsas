@@ -204,7 +204,7 @@
                       <!-- <td>Acta Parcial # <?php echo $i++; ?> </td> -->
                       <td><?php echo $balancesfinancieros->estado; ?></td> 
                       <td><p><?php echo $balancesfinancieros->actaparcial; ?></p></td>
-                    <?php if($balancesfinancieros->id != null): ?>
+                    <?php if($balancesfinancieros->archivo != ''): ?>
                       <td><a href="descargarc/<?php echo e($balancesfinancieros->id); ?>" target="_blank"><button class="btn btn-info">Descargar</button></a></td>
                     <?php endif; ?>
                   </tr>
