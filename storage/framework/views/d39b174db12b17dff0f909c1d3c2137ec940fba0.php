@@ -2,16 +2,16 @@
 <?php if(Auth::user()->tipoUsuario == '1'): ?>
 <table class="table table-responsive" id="ejecucionfisicofinancieras-table">
     <thead>
+        <th><b>Tipo<b></th>
         <th>Descripcion</th>
-        <th>Observaciones</th>
         <th>Fecha de creacion</th>
         <th colspan="3">Action</th>
     </thead>
     <tbody>
     <?php $__currentLoopData = $correspondencia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $correspondencia): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <tr>
+        <td><b><?php echo $correspondencia->descripcion; ?><b></td>
         <td><?php echo $correspondencia->titulo; ?></td>
-        <td><?php echo $correspondencia->descripcion; ?></td>
         <td><?php echo $correspondencia->created_at; ?></td>
             <td>
                 <?php echo Form::open(['route' => ['correspondencia.destroy', $correspondencia->id], 'method' => 'delete']); ?>

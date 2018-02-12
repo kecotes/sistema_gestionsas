@@ -50,8 +50,14 @@
             <td>{!! $contratosRdt->objetocontrato !!}</td>
             <td>{!! $contratosRdt->apodocontrato !!}</td>
             <td>{!! $contratosRdt->valorcontrato !!}</td>
+            <td>
+                <div class='btn-group'>
+                    <a href="contratos/{{$contratosRdt->id}}" class='btn btn-default btn'><i class="glyphicon glyphicon-eye-open"></i></a>
 
-        </tr>
+                </div>
+              
+                {!! Form::close() !!}
+            </td>
         @endforeach
     </tbody>
 </table>

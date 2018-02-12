@@ -170,6 +170,8 @@
 
         <!-- Balance Financiero -->
 
+<!-- Resiente -->
+<?php if(Auth::user()->tipoUsuario == '1'): ?>
             <div class="box-header">
                  <h3 class="box-title">BALANCE FINANCIERO</h3>
                </div>
@@ -225,8 +227,9 @@
               </div>
               <?php $__currentLoopData = $archivoscontratos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $archivoscontratos): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                   <ul>
-                    <li><?php echo $archivoscontratos->tipo; ?>  <a href="descargarb/<?php echo e($archivoscontratos->id); ?>"  target="_blank"><button class="btn  btn-info">Descargar</button></a>
+                    <li><?php echo $archivoscontratos->tipo; ?>  <a href="descargarb/<?php echo e($archivoscontratos->id); ?>"  target="_blank"><button class="btn  btn-info btn-xs">Descargar</button></a>
                   </ul>  
               <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
 </table>
+<?php endif; ?>

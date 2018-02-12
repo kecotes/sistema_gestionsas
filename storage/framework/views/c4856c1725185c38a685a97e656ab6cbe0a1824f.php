@@ -53,8 +53,15 @@
             <td><?php echo $contratosRdt->objetocontrato; ?></td>
             <td><?php echo $contratosRdt->apodocontrato; ?></td>
             <td><?php echo $contratosRdt->valorcontrato; ?></td>
+            <td>
+                <div class='btn-group'>
+                    <a href="contratos/<?php echo e($contratosRdt->id); ?>" class='btn btn-default btn'><i class="glyphicon glyphicon-eye-open"></i></a>
 
-        </tr>
+                </div>
+              
+                <?php echo Form::close(); ?>
+
+            </td>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
     </tbody>
 </table>

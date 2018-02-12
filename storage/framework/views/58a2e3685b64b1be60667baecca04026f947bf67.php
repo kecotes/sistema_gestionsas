@@ -26,17 +26,17 @@
 
 </div>
 
-<!-- Contenido Field -->
 <div class="form-group col-sm-6">
-<?php echo Form::label('contenido', 'Observaciones:'); ?>
+<?php echo Form::label('contenido', 'Tipo de Correspondencia'); ?>
 
-<?php echo Form::text('contenido', null, ['class' => 'form-control']); ?>
+<?php echo Form::select('contenido', ['Correspondencia Enviada' => 'Correspondencia Enviada', 'Correspondencia Recibida' => 'Correspondencia Recibida'], null, ['class' => 'form-control']); ?>
 
 </div>
 
 <div class="form-group col-sm-6">
 <label for="exampleInputFile">Adjuntar Archivo</label>
 <input type="file" name="file">
+<p>**Campo Requerido**</p>
 </div>
 
 <!-- Submit Field -->

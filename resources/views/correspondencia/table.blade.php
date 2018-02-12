@@ -2,16 +2,16 @@
 @if(Auth::user()->tipoUsuario == '1')
 <table class="table table-responsive" id="ejecucionfisicofinancieras-table">
     <thead>
+        <th><b>Tipo<b></th>
         <th>Descripcion</th>
-        <th>Observaciones</th>
         <th>Fecha de creacion</th>
         <th colspan="3">Action</th>
     </thead>
     <tbody>
     @foreach($correspondencia as $correspondencia)
         <tr>
+        <td><b>{!! $correspondencia->descripcion !!}<b></td>
         <td>{!! $correspondencia->titulo !!}</td>
-        <td>{!! $correspondencia->descripcion !!}</td>
         <td>{!! $correspondencia->created_at !!}</td>
             <td>
                 {!! Form::open(['route' => ['correspondencia.destroy', $correspondencia->id], 'method' => 'delete']) !!}

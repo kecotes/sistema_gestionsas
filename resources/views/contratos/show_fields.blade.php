@@ -170,6 +170,8 @@
 
         <!-- Balance Financiero -->
 
+<!-- Resiente -->
+@if(Auth::user()->tipoUsuario == '1')
             <div class="box-header">
                  <h3 class="box-title">BALANCE FINANCIERO</h3>
                </div>
@@ -225,8 +227,9 @@
               </div>
               @foreach($archivoscontratos as $archivoscontratos)
                   <ul>
-                    <li>{!! $archivoscontratos->tipo !!}  <a href="descargarb/{{ $archivoscontratos->id }}"  target="_blank"><button class="btn  btn-info">Descargar</button></a>
+                    <li>{!! $archivoscontratos->tipo !!}  <a href="descargarb/{{ $archivoscontratos->id }}"  target="_blank"><button class="btn  btn-info btn-xs">Descargar</button></a>
                   </ul>  
               @endforeach
 
 </table>
+@endif

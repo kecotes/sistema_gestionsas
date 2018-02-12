@@ -24,15 +24,15 @@
 {!! Form::text('titulo', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Contenido Field -->
 <div class="form-group col-sm-6">
-{!! Form::label('contenido', 'Observaciones:') !!}
-{!! Form::text('contenido', null, ['class' => 'form-control']) !!}
+{!! Form::label('contenido', 'Tipo de Correspondencia') !!}
+{!! Form::select('contenido', ['Correspondencia Enviada' => 'Correspondencia Enviada', 'Correspondencia Recibida' => 'Correspondencia Recibida'], null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-6">
 <label for="exampleInputFile">Adjuntar Archivo</label>
 <input type="file" name="file">
+<p>**Campo Requerido**</p>
 </div>
 
 <!-- Submit Field -->

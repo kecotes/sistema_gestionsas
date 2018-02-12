@@ -122,6 +122,7 @@ class CorrespondenciaController extends Controller
             $actividadescontratos->idcontratos=$request->get('idcontratos');
             $actividadescontratos->idtipoactividades=$request->get('idactividad');
             $actividadescontratos->iduser=$request->get('idresidentes');
+            $actividadescontratos->idinforme=0;
             $actividadescontratos->save();
 
             $archivosactividadescontratos = new archivosactividadescontratos();
