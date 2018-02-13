@@ -28,6 +28,23 @@
 
 </div>
 
+
+<!-- Ciudad Field -->
+<div class="form-group col-sm-6">
+    <?php echo Form::label('ciudad', 'Ciudad:'); ?>
+
+    <?php echo Form::text('ciudad', null, ['class' => 'form-control']); ?>
+
+</div>
+
+<!-- Departamento Field -->
+<div class="form-group col-sm-6">
+    <?php echo Form::label('departamento', 'Departamento:'); ?>
+
+    <?php echo Form::text('departamento', null, ['class' => 'form-control']); ?>
+
+</div>
+
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
     <?php echo Form::label('telefono', 'Telefono:'); ?>
@@ -61,23 +78,6 @@
 
 </div>
 
-
-
-<!-- Ciudad Field -->
-<div class="form-group col-sm-6">
-    <?php echo Form::label('ciudad', 'Ciudad:'); ?>
-
-    <?php echo Form::text('ciudad', null, ['class' => 'form-control']); ?>
-
-</div>
-
-<!-- Departamento Field -->
-<div class="form-group col-sm-6">
-    <?php echo Form::label('departamento', 'Departamento:'); ?>
-
-    <?php echo Form::text('departamento', null, ['class' => 'form-control']); ?>
-
-</div>
 
 <!-- Tipopjuridica Field -->
 <div class="form-group col-sm-6">

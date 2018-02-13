@@ -22,6 +22,19 @@
     {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
 </div>
 
+
+<!-- Ciudad Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('ciudad', 'Ciudad:') !!}
+    {!! Form::text('ciudad', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Departamento Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('departamento', 'Departamento:') !!}
+    {!! Form::text('departamento', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telefono', 'Telefono:') !!}
@@ -47,19 +60,6 @@
   {!! Form::text('expedicion', null, ['class' => 'form-control']) !!}
 </div>
 
-
-
-<!-- Ciudad Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('ciudad', 'Ciudad:') !!}
-    {!! Form::text('ciudad', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Departamento Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('departamento', 'Departamento:') !!}
-    {!! Form::text('departamento', null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Tipopjuridica Field -->
 <div class="form-group col-sm-6">

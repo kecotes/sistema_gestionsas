@@ -17,8 +17,7 @@
                     <a href="<?php echo route('balancesfinancieros.show', [$balancesfinancieros->id]); ?>" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a> 
                     <a href="<?php echo route('balancesfinancieros.edit', [$balancesfinancieros->id]); ?>" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="descargarBalances/<?php echo e($balancesfinancieros->idbalancesarch); ?>" class='btn btn-default btn' target="_blank"><i class="glyphicon glyphicon-download"></i></a>
-                    <?php echo Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]); ?>
-
+                    <!-- <?php echo Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]); ?> -->
                 </div>
                 <?php echo Form::close(); ?>
 

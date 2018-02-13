@@ -125,6 +125,7 @@ class EstadoTiempoController extends Controller
         ->join('tipoactividades as ta','ta.id','=','ac.idtipoactividades')
         ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
         ->select('ac.id','aac.titulo')
+        ->where('c.id','=',$idcontrato)
         ->where('u.id','=',$idusers)
         ->where('ac.idtipoactividades','=',$idactividad)
         ->whereNull('ac.deleted_at')->get();

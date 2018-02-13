@@ -53,7 +53,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valorcontrato', 'Valor del contrato:'); ?>
 
-    <?php echo Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']); ?>
+    <?php echo Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59']); ?>
 
 </div>
 
@@ -69,7 +69,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoranticipo', 'Valor del anticipo:'); ?>
 
-    <?php echo Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay aticipo']); ?>
+    <?php echo Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59']); ?>
 
 </div>
 
@@ -123,7 +123,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoradicional', 'Valor adicional:'); ?>
 
-    <?php echo Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay valor adicional']); ?>
+    <?php echo Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59. Poner 0 si no hay ']); ?>
 
 </div>
 
@@ -131,7 +131,7 @@
 <div class="form-group col-sm-6">
     <?php echo Form::label('valoranticipoadicional', 'Valor del anticipo adicional:'); ?>
 
-    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay anticipo adicional']); ?>
+    <?php echo Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59. Poner 0 si no hay']); ?>
 
 </div>
 

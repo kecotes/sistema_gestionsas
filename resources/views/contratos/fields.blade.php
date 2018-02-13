@@ -42,7 +42,7 @@
 <!-- Valorcontrato Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valorcontrato', 'Valor del contrato:') !!}
-    {!! Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Sin puntos ni comas']) !!}
+    {!! Form::text('valorcontrato', null, ['class' => 'form-control', 'placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59']) !!}
 </div>
 
 <!-- Valoranticipol Field -->
@@ -54,7 +54,7 @@
 <!-- Valoranticipo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoranticipo', 'Valor del anticipo:') !!}
-    {!! Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay aticipo']) !!}
+    {!! Form::text('valoranticipo', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59']) !!}
 </div>
 
 <!-- Porcentajeanticipo Field -->
@@ -102,13 +102,13 @@
 <!-- Valoradicional Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoradicional', 'Valor adicional:') !!}
-    {!! Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay valor adicional']) !!}
+    {!! Form::text('valoradicional', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59. Poner 0 si no hay ']) !!}
 </div>
 
 <!-- Valoranticipoadicional Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('valoranticipoadicional', 'Valor del anticipo adicional:') !!}
-    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Sin puntos ni comas. Poner 0 si no hay anticipo adicional']) !!}
+    {!! Form::text('valoranticipoadicional', null, ['class' => 'form-control','placeholder' => '*Digitar valor entero, solo poner puntos para decimales Ej: 2869321.59. Poner 0 si no hay']) !!}
 </div>
 
 <!-- Plazoinicial Field -->

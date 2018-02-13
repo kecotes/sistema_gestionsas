@@ -21,7 +21,7 @@
                 <div class='btn-group'>
                     <!-- <a href="<?php echo route('polizas.show', [$polizas->id]); ?>" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a> -->
                     <a href="<?php echo route('polizas.edit', [$polizas->id]); ?>" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="estadospolizas/searchText=2" class='btn btn-default'><i class="fa fa-mail-forward"></i></a> 
+                    <a href="<?php echo route('estadospolizas.index'); ?>" class='btn btn-default'><i class="fa fa-mail-forward"></i></a> 
                     <a href="descargarPoliza/<?php echo e($polizas->idpolizasarch); ?>" class='btn btn-default' target="_blank"><i class="glyphicon glyphicon-download"></i></a> 
                     <?php echo Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]); ?>
 
