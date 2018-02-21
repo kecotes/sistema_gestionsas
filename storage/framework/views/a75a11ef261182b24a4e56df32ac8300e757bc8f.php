@@ -19,7 +19,7 @@
     <li><a href="<?php echo route('usuarioscontratados.index'); ?>"><i class="fa fa-user"></i> Personal Contratado</a></li>
     <li><a href="<?php echo route('polizas.index'); ?>"><i class="fa fa-file"></i> Polizas</a></li>
     <li><a href="<?php echo route('estadospolizas.index'); ?>"><i class="fa fa-file-o"></i> Estados de Polizas</a></li>
-    <li><a href="<?php echo route('correspondencia.index'); ?>"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
+    <li><a href="<?php echo route('correspondencias.index'); ?>"><i class="fa fa-envelope-square"></i> Correspondencia</a></li>
     <li>
       <a href="#"><i class="fa fa-newspaper-o"></i> Novedades del Contrato
         <span class="pull-right-container">

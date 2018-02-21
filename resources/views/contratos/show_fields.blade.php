@@ -136,7 +136,7 @@
                 @endforeach
                 </tbody>
                 </table>
-              </div><br>
+              </div><br><br>
 
 
         <!-- Estados Polizas -->
@@ -166,7 +166,61 @@
                 @endforeach
                 </tbody>
                 </table>
-              </div><br>
+              </div><br><br>
+
+
+        <!-- Correspondencias -->
+        
+        <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA ENVIADA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                @foreach($correspondenciasEnviada as $correspondencias)                
+                    <td><p>{!! $correspondencias->fecha !!}</p></td>
+                    <td><p>{!! $correspondencias->destinatario !!}</p></td>
+                    <td><p>{!! $correspondencias->remitente !!}</p></td>
+                    <td><p>{!! $correspondencias->asunto !!}</p></td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
+              </div>
+
+              <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA RECIBIDA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                @foreach($correspondenciasRecibida as $correspondencias)                               
+                    <td><p>{!! $correspondencias->fecha !!}</p></td>
+                    <td><p>{!! $correspondencias->destinatario !!}</p></td>
+                    <td><p>{!! $correspondencias->remitente !!}</p></td>
+                    <td><p>{!! $correspondencias->asunto !!}</p></td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
+              </div><br><br>
+
 
         <!-- Balance Financiero -->
 

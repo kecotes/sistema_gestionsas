@@ -87,7 +87,7 @@ class PolizasController extends AppBaseController
     {
         //$contratos=DB::table('contratos as c')->select(DB::raw('CONCAT(c.ncontrato, " ",c.apodocontrato) AS contratos'),'c.id')->whereNull('deleted_at')->get();
         $contratos=DB::table('contratos')->whereNull('deleted_at')->get();
-        $rutaarchivos="../storage/archivos/";
+
 		return view("polizas.create",["contratos"=>$contratos]);
     }
 

@@ -1,0 +1,68 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "destinatario",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required"
+    },
+    {
+        "name": "remitente",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "asunto",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "archivo",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "fecha",
+        "dbType": "date"
+    },
+    {
+        "name": "idcontratos",
+        "dbType": "integer:unsigned:foreign,contratos,id",
+        "htmlType": "text",
+        "relation": "mt1,contratos,icontratos,id"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+
+
+]

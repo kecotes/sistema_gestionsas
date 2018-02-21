@@ -281,25 +281,25 @@ Breadcrumbs::register('entidadescontratantes.show', function($breadcrumbs)
 
 
 // Correspondencia
-Breadcrumbs::register('correspondencia', function($breadcrumbs)
+Breadcrumbs::register('correspondencias', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Correspondencia', route('correspondencia.index'));
+    $breadcrumbs->push('Correspondencias', route('correspondencias.index'));
 });
 
 // Correspondencia.create
-Breadcrumbs::register('correspondencia.create', function($breadcrumbs)
+Breadcrumbs::register('correspondencias.create', function($breadcrumbs)
 {
-    $breadcrumbs->parent('correspondencia');
-    $breadcrumbs->push('Nueva Correspondencia', route('correspondencia.create'));
+    $breadcrumbs->parent('correspondencias');
+    $breadcrumbs->push('Nueva Correspondencias', route('correspondencias.create'));
 });
 
 // Correspondencia.show
-Breadcrumbs::register('correspondencia.show', function($breadcrumbs)
+Breadcrumbs::register('correspondencias.show', function($breadcrumbs)
 {
     $resi = App\Models\personas::find($resi);
-    $breadcrumbs->parent('correspondencia');
-    $breadcrumbs->push($resi->direccion, route('correspondencia.show',$resi->id));
+    $breadcrumbs->parent('correspondencias');
+    $breadcrumbs->push($resi->direccion, route('correspondencias.show',$resi->id));
 });
 
 

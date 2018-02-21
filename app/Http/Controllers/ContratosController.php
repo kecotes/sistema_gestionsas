@@ -23,6 +23,7 @@ use App\Models\Archivoscontratos;
 use App\Models\Novedadesfechas;
 use App\Models\Balancesfinancieros;
 use App\Models\Archivosbalancesfinancieros;
+use App\Models\Correspondencias;
 use App\Models\Adicciones;
 
 use DB;
@@ -222,6 +223,23 @@ class ContratosController extends AppBaseController
       ->select('bf.id','abf.id as idarchbalances','abf.archivo','bf.actaparcial','bf.estado','bf.pendientepagar')
       ->where('idcontratos','=',$id)->whereNull('bf.deleted_at')->get();
 
+      //Correspondencias
+      $correspondenciasEnviada=DB::table('personas as p')
+        ->join('contratos as c','p.id','=','c.idpersonas')
+        ->join('correspondencias as co','c.id','=','co.idcontratos')
+        ->select('co.id','co.tipo','co.destinatario','co.remitente','co.archivo','co.fecha','co.asunto')
+        ->where('idcontratos','=',$id)
+        ->where('tipo','=','Enviada')
+        ->whereNull('co.deleted_at')->get();
+
+        $correspondenciasRecibida=DB::table('personas as p')
+        ->join('contratos as c','p.id','=','c.idpersonas')
+        ->join('correspondencias as co','c.id','=','co.idcontratos')
+        ->select('co.id','co.tipo','co.destinatario','co.remitente','co.archivo','co.fecha','co.asunto')
+        ->where('idcontratos','=',$id)
+        ->where('tipo','=','Recibida')
+        ->whereNull('co.deleted_at')->get();
+
       //Detalles
       $tiposcontratos=DB::table('tiposcontratos as tc')
       ->join('contratos as c','tc.id','=','c.idtiposcontratos')
@@ -246,7 +264,7 @@ class ContratosController extends AppBaseController
       ->where('c.id','=',$id)
       ->first();  
 
-		return view("contratos.show",["contratos"=>$contratos, "entidadescontratantes"=>$entidadescontratantes,"tiposcontratos"=>$tiposcontratos,"residentes"=>$residentes,"polizas"=>$polizas,"rutasarchivos"=>$rutasarchivos,"archivoscontratos"=>$archivoscontratos,"estadospolizas"=>$estadospolizas,"novedadesfechas"=>$novedadesfechas,"balancesfinancieros"=>$balancesfinancieros,"i"=>$i]);
+		return view("contratos.show",["contratos"=>$contratos, "entidadescontratantes"=>$entidadescontratantes,"tiposcontratos"=>$tiposcontratos,"residentes"=>$residentes,"polizas"=>$polizas,"rutasarchivos"=>$rutasarchivos,"archivoscontratos"=>$archivoscontratos,"estadospolizas"=>$estadospolizas,"novedadesfechas"=>$novedadesfechas,"balancesfinancieros"=>$balancesfinancieros,"i"=>$i,"correspondenciasEnviada"=>$correspondenciasEnviada,"correspondenciasRecibida"=>$correspondenciasRecibida]);
  }
 
 

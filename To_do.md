@@ -17,6 +17,9 @@ TODO:
 [x] - Agregar Reportes Pdf (Muy basico aun)}
 [x] - Crear una nueva tabbla que se llame adicciones para ahi almacenar las adicciones ingresadas, y al final solo modifico el ultimo pendiente por pagar - 7 feb
 
+----- 16 Feb
+[] 
+
 FIXME:
 ->Los balances y las adicciones no se eliminan del contrato el valor
 ->Las adicciones no se modifican hasta ahora
@@ -34,6 +37,7 @@ FIXME:
 BUG:
 [x] - Descargar archivos ultima version de cada contrato especifico
 [] - (?) Al crear una poliza crea 2 en la BD automaticamente, almenos en la priemra interaccion confirmada.
+[] - A los residentes les aparece el boton de descargar version inicial aun sin haber una y al admin no
 
 Observaciones:
 

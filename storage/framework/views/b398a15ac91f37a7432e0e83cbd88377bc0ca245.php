@@ -136,7 +136,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                 </tbody>
                 </table>
-              </div><br>
+              </div><br><br>
 
 
         <!-- Estados Polizas -->
@@ -166,7 +166,61 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                 </tbody>
                 </table>
-              </div><br>
+              </div><br><br>
+
+
+        <!-- Correspondencias -->
+        
+        <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA ENVIADA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                <?php $__currentLoopData = $correspondenciasEnviada; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $correspondencias): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>                
+                    <td><p><?php echo $correspondencias->fecha; ?></p></td>
+                    <td><p><?php echo $correspondencias->destinatario; ?></p></td>
+                    <td><p><?php echo $correspondencias->remitente; ?></p></td>
+                    <td><p><?php echo $correspondencias->asunto; ?></p></td>
+                </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                </tbody>
+                </table>
+              </div>
+
+              <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA RECIBIDA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                <?php $__currentLoopData = $correspondenciasRecibida; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $correspondencias): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>                               
+                    <td><p><?php echo $correspondencias->fecha; ?></p></td>
+                    <td><p><?php echo $correspondencias->destinatario; ?></p></td>
+                    <td><p><?php echo $correspondencias->remitente; ?></p></td>
+                    <td><p><?php echo $correspondencias->asunto; ?></p></td>
+                </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                </tbody>
+                </table>
+              </div><br><br>
+
 
         <!-- Balance Financiero -->
 

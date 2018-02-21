@@ -93,6 +93,7 @@ Route::get('contratos/descargarc/{id}','ContratosController@descargarc');
 Route::get('descargarBalances/{id}','BalancesfinancierosController@descargarBalances');
 
 Route::get('descargarPoliza/{id}','PolizasController@descargarPoliza');
+Route::get('descargarCorrespondencia/{id}','CorrespondenciasController@descargarCorrespondencia');
 
 
 //Descargar formato inicial para cada contrato
@@ -120,3 +121,5 @@ Route::resource('actividadeseguimientos', 'ActividadeseguimientoController');
 
 
 Route::resource('adicciones', 'AdiccionesController');
+
+Route::resource('correspondencias', 'CorrespondenciasController');
