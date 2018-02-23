@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('login');
 });
 
 
@@ -112,6 +112,7 @@ Route::get('descargarEje/{id}','EjefisicofinancierasController@descargarEje');
 Route::get('crear_reporte_porventa/{tipo}','PdfController@crear_reporte_porventa');
 
 
+Route::get('home', 'GraficasController@index');
 Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
 Route::get('grafica_publicaciones', 'GraficasController@total_publicaciones');
 

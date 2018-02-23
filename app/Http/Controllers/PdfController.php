@@ -36,8 +36,7 @@ class PdfController extends Controller
         $view =  \View::make($vistaurl, compact('data', 'date', 'contratos'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        if($tipo==1){return $pdf->stream('reporte',["contratos"=>$contratos]);}
-        if($tipo==2){return $pdf->download('reporte.pdf'); }
+        return $pdf->stream('reporte',["contratos"=>$contratos]);
     }
 
     public function crear_reporte_porventa($tipo){

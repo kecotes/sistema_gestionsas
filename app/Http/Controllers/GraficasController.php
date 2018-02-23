@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Actividadescontratos;
 use App\Models\Tipoactividades;
-use App\Models\contratos;
+use App\Models\Contratos;
 use App\Models\Tiposcontratos;
 use App\Models\Entidadescontratantes;
 use App\Models\Pnaturales;
@@ -84,11 +84,14 @@ class GraficasController extends Controller
 
     public function index()
     {
+        $contratos=Contratos::all();
+        $ctpc=count($contratos);
         $anio=date("Y");
         $mes=date("m");
         return view("home")
                ->with("anio",$anio)
-               ->with("mes",$mes);
+               ->with("mes",$mes)
+               ->with("ctpc",$ctpc);
     }
 
     /**
