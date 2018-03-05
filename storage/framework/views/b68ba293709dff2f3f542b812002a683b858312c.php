@@ -3,7 +3,7 @@
             <div class="col-xs-12">
               <div class="box box-info">
                 <div class="box-header">
-                  <h3 class="box-title">REPORTES DEL SISTEMA</h3>
+                  <h3 class="box-title">REPORTE - FICHA TECNICA DEL CONTRATO</h3>
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">

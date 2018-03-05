@@ -12,8 +12,10 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Input;
 use Response;
 
+use App\User;
 use  App\Models\contratos;
 use App\Models\Tiposcontratos;
+use App\Models\Tipoactividades;
 use App\Models\Entidadescontratantes;
 use App\Models\Pnaturales;
 use App\Models\Personas;
@@ -256,6 +258,21 @@ class ContratosController extends AppBaseController
       ->whereNull('ec.deleted_at')
       ->first();  
 
+      $actividadescontratos=DB::table('personas as p')
+      ->join('contratos as c','p.id','=','c.idpersonas')
+      ->join('actividadescontratos as ac','c.id','=','ac.idcontratos')
+      ->join('tipoactividades as ta','ac.idtipoactividades','=','ta.id')
+      ->join('archivosactividadescontratos as aac','ac.id','=','aac.idactividadescontratos')
+      ->select('ac.id','aac.id as idejecuarch','c.ncontrato','ac.idtipoactividades','c.nocontrato','c.apodocontrato','c.idpersonas','ta.tipoactividad','ac.created_at','aac.titulo','aac.descripcion','ac.iduser')
+      ->where('c.id','=',$id)
+      ->whereNull('ac.deleted_at')
+      ->orderBy('ac.id','desc')
+      ->get();
+
+      
+      $tipoactividades = Tipoactividades::all();
+      $users = User::all();
+
       //Residentes
       $residentes=DB::table('personas as p')
       ->join('pnaturales as pn','p.id','=','pn.idpersonas')
@@ -264,7 +281,7 @@ class ContratosController extends AppBaseController
       ->where('c.id','=',$id)
       ->first();  
 
-		return view("contratos.show",["contratos"=>$contratos, "entidadescontratantes"=>$entidadescontratantes,"tiposcontratos"=>$tiposcontratos,"residentes"=>$residentes,"polizas"=>$polizas,"rutasarchivos"=>$rutasarchivos,"archivoscontratos"=>$archivoscontratos,"estadospolizas"=>$estadospolizas,"novedadesfechas"=>$novedadesfechas,"balancesfinancieros"=>$balancesfinancieros,"i"=>$i,"correspondenciasEnviada"=>$correspondenciasEnviada,"correspondenciasRecibida"=>$correspondenciasRecibida]);
+		return view("contratos.show",["contratos"=>$contratos, "entidadescontratantes"=>$entidadescontratantes,"tiposcontratos"=>$tiposcontratos,"residentes"=>$residentes,"polizas"=>$polizas,"rutasarchivos"=>$rutasarchivos,"archivoscontratos"=>$archivoscontratos,"estadospolizas"=>$estadospolizas,"novedadesfechas"=>$novedadesfechas,"balancesfinancieros"=>$balancesfinancieros,"i"=>$i,"correspondenciasEnviada"=>$correspondenciasEnviada,"correspondenciasRecibida"=>$correspondenciasRecibida,"actividadescontratos"=>$actividadescontratos,"tipoactividades"=>$tipoactividades,"users"=>$users]);
  }
 
 

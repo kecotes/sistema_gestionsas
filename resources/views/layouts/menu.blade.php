@@ -81,7 +81,7 @@
     </span>
   </a>
   <ul class="treeview-menu">
-    <li><a href="{{URL::to('pdf')}}"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+    <li><a href="{!! route('pdf.index') !!}"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
     <!--<li><a href="{{URL::to('excel')}}"><i class="fa fa-file-excel-o"></i> EXCEL</a></li> -->
   </ul>
 </li>

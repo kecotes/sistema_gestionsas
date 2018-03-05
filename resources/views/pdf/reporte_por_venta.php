@@ -115,46 +115,196 @@ table {
      <h3>Tel: 7280643 - Cel: 3172410383</h3> </center>
       
       <br><br><br><br>
-      <h1>Reportes de los Contratos</h1>
-       <h3> <small>Generado en la fecha: <?=  $date; ?> </small></h3>
+      <?php foreach($data as $contratos){ ?><center><h3><?= $contratos->nocontrato; ?></h3></center><?php  } ?>
+       <small>Generado en la fecha: <?=  $date; ?> </small>
       
  </section>
 
-              <div class="box">
 
                 <div class="box-body">
-                  <table border="1" class="table table-bordered">
+                  <table class="table table-hover">
 
-                    <tbody>
                   <?php foreach($data as $contratos){ ?>
-                    <?php if( $contratos->id == 1 ){ ?>
                         
-                      <tr><th style="width: 40px">Nombre del Contrato</th><td style="width: 10px" ><?= $contratos-> nocontrato; ?></td></tr>
-                      <tr><th style="width: 40px">Objeto del Contrato</th><td style="width: 10px" ><?= $contratos-> objetocontrato; ?></td></tr>
-                      <tr><th style="width: 40px">Apodo del Contrato</th><td style="width: 10px" ><?= $contratos-> apodocontrato; ?></td></tr>
-                     <tr><th style="width: 40px">Valor del Contrato</th><td style="width: 10px" ><?= $contratos-> valorcontrato; ?></td></tr>
-                     <tr><th style="width: 40px">Valor del Contrato (en letras)</th><td style="width: 10px" ><?= $contratos-> valorcontratol; ?></td></tr>
-                     <tr><th style="width: 40px">Valor del valoranticipo </th><td style="width: 10px" ><?= $contratos-> valoranticipo; ?></td></tr>
-                     <tr><th style="width: 40px">Valor del valoranticipo (en letras)</th><td style="width: 10px" ><?= $contratos-> valoranticipol; ?></td></tr>
-                     <tr><th style="width: 40px">Forma de Pago</th><td style="width: 10px" ><?= $contratos-> formapago; ?></td></tr>
-                     <tr><th style="width: 40px">Valor Adicional Contrato</th><td style="width: 10px" ><?= $contratos-> valoradicional; ?></td></tr>
-                     <tr><th style="width: 40px">Plazo Inicial</th><td style="width: 10px" ><?= $contratos-> plazoinicial; ?></td></tr>
-                      <tr><th style="width: 40px">Fecha de inicio</th><td style="width: 10px" ><?= $contratos-> fechainiciacion; ?></td></tr>
-                      <tr><th style="width: 40px">Fecha de Finalizcion </th><td style="width: 10px" ><?= $contratos-> fechafinalizacion; ?></td></tr>
-                      <tr><th style="width: 40px">Estado</th><td style="width: 10px" ><?= $contratos-> estado; ?></td></tr>
-                
-                    <?php ?>                    
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Nombre del Contrato</th><td style="width: 10px" ><?= $contratos->nocontrato; ?></td></tr>
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Objeto del Contrato</th><td style="width: 10px" ><?= $contratos->objetocontrato; ?></td></tr>
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Apodo del Contrato</th><td style="width: 10px" ><?= $contratos->apodocontrato; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Valor del Contrato</th><td style="width: 10px" ><?= $contratos->valorcontrato; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Valor del Contrato (en letras)</th><td style="width: 10px" ><?= $contratos->valorcontratol; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Valor del valoranticipo </th><td style="width: 10px" ><?= $contratos->valoranticipo; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Valor del valoranticipo (en letras)</th><td style="width: 10px" ><?= $contratos->valoranticipol; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Forma de Pago</th><td style="width: 10px" ><?= $contratos->formapago; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Valor Adicional Contrato</th><td style="width: 10px" ><?= $contratos->valoradicional; ?></td></tr>
+                     <tr><th bgcolor="#82E0AA" style="width: 40px">Plazo Inicial</th><td style="width: 10px" ><?= $contratos->plazoinicial; ?></td></tr>
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Fecha de inicio</th><td style="width: 10px" ><?= $contratos->fechainiciacion; ?></td></tr>
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Fecha de Finalizcion </th><td style="width: 10px" ><?= $contratos->fechafinalizacion; ?></td></tr>
+                      <tr><th bgcolor="#82E0AA" style="width: 40px">Estado</th><td style="width: 10px" ><?= $contratos->estado; ?></td></tr>              
                     
-                    <?php  } } ?>
-                    
-                  </tbody>
+                    <?php  } ?>
+
 
                   </table>
-                </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
+                  </div>
+
                   
-                </div>
-              </div><!-- /.box -->
+                    <div class="box-header">
+                        <h3 class="box-title">SEGUIMIENTO A LAS GARANTÍAS</h3>
+                    </div>
+
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                        <thead>
+                        <tr>
+                        <th bgcolor="#82E0AA">Fecha de expedicion</th>
+                        <th bgcolor="#82E0AA">Tipo de Poliza</th>
+                        <th bgcolor="#82E0AA">No. de Poliza</th>
+                        <th bgcolor="#82E0AA">Tipo de Certificado</th>
+                        <th bgcolor="#82E0AA">Observaciones</th>
+                        </thead>
+                        <tbody>
+                        <?php foreach($poli as $polizas){ ?>   
+                        <tr>             
+                            <td><p><?= $polizas->fechaexpedicion; ?></p></td>
+                            <td><p><?= $polizas->tipopoliza; ?></p></td>
+                            <td><p><?= $polizas->npoliza; ?></p></td>
+                            <td><p><?= $polizas->tipocertificado; ?></p></td>
+                            <td><p><?=$polizas->observaciones; ?></p></td>
+                        </tr>
+                        <?php  } ?>
+                        </tbody>
+                        </table>
+                    </div><br><br>
+
+                <!-- Estados Polizas -->
+
+                <div class="box-header">
+                        <h3 class="box-title">ESTADOS DE POLIZAS</h3>
+                    </div>
+
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                        <thead>
+                        <tr>
+                        <th bgcolor="#82E0AA">Amparo</th>
+                        <th bgcolor="#82E0AA">Vigencia Desde</th>
+                        <th bgcolor="#82E0AA">Vigencia Hasta</th>
+                        <th bgcolor="#82E0AA">Valor Asegurado</th>
+                        <th bgcolor="#82E0AA">Estado Polizaa</th>
+                        </thead>
+                        <tbody>
+                        <?php foreach($estadospolizas as $estadospolizas){ ?>
+                        <tr>                   
+                            <td><p><?=  $estadospolizas->amparo; ?></p></td>
+                            <td><p><?=  $estadospolizas->vigenciadesde; ?></p></td>
+                            <td><p><?=  $estadospolizas->vigenciahasta; ?></p></td>
+                            <td><p><?=  $estadospolizas->valorasegurado; ?></p></td>
+                            <td><p><?=  $estadospolizas->estadopoliza; ?></p></td>
+                        </tr>
+                        <?php } ?>
+                        </tbody>
+                        </table>
+                    </div><br><br>
+
+
+                <!-- Correspondencias -->
+                        
+                <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA ENVIADA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                <?php foreach($correspondenciasEnviada as $correspondencias){ ?> 
+                <tr>               
+                    <td><p><?=  $correspondencias->fecha; ?></p></td>
+                    <td><p><?=  $correspondencias->destinatario; ?></p></td>
+                    <td><p><?=  $correspondencias->remitente; ?></p></td>
+                    <td><p><?=  $correspondencias->asunto; ?></p></td>
+                </tr>
+                <?php } ?>
+                </tbody>
+                </table>
+              </div>
+
+              <div class="box-header">
+                 <h3 class="box-title">CORRESPONDENCIA RECIBIDA</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Fecha</th>
+                  <th bgcolor="#82E0AA">Destinatario</th>
+                  <th bgcolor="#82E0AA">Remitente</th>
+                  <th bgcolor="#82E0AA">Asunto</th>
+                </thead>
+                <tbody>
+                <?php foreach($correspondenciasRecibida as $correspondencias){ ?>  
+                <tr>                             
+                    <td><p><?=  $correspondencias->fecha; ?></p></td>
+                    <td><p><?=  $correspondencias->destinatario; ?></p></td>
+                    <td><p><?=  $correspondencias->remitente; ?></p></td>
+                    <td><p><?=  $correspondencias->asunto; ?></p></td>
+                </tr>
+                <?php } ?>
+                </tbody>
+                </table>
+              </div><br><br>
+
+
+            <div class="box-header">
+                 <h3 class="box-title">BALANCE FINANCIERO</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                  <th bgcolor="#82E0AA" style="width: 40px">Concepto</th>
+                  <th bgcolor="#82E0AA" style="width: 40px">Valor</th>
+                </thead>
+                <tbody>
+                <tr></tr>
+                <tr>
+                    <td style="width: 40px"><b>VALOR INCIAL DEL CONTRATO</b></td>                
+                    <td style="width: 40px"><p><?= $contratos->valorcontrato; ?></p></td>
+                </tr>
+                <tr>
+                    <td style="width: 40px">Anticipo</td>
+                    <td style="width: 40px"><p><?= $contratos->valoranticipo; ?></p></td>
+                </tr>
+                <tr>
+                    <td style="width: 40px">Valor Adiccional</td>
+                    <td style="width: 40px"><p><?= $contratos->valoradicional; ?><</p></td>
+                </tr>
+                <tr>
+                    <td style="width: 40px">Valor Anticipo Adiccional</td>
+                    <td style="width: 40px"><p><?= $contratos->valoranticipoadicional; ?><</p></td>
+                </tr>
+                <?php foreach($balancesfinancieros as $balancesfinancieros){ ?>  
+                <?php if($balancesfinancieros->estado != "Acta parcial inicial"){ ?>
+                  <tr>
+                      <!-- <td>Acta Parcial # {!! $i++ !!} </td> -->
+                      <td style="width: 40px"><?= $balancesfinancieros->estado;  ?><</td> 
+                      <td style="width: 40px"><p><?= $balancesfinancieros->actaparcial;  ?><</p></td>
+                  </tr>
+                  <?php } ?>
+                <?php } ?>
+                <tr>
+                    <td style="width: 40px"><b>PENDIENTE POR PAGAR</b></td>
+                    <td style="width: 40px"><b><?= $balancesfinancieros->pendientepagar;  ?><</b></td>
+                </tr>
+                </tbody>
+                </table>
+            </div><br><br>
 
               
             </div>

@@ -224,8 +224,8 @@
 
         <!-- Balance Financiero -->
 
-<!-- Resiente -->
-<?php if(Auth::user()->tipoUsuario == '1'): ?>
+
+      <?php if(Auth::user()->tipoUsuario == '1'): ?>
             <div class="box-header">
                  <h3 class="box-title">BALANCE FINANCIERO</h3>
                </div>
@@ -274,9 +274,8 @@
                 </table>
             </div><br><br>
 
-            
-            <!-- Archivos Contratos -->
-              <div class="box-header">
+             <!-- Archivos Contratos -->
+             <div class="box-header">
                 <h3 class="box-title">DOCUMENTOS ADJUNTOS DEL CONTRATO</h3>
               </div>
               <?php $__currentLoopData = $archivoscontratos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $archivoscontratos): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
@@ -285,5 +284,43 @@
                   </ul>  
               <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
-</table>
-<?php endif; ?>
+          </table>
+          <?php endif; ?>
+          <br><br><br>
+
+            <div class="box-header">
+                 <h3 class="box-title">ACTVIDADES DE CONTRATO</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Descripcion</th>
+                  <th bgcolor="#82E0AA">Tipo de Actividad</th>
+                  <th bgcolor="#82E0AA">Residente</th>
+                  <th bgcolor="#82E0AA">Fecha de Creacion</th>
+                </thead>
+                <tbody>
+                <?php $__currentLoopData = $actividadescontratos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $actividadescontratos): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                <?php if($actividadescontratos->descripcion != 'admin' && $actividadescontratos->tipoactividad != 'informe' && $actividadescontratos->tipoactividad != 'Correspondencia' && $actividadescontratos->tipoactividad != 'Informe'): ?>                               
+                    <td><p><?php echo $actividadescontratos->descripcion; ?></p></td>
+                    
+                        <td><?php echo $actividadescontratos->tipoactividad; ?></td>
+
+
+                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                      <?php if($actividadescontratos->iduser == $user->id): ?>
+                        <td><?php echo $user->name; ?></td>
+                      <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+
+                    <td><p><?php echo $actividadescontratos->created_at; ?></p></td>
+                </tr>
+                <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                </tbody>
+                </table>
+              </div><br><br>
+            
+           

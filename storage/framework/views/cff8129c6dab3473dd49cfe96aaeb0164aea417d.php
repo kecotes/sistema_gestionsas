@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="content-header">
-      <h1>Registro Fotografico <?php if($query != null): ?> <a class="btn btn-success" href="createregistrofotografico/<?php echo e($query); ?>">Nuevo</a> <?php endif; ?> 
-       <?php if($contratoid != null): ?> <a class="btn btn-info" href="registrofoto/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?>
+      <h1>Registro Fotografico <?php if($query != null): ?> <a class="btn btn-success" href="createregistrofotografico/<?php echo e($query); ?>">Nuevo</a>  
+       <?php if($contratoid != null): ?> <a class="btn btn-info" href="registrofoto/<?php echo e($contratoid->id); ?>">Descargar ultima version</a> <?php endif; ?> <?php endif; ?>
         <small></small>
       </h1>
             <?php echo Breadcrumbs::render('actividadescontratos'); ?>  

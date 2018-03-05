@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use  App\Models\Contratos;
+use  App\Models\Polizas;
 use App\Models\Tiposcontratos;
 use App\Models\Entidadescontratantes;
 use App\Models\Pnaturales;
@@ -22,28 +23,53 @@ class PdfController extends Controller
     } 
 
 
-      public function crearPDF($datos,$vistaurl,$tipo)
+    public function crearPDF($datos, $polizas, $estadospolizas, $correspondenciasEnviada, $correspondenciasRecibida, $balancesfinancieros, $vistaurl,$tipo)
     {
             $uh=1;
         $data = $datos;
-        $contratos=DB::table('personas as p')
-      ->join('contratos as c','p.id','=','c.idpersonas')
-      ->join('entidadescontratantes as ec','ec.id','=','c.identidadescontrates')
-      ->join('tiposcontratos as tc','tc.id','=','c.idtiposcontratos')
-      ->where('c.id','=',$tipo);
+        $poli =$polizas;
+        
 
         $date = date('Y-m-d');
-        $view =  \View::make($vistaurl, compact('data', 'date', 'contratos'))->render();
+        $view =  \View::make($vistaurl, compact('data', 'poli', 'estadospolizas', 'correspondenciasEnviada', 'correspondenciasRecibida', 'balancesfinancieros', 'date'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->stream('reporte',["contratos"=>$contratos]);
+        return $pdf->stream('reporte',["data"=>$data]);
     }
 
     public function crear_reporte_porventa($tipo){
      //$persona->idventa=$venta->idventa;
      $vistaurl="pdf.reporte_por_venta";
-     $contratos=Contratos::all();
-     return $this->crearPDF($contratos, $vistaurl,$tipo);
+     $contratos=DB::table('contratos')
+      ->where('id','=',$tipo)->get();
+
+      $polizas=DB::table('polizas')
+      ->where('idcontratos','=',$tipo)->get();
+
+      $estadospolizas=DB::table('estadospolizas')->where('idcontratos','=',$tipo)->whereNull('deleted_at')->get();
+
+      $correspondenciasEnviada=DB::table('personas as p')
+        ->join('contratos as c','p.id','=','c.idpersonas')
+        ->join('correspondencias as co','c.id','=','co.idcontratos')
+        ->select('co.id','co.tipo','co.destinatario','co.remitente','co.archivo','co.fecha','co.asunto')
+        ->where('idcontratos','=',$tipo)
+        ->where('tipo','=','Enviada')
+        ->whereNull('co.deleted_at')->get();
+
+        $correspondenciasRecibida=DB::table('personas as p')
+        ->join('contratos as c','p.id','=','c.idpersonas')
+        ->join('correspondencias as co','c.id','=','co.idcontratos')
+        ->select('co.id','co.tipo','co.destinatario','co.remitente','co.archivo','co.fecha','co.asunto')
+        ->where('idcontratos','=',$tipo)
+        ->where('tipo','=','Recibida')
+        ->whereNull('co.deleted_at')->get();
+
+        $balancesfinancieros=DB::table('balancesfinancieros as bf')
+      ->join('archivosbalancesfinancieros as abf','bf.id','=','abf.idbalancesfinancieros')
+      ->select('bf.id','abf.id as idarchbalances','abf.archivo','bf.actaparcial','bf.estado','bf.pendientepagar')
+      ->where('idcontratos','=',$tipo)->whereNull('bf.deleted_at')->get();
+
+     return $this->crearPDF($contratos, $polizas, $estadospolizas, $correspondenciasEnviada, $correspondenciasRecibida, $balancesfinancieros, $vistaurl, $tipo);
 //venta = datos;
     }
     /**

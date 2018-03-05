@@ -224,8 +224,8 @@
 
         <!-- Balance Financiero -->
 
-<!-- Resiente -->
-@if(Auth::user()->tipoUsuario == '1')
+
+      @if(Auth::user()->tipoUsuario == '1')
             <div class="box-header">
                  <h3 class="box-title">BALANCE FINANCIERO</h3>
                </div>
@@ -274,9 +274,8 @@
                 </table>
             </div><br><br>
 
-            
-            <!-- Archivos Contratos -->
-              <div class="box-header">
+             <!-- Archivos Contratos -->
+             <div class="box-header">
                 <h3 class="box-title">DOCUMENTOS ADJUNTOS DEL CONTRATO</h3>
               </div>
               @foreach($archivoscontratos as $archivoscontratos)
@@ -285,5 +284,43 @@
                   </ul>  
               @endforeach
 
-</table>
-@endif
+          </table>
+          @endif
+          <br><br><br>
+
+            <div class="box-header">
+                 <h3 class="box-title">ACTVIDADES DE CONTRATO</h3>
+               </div>
+
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th bgcolor="#82E0AA">Descripcion</th>
+                  <th bgcolor="#82E0AA">Tipo de Actividad</th>
+                  <th bgcolor="#82E0AA">Residente</th>
+                  <th bgcolor="#82E0AA">Fecha de Creacion</th>
+                </thead>
+                <tbody>
+                @foreach($actividadescontratos as $actividadescontratos)
+                @if($actividadescontratos->descripcion != 'admin' && $actividadescontratos->tipoactividad != 'informe' && $actividadescontratos->tipoactividad != 'Correspondencia' && $actividadescontratos->tipoactividad != 'Informe')                               
+                    <td><p>{!! $actividadescontratos->descripcion !!}</p></td>
+                    
+                        <td>{!! $actividadescontratos->tipoactividad !!}</td>
+
+
+                    @foreach($users as $user)
+                      @if($actividadescontratos->iduser == $user->id)
+                        <td>{!! $user->name !!}</td>
+                      @endif
+                    @endforeach
+
+                    <td><p>{!! $actividadescontratos->created_at !!}</p></td>
+                </tr>
+                @endif
+                @endforeach
+                </tbody>
+                </table>
+              </div><br><br>
+            
+           
