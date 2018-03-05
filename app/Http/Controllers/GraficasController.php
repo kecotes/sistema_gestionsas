@@ -21,6 +21,7 @@ use App\Models\Archivoscontratos;
 use App\Models\Novedadesfechas;
 use App\Models\Balancesfinancieros;
 use App\Models\Archivosbalancesfinancieros;
+use App\Models\Correspondencias;
 
 class GraficasController extends Controller
 {
@@ -86,12 +87,26 @@ class GraficasController extends Controller
     {
         $contratos=Contratos::all();
         $ctpc=count($contratos);
+
+        $correspondencias=Correspondencias::whereNull('deleted_at')->get();
+        $ccrr=count($correspondencias);
+
+        $users=User::whereNull('deleted_at')->get();
+        $ctur=count($users);
+
+        $actividadescontratos=Actividadescontratos::whereNull('deleted_at')->get();
+        $ctac=count($actividadescontratos);
+
+
         $anio=date("Y");
         $mes=date("m");
         return view("home")
                ->with("anio",$anio)
                ->with("mes",$mes)
-               ->with("ctpc",$ctpc);
+               ->with("ctpc",$ctpc)
+               ->with("ccrr",$ccrr)
+               ->with("ctur",$ctur)
+               ->with("ctac",$ctac);
     }
 
     /**

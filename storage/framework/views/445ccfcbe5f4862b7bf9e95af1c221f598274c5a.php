@@ -25,7 +25,7 @@
             <div class="icon">
               <i class="fa fa-folder-open"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas info<i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo route('contratos.index'); ?>" class="small-box-footer">Mas info<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -33,14 +33,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>7</h3>
+              <h3><?php echo $ccrr; ?></h3>
 
-              <p>Correspondencia</p>
+              <p>Correspondencias</p>
             </div>
             <div class="icon">
               <i class="fa fa-envelope-square"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo route('correspondencias.index'); ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -48,14 +48,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>3</h3>
 
-              <p>Personal nuevo</p>
+
+              <p>Personal Registrado</p>
             </div>
             <div class="icon">
               <i class="fa fa-group"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo route('residentes.index'); ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -63,7 +63,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>8</h3>
+              <h3><?php echo $ctac; ?></h3>
 
               <p>Actividades contratos</p>
             </div>
