@@ -91,7 +91,7 @@ class GraficasController extends Controller
         $correspondencias=Correspondencias::whereNull('deleted_at')->get();
         $ccrr=count($correspondencias);
 
-        $users=User::whereNull('deleted_at')->get();
+        $users=User::all();
         $ctur=count($users);
 
         $actividadescontratos=Actividadescontratos::whereNull('deleted_at')->get();

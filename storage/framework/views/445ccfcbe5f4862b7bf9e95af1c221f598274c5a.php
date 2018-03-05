@@ -48,7 +48,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-
+              <h3><?php echo $ctur; ?></h3>
 
               <p>Personal Registrado</p>
             </div>

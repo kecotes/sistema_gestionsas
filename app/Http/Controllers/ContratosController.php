@@ -319,6 +319,12 @@ class ContratosController extends AppBaseController
         $archivo=Input::file('file');
         $archivo2=Input::file('file2');
         $archivo3=Input::file('file3');
+        $archivo4=Input::file('file4');
+        $archivo5=Input::file('file5');
+        $archivo6=Input::file('file6');
+        $archivo7=Input::file('file7');
+        $archivo8=Input::file('file8');
+        $archivo9=Input::file('file9');
 
         $contratos= contratos::findOrFail($id);
         $contratos->objetocontrato=$request->get('objetocontrato');
@@ -382,6 +388,96 @@ class ContratosController extends AppBaseController
             $archivoscontratos->titulo="";
             $archivoscontratos->descripcion="";
             $archivoscontratos->tipo="CDP";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //RP
+        if($archivo4 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo4->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo4) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="CDP";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //Certificacion Bancaria
+        if($archivo5 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo5->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo5) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Certificacion Bancaria";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //Acto Consorcial 
+        if($archivo6 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo6->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo6) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Acto Consorcial";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //RUT Union Temporal
+        if($archivo7 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo7->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo7) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="RUT Union Temporal";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //Registro Unico Tributario
+        if($archivo8 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo8->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo8) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Registro Unico Tributario";
+            $archivoscontratos->idcontratos=$contratos->id;
+            $archivoscontratos->save();
+        }
+
+        //Documento de Identidad
+        if($archivo9 != null) {
+            $archivoscontratos = new archivoscontratos();
+            $carpeta="17";
+                $ruta=$carpeta."/".$request->get("idresidentes")."/".$archivo9->getClientOriginalName();
+                $r1=Storage::disk('local')->put($ruta,  \File::get($archivo9) );
+            $archivoscontratos->archivo=$ruta;
+
+            $archivoscontratos->titulo="";
+            $archivoscontratos->descripcion="";
+            $archivoscontratos->tipo="Documento de Identidad";
             $archivoscontratos->idcontratos=$contratos->id;
             $archivoscontratos->save();
         }
