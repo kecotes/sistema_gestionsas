@@ -14,16 +14,16 @@ class Circle extends Shape
     protected $cy = 0;
     protected $r;
 
-    public function start($attributes)
+    public function start($attribs)
     {
-        if (isset($attributes['cx'])) {
-            $this->cx = $attributes['cx'];
+        if (isset($attribs['cx'])) {
+            $this->cx = $attribs['cx'];
         }
-        if (isset($attributes['cy'])) {
-            $this->cy = $attributes['cy'];
+        if (isset($attribs['cy'])) {
+            $this->cy = $attribs['cy'];
         }
-        if (isset($attributes['r'])) {
-            $this->r = $attributes['r'];
+        if (isset($attribs['r'])) {
+            $this->r = $attribs['r'];
         }
 
         $this->document->getSurface()->circle($this->cx, $this->cy, $this->r);

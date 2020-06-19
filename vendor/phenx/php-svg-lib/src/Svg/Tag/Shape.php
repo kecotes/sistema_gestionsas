@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien MÃ©nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -12,18 +12,21 @@ use Svg\Style;
 
 class Shape extends AbstractTag
 {
-    protected function before($attributes)
+    protected function before($attribs)
     {
         $surface = $this->document->getSurface();
 
         $surface->save();
 
-        $style = $this->makeStyle($attributes);
+        $style = new Style();
+        $style->inherit($this);
+        $style->fromAttributes($attribs);
 
         $this->setStyle($style);
+
         $surface->setStyle($style);
 
-        $this->applyTransform($attributes);
+        $this->applyTransform($attribs);
     }
 
     protected function after()
@@ -33,24 +36,16 @@ class Shape extends AbstractTag
         if ($this->hasShape) {
             $style = $surface->getStyle();
 
-            $fill   = $style->fill   && is_array($style->fill);
-            $stroke = $style->stroke && is_array($style->stroke);
+            $fill   = $style->fill   && $style->fill   !== "none";
+            $stroke = $style->stroke && $style->stroke !== "none";
 
             if ($fill) {
                 if ($stroke) {
                     $surface->fillStroke();
                 } else {
-//                    if (is_string($style->fill)) {
-//                        /** @var LinearGradient|RadialGradient $gradient */
-//                        $gradient = $this->getDocument()->getDef($style->fill);
-//
-//                        var_dump($gradient->getStops());
-//                    }
-
                     $surface->fill();
                 }
-            }
-            elseif ($stroke) {
+            } elseif ($stroke) {
                 $surface->stroke();
             }
             else {

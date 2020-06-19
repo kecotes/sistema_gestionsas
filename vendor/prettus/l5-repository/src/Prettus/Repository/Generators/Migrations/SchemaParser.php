@@ -2,10 +2,13 @@
 namespace Prettus\Repository\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class SchemaParser
  * @package Prettus\Repository\Generators\Migrations
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 class SchemaParser implements Arrayable
 {
@@ -113,7 +116,7 @@ class SchemaParser implements Arrayable
      */
     public function getColumn($schema)
     {
-        return array_first(explode(':', $schema), function ($key, $value) {
+        return Arr::first(explode(':', $schema), function ($key, $value) {
             return $value;
         });
     }
@@ -207,7 +210,7 @@ class SchemaParser implements Arrayable
         if ($key == 0) {
             return '->' . $field . "('" . $column . "')";
         }
-        if (str_contains($field, '(')) {
+        if (Str::contains($field, '(')) {
             return '->' . $field;
         }
 

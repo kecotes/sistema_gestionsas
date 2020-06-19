@@ -11,6 +11,7 @@ use Exception;
 /**
  * Class CacheableRepository
  * @package Prettus\Repository\Traits
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 trait CacheableRepository
 {
@@ -172,7 +173,6 @@ trait CacheableRepository
 
             return [
                 'hash' => md5((string) $r),
-                'properties' => $r->getProperties(),
             ];
         }
     }

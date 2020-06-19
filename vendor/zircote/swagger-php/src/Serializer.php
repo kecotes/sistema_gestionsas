@@ -1,39 +1,46 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace Swagger;
+/**
+ * @license Apache 2.0
+ */
+
+namespace OpenApi;
+
+use OpenApi\Annotations\AbstractAnnotation;
 
 /**
  * Class AnnotationDeserializer is used to deserialize a json string
- * to a specific Swagger PHP Annotation class and vice versa.
+ * to a specific Annotation class and vice versa.
  *
  * @link https://github.com/zircote/swagger-php
  */
 class Serializer
 {
-    const CONTACT = 'Swagger\Annotations\Contact';
-    const DEFINITION = 'Swagger\Annotations\Definition';
-    const DELETE = 'Swagger\Annotations\Delete';
-    const EXTERNALDOCUMENTATION = 'Swagger\Annotations\ExternalDocumentation';
-    const GET = 'Swagger\Annotations\Get';
-    const HEAD = 'Swagger\Annotations\Head';
-    const HEADER = 'Swagger\Annotations\Header';
-    const INFO = 'Swagger\Annotations\Info';
-    const ITEMS = 'Swagger\Annotations\Items';
-    const LICENSE = 'Swagger\Annotations\License';
-    const OPERATION = 'Swagger\Annotations\Operation';
-    const OPTIONS = 'Swagger\Annotations\Options';
-    const PARAMETER = 'Swagger\Annotations\Parameter';
-    const PATCH = 'Swagger\Annotations\Patch';
-    const PATH = 'Swagger\Annotations\Path';
-    const POST = 'Swagger\Annotations\Post';
-    const PROPERTY = 'Swagger\Annotations\Property';
-    const PUT = 'Swagger\Annotations\Put';
-    const RESPONSE = 'Swagger\Annotations\Response';
-    const SCHEMA = 'Swagger\Annotations\Schema';
-    const SECURITYSCHEME = 'Swagger\Annotations\SecurityScheme';
-    const SWAGGER = 'Swagger\Annotations\Swagger';
-    const TAG = 'Swagger\Annotations\Tag';
-    const XML = 'Swagger\Annotations\Xml';
+    const CONTACT = 'OpenApi\Annotations\Contact';
+    const DELETE = 'OpenApi\Annotations\Delete';
+    const EXTERNALDOCUMENTATION = 'OpenApi\Annotations\ExternalDocumentation';
+    const FLOW = 'OpenApi\Annotations\Flow';
+    const GET = 'OpenApi\Annotations\Get';
+    const HEAD = 'OpenApi\Annotations\Head';
+    const HEADER = 'OpenApi\Annotations\Header';
+    const INFO = 'OpenApi\Annotations\Info';
+    const ITEMS = 'OpenApi\Annotations\Items';
+    const LICENSE = 'OpenApi\Annotations\License';
+    const OPENAPI = 'OpenApi\Annotations\OpenApi';
+    const OPERATION = 'OpenApi\Annotations\Operation';
+    const OPTIONS = 'OpenApi\Annotations\Options';
+    const PARAMETER = 'OpenApi\Annotations\Parameter';
+    const PATCH = 'OpenApi\Annotations\Patch';
+    const PATHITEM = 'OpenApi\Annotations\PathItem';
+    const POST = 'OpenApi\Annotations\Post';
+    const PROPERTY = 'OpenApi\Annotations\Property';
+    const PUT = 'OpenApi\Annotations\Put';
+    const REQUESTBODY = 'OpenApi\Annotations\RequestBody';
+    const RESPONSE = 'OpenApi\Annotations\Response';
+    const SCHEMA = 'OpenApi\Annotations\Schema';
+    const SECURITYSCHEME = 'OpenApi\Annotations\SecurityScheme';
+    const TAG = 'OpenApi\Annotations\Tag';
+    const XML = 'OpenApi\Annotations\Xml';
 
     private static $cachedNames;
 
@@ -55,7 +62,7 @@ class Serializer
     /**
      * Serialize.
      *
-     * @param Annotations\AbstractAnnotation $annotation
+     * @param  Annotations\AbstractAnnotation $annotation
      * @return string
      */
     public function serialize(Annotations\AbstractAnnotation $annotation)
@@ -76,7 +83,7 @@ class Serializer
     public function deserialize($jsonString, $className)
     {
         if (!$this->isValidClassName($className)) {
-            throw new \Exception($className.' is not defined in Swagger PHP Annotations');
+            throw new \Exception($className.' is not defined in OpenApi PHP Annotations');
         }
         return $this->doDeserialize(json_decode($jsonString), $className);
     }
@@ -91,10 +98,10 @@ class Serializer
      *
      * @throws \Exception
      */
-    public function deserializeFile($filename, $className = 'Swagger\Annotations\Swagger')
+    public function deserializeFile($filename, $className = 'OpenApi\Annotations\OpenApi')
     {
         if (!$this->isValidClassName($className)) {
-            throw new \Exception($className.' is not defined in Swagger PHP Annotations');
+            throw new \Exception($className.' is not defined in OpenApi PHP Annotations');
         }
         $jsonString = file_get_contents($filename);
         return $this->doDeserialize(json_decode($jsonString), $className);
@@ -117,6 +124,9 @@ class Serializer
             }
 
             if (substr($property, 0, 2) === 'x-') {
+                if ($annotation->x === UNDEFINED) {
+                    $annotation->x = [];
+                }
                 $custom = substr($property, 2);
                 $annotation->x[$custom] = $value;
             } else {
@@ -139,13 +149,17 @@ class Serializer
     {
         // property is primitive type
         if (array_key_exists($property, $annotation::$_types)) {
-            return $value;
+            return $this->doDeserializeBaseProperty($annotation::$_types[$property], $value);
         }
         // property is embedded annotation
         foreach ($annotation::$_nested as $class => $declaration) {
             // property is an annotation
             if (is_string($declaration) && $declaration === $property) {
-                return $this->doDeserialize($value, $class);
+                if (is_object($value)) {
+                    return $this->doDeserialize($value, $class);
+                } else {
+                    return $value;
+                }
             }
 
             // property is an annotation array
@@ -169,6 +183,38 @@ class Serializer
                 return $annotationHash;
             }
         }
+
+        return $value;
+    }
+
+    /**
+     * Deserialize base annotation property
+     *
+     * @param string $type The property type
+     * @param mixed $value The value to deserialization
+     *
+     * @return array|\OpenApi\Annotations\AbstractAnnotation
+     */
+    private function doDeserializeBaseProperty($type, $value)
+    {
+        $isAnnotationClass = is_string($type) && is_subclass_of(trim($type, '[]'), AbstractAnnotation::class);
+
+        if ($isAnnotationClass) {
+            $isArray = strpos($type, '[') === 0 && substr($type, -1) === ']';
+
+            if ($isArray) {
+                $annotationArr = [];
+                $class = trim($type, '[]');
+
+                foreach ($value as $v) {
+                    $annotationArr[] = $this->doDeserialize($v, $class);
+                }
+                return $annotationArr;
+            }
+
+            return $this->doDeserialize($value, $type);
+        }
+
         return $value;
     }
 }

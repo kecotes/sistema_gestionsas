@@ -324,10 +324,10 @@ class QueryBuilderEngine extends BaseEngine
          */
         foreach ($relationChunk as $relation => $chunk) {
             // Prepare variables
-            $builder  = $chunk['builder'];
-            $query    = $chunk['query'];
-            $bindings = $builder->getBindings();
-            $sql      = "({$builder->toSql()}) >= 1";
+            $builder      = $chunk['builder'];
+            $relationType = $chunk['relationType'];
+            $query        = $chunk['query'];
+            $builder      = "({$builder->toSql()}) >= 1";
 
             // Check if it last relation we will use orWhereRaw
             if ($lastRelation == $relation) {
@@ -338,7 +338,11 @@ class QueryBuilderEngine extends BaseEngine
                 $relationMethod = "whereRaw";
             }
 
-            $query->{$relationMethod}($sql, $bindings);
+            if ($relationType instanceof MorphToMany) {
+                $query->{$relationMethod}($builder, [$relationType->getMorphClass(), $this->prepareKeyword($keyword)]);
+            } else {
+                $query->{$relationMethod}($builder, [$this->prepareKeyword($keyword)]);
+            }
         }
     }
 
@@ -516,43 +520,37 @@ class QueryBuilderEngine extends BaseEngine
             $joins[] = $join->table;
         }
 
-        /**
-         * Add support nested relations.
-         */
-        $lastQuery = $this->query;
+        $model = $this->query->getRelation($relation);
+        if ($model instanceof BelongsToMany) {
+            $pivot   = $model->getTable();
+            $pivotPK = $model->getForeignKey();
+            $pivotFK = $model->getQualifiedParentKeyName();
 
-        foreach (explode('.', $relation) as $eachRelation) {
-            $model = $lastQuery->getRelation($eachRelation);
-
-            if ($model instanceof BelongsToMany) {
-                $pivot   = $model->getTable();
-                $pivotPK = $model->getForeignKey();
-                $pivotFK = $model->getQualifiedParentKeyName();
-                if (! in_array($pivot, $joins)) {
-                    $this->getQueryBuilder()->leftJoin($pivot, $pivotPK, '=', $pivotFK);
-                }
-                $related = $model->getRelated();
-                $table   = $related->getTable();
-                $tablePK = $related->getForeignKey();
-                $tableFK = $related->getQualifiedKeyName();
-                if (! in_array($table, $joins)) {
-                    $this->getQueryBuilder()->leftJoin($table, $pivot . '.' . $tablePK, '=', $tableFK);
-                }
-            } else {
-                $table = $model->getRelated()->getTable();
-                if ($model instanceof HasOneOrMany) {
-                    $foreign = $model->getForeignKey();
-                    $other   = $model->getQualifiedParentKeyName();
-                } else {
-                    $foreign = $model->getQualifiedForeignKey();
-                    $other   = $model->getQualifiedOtherKeyName();
-                }
-                if (! in_array($table, $joins)) {
-                    $this->getQueryBuilder()->leftJoin($table, $foreign, '=', $other);
-                }
+            if (! in_array($pivot, $joins)) {
+                $this->getQueryBuilder()->leftJoin($pivot, $pivotPK, '=', $pivotFK);
             }
 
-            $lastQuery = $model->getQuery();
+            $related = $model->getRelated();
+            $table   = $related->getTable();
+            $tablePK = $related->getForeignKey();
+            $tableFK = $related->getQualifiedKeyName();
+
+            if (! in_array($table, $joins)) {
+                $this->getQueryBuilder()->leftJoin($table, $pivot . '.' . $tablePK, '=', $tableFK);
+            }
+        } else {
+            $table = $model->getRelated()->getTable();
+            if ($model instanceof HasOneOrMany) {
+                $foreign = $model->getForeignKey();
+                $other   = $model->getQualifiedParentKeyName();
+            } else {
+                $foreign = $model->getQualifiedForeignKey();
+                $other   = $model->getQualifiedOtherKeyName();
+            }
+
+            if (! in_array($table, $joins)) {
+                $this->getQueryBuilder()->leftJoin($table, $foreign, '=', $other);
+            }
         }
 
         $column = $table . '.' . $relationColumn;
@@ -636,20 +634,8 @@ class QueryBuilderEngine extends BaseEngine
                     $relation       = implode('.', $parts);
 
                     if (in_array($relation, $eagerLoads)) {
-                        // Loop for nested relations
-                        // This code is check morph many or not.
-                        // If one of nested relation is MorphToMany
-                        // we will call joinEagerLoadedColumn.
-                        $lastQuery = $this->query;
-                        $isMorphToMany = false;
-                        foreach (explode('.', $relation) as $eachRelation) {
-                            $relationship = $lastQuery->getRelation($eachRelation);
-                            if (! ($relationship instanceof MorphToMany)) {
-                                $isMorphToMany = true;
-                            }
-                            $lastQuery = $relationship;
-                        }
-                        if ($isMorphToMany) {
+                        $relationship = $this->query->getRelation($relation);
+                        if (! ($relationship instanceof MorphToMany)) {
                             $column = $this->joinEagerLoadedColumn($relation, $relationColumn);
                         } else {
                             $valid = 0;

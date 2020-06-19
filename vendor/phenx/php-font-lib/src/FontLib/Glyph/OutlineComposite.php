@@ -41,10 +41,7 @@ class OutlineComposite extends Outline {
       $glyphIDs[] = $_component->glyphIndex;
 
       $_glyph   = $this->table->data[$_component->glyphIndex];
-
-      if ($_glyph !== $this) {
-        $glyphIDs = array_merge($glyphIDs, $_glyph->getGlyphIDs());
-      }
+      $glyphIDs = array_merge($glyphIDs, $_glyph->getGlyphIDs());
     }
 
     return $glyphIDs;
@@ -227,14 +224,10 @@ class OutlineComposite extends Outline {
     $glyphs = $glyph_data->data;
 
     foreach ($this->components as $component) {
-      $_glyph = $glyphs[$component->glyphIndex];
-
-      if ($_glyph !== $this) {
-        $contours[] = array(
-          "contours"  => $_glyph->getSVGContours(),
-          "transform" => $component->getMatrix(),
-        );
-      }
+      $contours[] = array(
+        "contours"  => $glyphs[$component->glyphIndex]->getSVGContours(),
+        "transform" => $component->getMatrix(),
+      );
     }
 
     return $contours;

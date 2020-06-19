@@ -10,10 +10,10 @@ namespace Svg\Tag;
 
 class Polyline extends Shape
 {
-    public function start($attributes)
+    public function start($attribs)
     {
         $tmp = array();
-        preg_match_all('/([\-]*[0-9\.]+)/', $attributes['points'], $tmp);
+        preg_match_all('/([\-]*[0-9\.]+)/', $attribs['points'], $tmp);
 
         $points = $tmp[0];
         $count = count($points);

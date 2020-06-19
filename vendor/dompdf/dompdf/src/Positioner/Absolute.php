@@ -16,11 +16,15 @@ use Dompdf\FrameDecorator\AbstractFrameDecorator;
 class Absolute extends AbstractPositioner
 {
 
-    /**
-     * @param AbstractFrameDecorator $frame
-     */
-    function position(AbstractFrameDecorator $frame)
+    function __construct(AbstractFrameDecorator $frame)
     {
+        parent::__construct($frame);
+    }
+
+    function position()
+    {
+
+        $frame = $this->_frame;
         $style = $frame->get_style();
 
         $p = $frame->find_positionned_parent();
@@ -39,7 +43,7 @@ class Absolute extends AbstractPositioner
 
         list($width, $height) = array($frame->get_margin_width(), $frame->get_margin_height());
 
-        $orig_style = $frame->get_original_style();
+        $orig_style = $this->_frame->get_original_style();
         $orig_width = $orig_style->width;
         $orig_height = $orig_style->height;
 
@@ -72,14 +76,14 @@ class Absolute extends AbstractPositioner
         } else {
             if ($right === "auto") {
                 // B or F
-                $x += (float)$left;
+                $x += $left;
             } else {
                 if ($orig_width === "auto") {
                     // D - TODO change width
-                    $x += (float)$left;
+                    $x += $left;
                 } else {
                     // H - Everything is fixed: left + width win
-                    $x += (float)$left;
+                    $x += $left;
                 }
             }
         }
@@ -92,27 +96,28 @@ class Absolute extends AbstractPositioner
             } else {
                 if ($orig_height === "auto") {
                     // C
-                    $y += (float)$h - $height - (float)$bottom;
+                    $y += $h - $height - $bottom;
                 } else {
                     // G
-                    $y += (float)$h - $height - (float)$bottom;
+                    $y += $h - $height - $bottom;
                 }
             }
         } else {
             if ($bottom === "auto") {
                 // B or F
-                $y += (float)$top;
+                $y += $top;
             } else {
                 if ($orig_height === "auto") {
                     // D - TODO change height
-                    $y += (float)$top;
+                    $y += $top;
                 } else {
                     // H - Everything is fixed: top + height win
-                    $y += (float)$top;
+                    $y += $top;
                 }
             }
         }
 
         $frame->set_position($x, $y);
+
     }
 }

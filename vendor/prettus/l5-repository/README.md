@@ -95,6 +95,7 @@ php artisan vendor:publish --provider "Prettus\Repository\Providers\RepositorySe
 - findWhere(array $where, $columns = ['*'])
 - findWhereIn($field, array $where, $columns = [*])
 - findWhereNotIn($field, array $where, $columns = [*])
+- findWhereBetween($field, array $where, $columns = [*])
 - create(array $attributes)
 - update(array $attributes, $id)
 - updateOrCreate(array $attributes, array $values = [])
@@ -296,7 +297,7 @@ The command will also create your basic RESTfull controller so just add this lin
 
 When running the command, you will be creating the "Entities" folder and "Repositories" inside the folder that you set as the default.
 
-Done, done that just now you do bind its interface for your real repository, for example in your own Repositories Service Provider.
+Now that is done, you still need to bind its interface for your real repository, for example in your own Repositories Service Provider.
 
 ```php
 App::bind('{YOUR_NAMESPACE}Repositories\PostRepository', '{YOUR_NAMESPACE}Repositories\PostRepositoryEloquent');
@@ -759,6 +760,58 @@ ORDER BY posts.title
 ...
 ```
 
+Sorting multiple columns same sortedBy
+
+`http://prettus.local/users?orderBy=name;created_at&sortedBy=desc`
+
+Result will have something like this
+
+```json
+   [
+       {
+           "id": 1,
+           "name": "Laravel",
+           "created_at": "-0001-11-29 00:00:00"
+       },
+       {
+           "id": 3,
+           "name": "Laravel",
+           "created_at": "-0001-11-28 00:00:00"
+       },
+       {
+           "id": 2,
+           "name": "John Doe",
+           "created_at": "-0001-11-30 00:00:00"
+       }
+   ]
+```
+
+
+Sorting multiple columns difference sortedBy
+
+`http://prettus.local/users?orderBy=name;created_at&sortedBy=desc;asc`
+
+Result will have something like this
+
+```json
+   [
+       {
+           "id": 3,
+           "name": "Laravel",
+           "created_at": "-0001-11-28 00:00:00"
+       },
+       {
+           "id": 1,
+           "name": "Laravel",
+           "created_at": "-0001-11-29 00:00:00"
+       },
+       {
+           "id": 2,
+           "name": "John Doe",
+           "created_at": "-0001-11-30 00:00:00"
+       }
+   ]
+```
 
 Add relationship
 

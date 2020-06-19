@@ -13,6 +13,8 @@ class Inspiring
      *
      * May McGinnis always control the board. #LaraconUS2015
      *
+     * RIP Charlie - Feb 6, 2018
+     *
      * @return string
      */
     public static function quote()
@@ -27,7 +29,8 @@ class Inspiring
             'He who is contented is rich. - Laozi',
             'Very little is needed to make a happy life. - Marcus Antoninus',
             'It is quality rather than quantity that matters. - Lucius Annaeus Seneca',
-
+            'Genius is one percent inspiration and ninety-nine percent perspiration. - Thomas Edison',
+            'Computer science is no more about computers than astronomy is about telescopes. - Edsger Dijkstra',
         ])->random();
     }
 }

@@ -7,9 +7,10 @@ use Prettus\Validator\Exceptions\ValidatorException;
 /**
  * Class AbstractValidator
  * @package Prettus\Validator
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
-abstract class AbstractValidator implements ValidatorInterface {
-
+abstract class AbstractValidator implements ValidatorInterface
+{
     /**
      * @var int
      */
@@ -37,6 +38,20 @@ abstract class AbstractValidator implements ValidatorInterface {
     protected $rules = array();
 
     /**
+     * Validation Custom Messages
+     *
+     * @var array
+     */
+    protected $messages = array();
+
+    /**
+     * Validation Custom Attributes
+     *
+     * @var array
+     */
+    protected $attributes = array();
+
+    /**
      * Validation errors
      *
      * @var MessageBag
@@ -50,7 +65,8 @@ abstract class AbstractValidator implements ValidatorInterface {
      * @param $id
      * @return $this
      */
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
         return $this;
     }
@@ -94,7 +110,7 @@ abstract class AbstractValidator implements ValidatorInterface {
      * @param string $action
      * @return boolean
      */
-    abstract public function passes( $action = null );
+    abstract public function passes($action = null);
 
     /**
      * Pass the data and the rules to the validator or throws ValidatorException
@@ -105,8 +121,8 @@ abstract class AbstractValidator implements ValidatorInterface {
      */
     public function passesOrFail($action = null)
     {
-        if(  !$this->passes($action) ){
-            throw new ValidatorException( $this->errorsBag() );
+        if (!$this->passes($action)) {
+            throw new ValidatorException($this->errorsBag());
         }
 
         return true;
@@ -120,11 +136,11 @@ abstract class AbstractValidator implements ValidatorInterface {
      * @param null $action
      * @return array
      */
-    public function getRules($action = null){
-
+    public function getRules($action = null)
+    {
         $rules = $this->rules;
 
-        if( isset($this->rules[$action]) ){
+        if (isset($this->rules[$action])) {
             $rules = $this->rules[$action];
         }
 
@@ -144,6 +160,50 @@ abstract class AbstractValidator implements ValidatorInterface {
     }
 
     /**
+     * Get Custom error messages for validation
+     *
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Set Custom error messages for Validation
+     *
+     * @param array $messages
+     * @return $this
+     */
+    public function setMessages(array $messages)
+    {
+        $this->messages = $messages;
+        return $this;
+    }
+
+    /**
+     * Get Custom error attributes for validation
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Set Custom error attributes for Validation
+     *
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
      * Parser Validation Rules
      *
      * @param $rules
@@ -152,33 +212,28 @@ abstract class AbstractValidator implements ValidatorInterface {
      */
     protected function parserValidationRules($rules, $id = null)
     {
-
-        if($id === null)
-        {
+        if (null === $id) {
             return $rules;
         }
 
-        array_walk($rules, function(&$rules, $field) use ($id)
-        {
-            if(!is_array($rules))
-            {
+        array_walk($rules, function (&$rules, $field) use ($id) {
+            if (!is_array($rules)) {
                 $rules = explode("|", $rules);
             }
 
-            foreach($rules as $ruleIdx => $rule)
-            {
+            foreach ($rules as $ruleIdx => $rule) {
                 // get name and parameters
                 @list($name, $params) = array_pad(explode(":", $rule), 2, null);
 
                 // only do someting for the unique rule
-                if(strtolower($name) != "unique") {
+                if (strtolower($name) != "unique") {
                     continue; // continue in foreach loop, nothing left to do here
                 }
 
                 $p = array_map("trim", explode(",", $params));
 
                 // set field name to rules key ($field) (laravel convention)
-                if(!isset($p[1])) {
+                if (!isset($p[1])) {
                     $p[1] = $field;
                 }
 
@@ -192,5 +247,4 @@ abstract class AbstractValidator implements ValidatorInterface {
 
         return $rules;
     }
-
 }

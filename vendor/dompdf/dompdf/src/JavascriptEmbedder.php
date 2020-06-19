@@ -7,6 +7,8 @@
  */
 namespace Dompdf;
 
+use Dompdf\Frame;
+
 /**
  * Embeds Javascript into the PDF document
  *
@@ -20,30 +22,19 @@ class JavascriptEmbedder
      */
     protected $_dompdf;
 
-    /**
-     * JavascriptEmbedder constructor.
-     *
-     * @param Dompdf $dompdf
-     */
-    public function __construct(Dompdf $dompdf)
+    function __construct(Dompdf $dompdf)
     {
         $this->_dompdf = $dompdf;
     }
 
-    /**
-     * @param $script
-     */
-    public function insert($script)
+    function insert($script)
     {
-        $this->_dompdf->getCanvas()->javascript($script);
+        $this->_dompdf->get_canvas()->javascript($script);
     }
 
-    /**
-     * @param Frame $frame
-     */
-    public function render(Frame $frame)
+    function render(Frame $frame)
     {
-        if (!$this->_dompdf->getOptions()->getIsJavascriptEnabled()) {
+        if (!$this->_dompdf->get_option("enable_javascript")) {
             return;
         }
 

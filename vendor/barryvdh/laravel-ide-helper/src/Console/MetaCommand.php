@@ -10,6 +10,7 @@
 
 namespace Barryvdh\LaravelIdeHelper\Console;
 
+use Barryvdh\LaravelIdeHelper\Factories;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -47,6 +48,7 @@ class MetaCommand extends Command
 
     protected $methods = [
       'new \Illuminate\Contracts\Container\Container',
+      '\Illuminate\Container\Container::makeWith(0)',
       '\Illuminate\Contracts\Container\Container::make(0)',
       '\Illuminate\Contracts\Container\Container::makeWith(0)',
       '\App::make(0)',
@@ -76,6 +78,9 @@ class MetaCommand extends Command
      */
     public function handle()
     {
+        // Needs to run before exception handler is registered
+        $factories = $this->config->get('ide-helper.include_factory_builders') ? Factories::all() : [];
+
         $this->registerClassAutoloadExceptions();
 
         $bindings = array();
@@ -87,19 +92,23 @@ class MetaCommand extends Command
 
             try {
                 $concrete = $this->laravel->make($abstract);
-                if (is_object($concrete)) {
+                $reflectionClass = new \ReflectionClass($concrete);
+                if (is_object($concrete) && !$reflectionClass->isAnonymous()) {
                     $bindings[$abstract] = get_class($concrete);
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 if ($this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
                     $this->comment("Cannot make '$abstract': ".$e->getMessage());
                 }
             }
         }
 
+        $this->unregisterClassAutoloadExceptions();
+
         $content = $this->view->make('meta', [
           'bindings' => $bindings,
           'methods' => $this->methods,
+          'factories' => $factories,
         ])->render();
 
         $filename = $this->option('filename');
@@ -122,7 +131,11 @@ class MetaCommand extends Command
         $abstracts = $this->laravel->getBindings();
 
         // Return the abstract names only
-        return array_keys($abstracts);
+        $keys = array_keys($abstracts);
+
+        sort($keys);
+
+        return $keys;
     }
 
     /**
@@ -131,7 +144,7 @@ class MetaCommand extends Command
     protected function registerClassAutoloadExceptions()
     {
         spl_autoload_register(function ($class) {
-            throw new \Exception("Class '$class' not found.");
+            throw new \ReflectionException("Class '$class' not found.");
         });
     }
 
@@ -147,5 +160,15 @@ class MetaCommand extends Command
         return array(
             array('filename', 'F', InputOption::VALUE_OPTIONAL, 'The path to the meta file', $filename),
         );
+    }
+
+    /**
+     * Remove our custom autoloader that we pushed onto the autoload stack
+     */
+    private function unregisterClassAutoloadExceptions()
+    {
+        $autoloadFunctions = spl_autoload_functions();
+        $ourAutoloader = array_pop($autoloadFunctions);
+        spl_autoload_unregister($ourAutoloader);
     }
 }

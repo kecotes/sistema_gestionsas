@@ -3,7 +3,7 @@
 namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\ProcessUtils;
+use Illuminate\Support\ProcessUtils;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Process\PhpExecutableFinder;
 
@@ -26,25 +26,54 @@ class ServeCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      *
      * @throws \Exception
      */
-    public function fire()
+    public function handle()
     {
-        chdir($this->laravel->publicPath());
+        chdir(public_path());
 
-        $host = $this->input->getOption('host');
+        $this->line("<info>Laravel development server started:</info> <http://{$this->host()}:{$this->port()}>");
 
-        $port = $this->input->getOption('port');
+        passthru($this->serverCommand(), $status);
 
-        $base = ProcessUtils::escapeArgument($this->laravel->basePath());
+        return $status;
+    }
 
-        $binary = ProcessUtils::escapeArgument((new PhpExecutableFinder)->find(false));
+    /**
+     * Get the full server command.
+     *
+     * @return string
+     */
+    protected function serverCommand()
+    {
+        return sprintf('%s -S %s:%s %s',
+            ProcessUtils::escapeArgument((new PhpExecutableFinder)->find(false)),
+            $this->host(),
+            $this->port(),
+            ProcessUtils::escapeArgument(base_path('server.php'))
+        );
+    }
 
-        $this->info("Laravel development server started on http://{$host}:{$port}/");
+    /**
+     * Get the host for the command.
+     *
+     * @return string
+     */
+    protected function host()
+    {
+        return $this->input->getOption('host');
+    }
 
-        passthru("{$binary} -S {$host}:{$port} {$base}/server.php");
+    /**
+     * Get the port for the command.
+     *
+     * @return string
+     */
+    protected function port()
+    {
+        return $this->input->getOption('port');
     }
 
     /**

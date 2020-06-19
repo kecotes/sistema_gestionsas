@@ -4,8 +4,8 @@ namespace Prettus\Repository\Generators;
 /**
  * Class PresenterGenerator
  * @package Prettus\Repository\Generators
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
-
 class PresenterGenerator extends Generator
 {
     /**

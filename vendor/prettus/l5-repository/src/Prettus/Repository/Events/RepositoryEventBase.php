@@ -7,6 +7,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 /**
  * Class RepositoryEventBase
  * @package Prettus\Repository\Events
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 abstract class RepositoryEventBase
 {
@@ -29,14 +30,14 @@ abstract class RepositoryEventBase
      * @param RepositoryInterface $repository
      * @param Model               $model
      */
-    public function __construct(RepositoryInterface $repository, Model $model)
+    public function __construct(RepositoryInterface $repository, Model $model = null)
     {
         $this->repository = $repository;
         $this->model = $model;
     }
 
     /**
-     * @return Model
+     * @return Model|array
      */
     public function getModel()
     {

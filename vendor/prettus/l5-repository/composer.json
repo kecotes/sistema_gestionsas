@@ -6,25 +6,29 @@
   "authors": [
     {
       "name": "Anderson Andrade",
+      "homepage": "http://andersonandra.de",
       "email": "contato@andersonandra.de",
       "role": "Developer"
     }
   ],
+  "homepage": "http://andersao.github.io/l5-repository",
   "support": {
     "email": "contato@andersonandra.de",
     "issues":"https://github.com/andersao/l5-repository/issues",
     "wiki":"https://github.com/andersao/l5-repository",
-    "source":"https://github.com/andersao/l5-repository"
+    "source":"https://github.com/andersao/l5-repository",
+    "docs": "http://andersao.github.io/l5-repository"
   },
   "require": {
-    "illuminate/http": "~5.0",
-    "illuminate/config": "~5.0",
-    "illuminate/support": "~5.0",
-    "illuminate/database": "~5.0",
-    "illuminate/pagination": "~5.0",
-    "illuminate/console": "~5.0",
-    "illuminate/filesystem": "~5.0",
-    "prettus/laravel-validation": "1.1.*"
+    "illuminate/http": "~5.0|~6.0|~7.0",
+    "illuminate/config": "~5.0|~6.0|~7.0",
+    "illuminate/support": "~5.0|~6.0|~7.0",
+    "illuminate/database": "~5.0|~6.0|~7.0",
+    "illuminate/pagination": "~5.0|~6.0|~7.0",
+    "illuminate/console": "~5.0|~6.0|~7.0",
+    "illuminate/filesystem": "~5.0|~6.0|~7.0",
+    "prettus/laravel-validation": "~1.1|~1.2",
+    "illuminate/validation": "~5.0|~6.0|~7.0"
   },
   "autoload": {
     "psr-4": {

@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien MÃ©nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -14,17 +14,17 @@ class Text extends Shape
     protected $y = 0;
     protected $text = "";
 
-    public function start($attributes)
+    public function start($attribs)
     {
         $document = $this->document;
         $height = $this->document->getHeight();
         $this->y = $height;
 
-        if (isset($attributes['x'])) {
-            $this->x = $attributes['x'];
+        if (isset($attribs['x'])) {
+            $this->x = $attribs['x'];
         }
-        if (isset($attributes['y'])) {
-            $this->y = $height - $attributes['y'];
+        if (isset($attribs['y'])) {
+            $this->y = $height - $attribs['y'];
         }
 
         $document->getSurface()->transform(1, 0, 0, -1, 0, $height);
@@ -35,22 +35,13 @@ class Text extends Shape
         $surface = $this->document->getSurface();
         $x = $this->x;
         $y = $this->y;
-        $style = $surface->getStyle();
-        $surface->setFont($style->fontFamily, $style->fontStyle, $style->fontWeight);
 
-        switch ($style->textAnchor) {
-            case "middle":
-                $width = $surface->measureText($this->text);
-                $x -= $width / 2;
-                break;
-
-            case "end":
-                $width = $surface->measureText($this->text);
-                $x -= $width;
-                break;
+        if ($surface->getStyle()->textAnchor == "middle") {
+            $width = $surface->measureText($this->text);
+            $x -= $width / 2;
         }
 
-        $surface->fillText($this->getText(), $x, $y);
+        $surface->fillText($this->text, $x, $y);
     }
 
     protected function after()
@@ -61,10 +52,5 @@ class Text extends Shape
     public function appendText($text)
     {
         $this->text .= $text;
-    }
-
-    public function getText()
-    {
-        return trim($this->text);
     }
 } 

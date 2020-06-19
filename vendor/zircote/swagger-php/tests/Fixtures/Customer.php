@@ -1,57 +1,91 @@
-<?php
-namespace SwaggerFixures;
+<?php declare(strict_types=1);
+// phpcs:ignoreFile (this file uses "\r\n" linebreaks on purpose)
+namespace OpenApiFixures;
 
 use Exception;
-use Swagger\Logger as SwgLogger;
-use \Swagger\Logger;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
+use OpenApi\Logger;
+use OpenApi\Logger as OpenApiLogger;
 
 /**
- * @SWG\Info(title="Fixture for ClassPropertiesTest", version="test")
- * @SWG\Definition()
+ * @OA\Info(title="Fixture for ClassPropertiesTest", version="test")
+ * @OA\Schema()
  */
 class Customer
 {
-    
+
     /**
-     * The firstname of the customer.
+     * The first name of the customer.
+     *
      * @var string
-     * @SWG\Property()
+     * @example John
+     * @OA\Property()
      */
     public $firstname;
-    
+
+    /**
+     * @var null|string The second name of the customer.
+     * @example Allan
+     * @OA\Property()
+     */
+    public $secondname;
+
+    /**
+     * The third name of the customer.
+     *
+     * @var string|null
+     * @example Peter
+     * @OA\Property()
+     */
+    public $thirdname;
+
+    /**
+     * The unknown name of the customer.
+     *
+     * @var unknown|null
+     * @example Unknown
+     * @OA\Property()
+     */
+    public $fourthname;
+
     /**
      * @var string The lastname of the customer.
-     * @SWG\Property()
+     * @OA\Property()
      */
     public $lastname;
-    
+
     /**
-     * @SWG\Property()
+     * @OA\Property()
      * @var string[]
      */
     public $tags;
-    
+
     /**
-     * @SWG\Property()
+     * @OA\Property()
      * @var Customer
      */
     public $submittedBy;
-    
+
     /**
-     * @SWG\Property()
+     * @OA\Property()
      * @var Customer[]
      */
     public $friends;
+
+    /**
+     * @OA\Property()
+     * @var Customer|null
+     */
+    public $bestFriend;
 
     /**
      * for ContextTest
      */
     public function testResolvingFullyQualifiedNames()
     {
-        $test = new SwgLogger();
+        $test = new OpenApiLogger();
         $test2 = new Logger();
-        $test3 = new SWG\Contact();
+        $test3 = new OA\Contact();
         throw new Exception();
     }
 }

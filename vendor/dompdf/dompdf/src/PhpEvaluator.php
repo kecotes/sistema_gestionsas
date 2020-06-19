@@ -7,6 +7,8 @@
  */
 namespace Dompdf;
 
+use Dompdf\Frame;
+
 /**
  * Executes inline PHP code during the rendering process
  *
@@ -20,22 +22,14 @@ class PhpEvaluator
      */
     protected $_canvas;
 
-    /**
-     * PhpEvaluator constructor.
-     * @param Canvas $canvas
-     */
-    public function __construct(Canvas $canvas)
+    function __construct(Canvas $canvas)
     {
         $this->_canvas = $canvas;
     }
 
-    /**
-     * @param $code
-     * @param array $vars
-     */
-    public function evaluate($code, $vars = array())
+    function evaluate($code, $vars = array())
     {
-        if (!$this->_canvas->get_dompdf()->getOptions()->getIsPhpEnabled()) {
+        if (!$this->_canvas->get_dompdf()->get_option("enable_php")) {
             return;
         }
 
@@ -50,13 +44,11 @@ class PhpEvaluator
             $$k = $v;
         }
 
+        //$code = html_entity_decode($code); // @todo uncomment this when tested
         eval($code);
     }
 
-    /**
-     * @param Frame $frame
-     */
-    public function render(Frame $frame)
+    function render(Frame $frame)
     {
         $this->evaluate($frame->get_node()->nodeValue);
     }

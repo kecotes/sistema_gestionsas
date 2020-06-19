@@ -17,27 +17,27 @@ class Rect extends Shape
     protected $rx = 0;
     protected $ry = 0;
 
-    public function start($attributes)
+    public function start($attribs)
     {
-        if (isset($attributes['x'])) {
-            $this->x = $attributes['x'];
+        if (isset($attribs['x'])) {
+            $this->x = $attribs['x'];
         }
-        if (isset($attributes['y'])) {
-            $this->y = $attributes['y'];
-        }
-
-        if (isset($attributes['width'])) {
-            $this->width = $attributes['width'];
-        }
-        if (isset($attributes['height'])) {
-            $this->height = $attributes['height'];
+        if (isset($attribs['y'])) {
+            $this->y = $attribs['y'];
         }
 
-        if (isset($attributes['rx'])) {
-            $this->rx = $attributes['rx'];
+        if (isset($attribs['width'])) {
+            $this->width = $attribs['width'];
         }
-        if (isset($attributes['ry'])) {
-            $this->ry = $attributes['ry'];
+        if (isset($attribs['height'])) {
+            $this->height = $attribs['height'];
+        }
+
+        if (isset($attribs['rx'])) {
+            $this->rx = $attribs['rx'];
+        }
+        if (isset($attribs['ry'])) {
+            $this->ry = $attribs['ry'];
         }
 
         $this->document->getSurface()->rect($this->x, $this->y, $this->width, $this->height, $this->rx, $this->ry);

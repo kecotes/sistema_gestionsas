@@ -22,26 +22,30 @@ abstract class AbstractPositioner
 {
 
     /**
-     * @param AbstractFrameDecorator $frame
-     * @return mixed
+     * @var \Dompdf\FrameDecorator\AbstractFrameDecorator
      */
-    abstract function position(AbstractFrameDecorator $frame);
+    protected $_frame;
 
-    /**
-     * @param AbstractFrameDecorator $frame
-     * @param $offset_x
-     * @param $offset_y
-     * @param bool $ignore_self
-     */
-    function move(AbstractFrameDecorator $frame, $offset_x, $offset_y, $ignore_self = false)
+    //........................................................................
+
+    function __construct(AbstractFrameDecorator $frame)
     {
-        list($x, $y) = $frame->get_position();
+        $this->_frame = $frame;
+    }
+
+    //........................................................................
+
+    abstract function position();
+
+    function move($offset_x, $offset_y, $ignore_self = false)
+    {
+        list($x, $y) = $this->_frame->get_position();
 
         if (!$ignore_self) {
-            $frame->set_position($x + $offset_x, $y + $offset_y);
+            $this->_frame->set_position($x + $offset_x, $y + $offset_y);
         }
 
-        foreach ($frame->get_children() as $child) {
+        foreach ($this->_frame->get_children() as $child) {
             $child->move($offset_x, $offset_y);
         }
     }

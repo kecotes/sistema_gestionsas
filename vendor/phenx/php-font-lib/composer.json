@@ -11,14 +11,8 @@
         }
     ],
     "autoload": {
-        "psr-4": {
-            "FontLib\\": "src/FontLib"
+        "psr-0": {
+            "FontLib\\": "src/"
         }
-    },
-    "config": {
-      "bin-dir": "bin"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^4.8"
     }
 }

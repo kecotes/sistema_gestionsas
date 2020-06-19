@@ -12,6 +12,8 @@ namespace Dompdf\FrameDecorator;
 use Dompdf\Dompdf;
 use Dompdf\Frame;
 use Dompdf\Exception;
+use DOMText;
+use Dompdf\FontMetrics;
 
 /**
  * Decorates Frame objects for text layout
@@ -25,12 +27,6 @@ class Text extends AbstractFrameDecorator
     // protected members
     protected $_text_spacing;
 
-    /**
-     * Text constructor.
-     * @param Frame $frame
-     * @param Dompdf $dompdf
-     * @throws Exception
-     */
     function __construct(Frame $frame, Dompdf $dompdf)
     {
         if (!$frame->is_text_node()) {
@@ -41,25 +37,22 @@ class Text extends AbstractFrameDecorator
         $this->_text_spacing = null;
     }
 
+    //........................................................................
+
     function reset()
     {
         parent::reset();
         $this->_text_spacing = null;
     }
 
-    // Accessor methods
+    //........................................................................
 
-    /**
-     * @return null
-     */
+    // Accessor methods
     function get_text_spacing()
     {
         return $this->_text_spacing;
     }
 
-    /**
-     * @return string
-     */
     function get_text()
     {
         // FIXME: this should be in a child class (and is incorrect)
@@ -81,18 +74,14 @@ class Text extends AbstractFrameDecorator
 
     //........................................................................
 
-    /**
-     * Vertical margins & padding do not apply to text frames
-     *
-     * http://www.w3.org/TR/CSS21/visudet.html#inline-non-replaced:
-     *
-     * The vertical padding, border and margin of an inline, non-replaced box
-     * start at the top and bottom of the content area, not the
-     * 'line-height'. But only the 'line-height' is used to calculate the
-     * height of the line box.
-     *
-     * @return float|int
-     */
+    // Vertical margins & padding do not apply to text frames
+
+    // http://www.w3.org/TR/CSS21/visudet.html#inline-non-replaced:
+    //
+    // The vertical padding, border and margin of an inline, non-replaced box
+    // start at the top and bottom of the content area, not the
+    // 'line-height'. But only the 'line-height' is used to calculate the
+    // height of the line box.
     function get_margin_height()
     {
         // This function is called in add_frame_to_line() and is used to
@@ -111,11 +100,9 @@ class Text extends AbstractFrameDecorator
         */
 
         return ($style->line_height / ($size > 0 ? $size : 1)) * $this->_dompdf->getFontMetrics()->getFontHeight($font, $size);
+
     }
 
-    /**
-     * @return array
-     */
     function get_padding_box()
     {
         $pb = $this->_frame->get_padding_box();
@@ -123,47 +110,41 @@ class Text extends AbstractFrameDecorator
 
         return $pb;
     }
+    //........................................................................
 
-    /**
-     * @param $spacing
-     */
+    // Set method
     function set_text_spacing($spacing)
     {
         $style = $this->_frame->get_style();
 
         $this->_text_spacing = $spacing;
-        $char_spacing = (float)$style->length_in_pt($style->letter_spacing);
+        $char_spacing = $style->length_in_pt($style->letter_spacing);
 
         // Re-adjust our width to account for the change in spacing
         $style->width = $this->_dompdf->getFontMetrics()->getTextWidth($this->get_text(), $style->font_family, $style->font_size, $spacing, $char_spacing);
     }
 
-    /**
-     *  Recalculate the text width
-     *
-     * @return float
-     */
+    //........................................................................
+
+    // Recalculate the text width
     function recalculate_width()
     {
         $style = $this->get_style();
         $text = $this->get_text();
         $size = $style->font_size;
         $font = $style->font_family;
-        $word_spacing = (float)$style->length_in_pt($style->word_spacing);
-        $char_spacing = (float)$style->length_in_pt($style->letter_spacing);
+        $word_spacing = $style->length_in_pt($style->word_spacing);
+        $char_spacing = $style->length_in_pt($style->letter_spacing);
 
         return $style->width = $this->_dompdf->getFontMetrics()->getTextWidth($text, $font, $size, $word_spacing, $char_spacing);
     }
 
+    //........................................................................
+
     // Text manipulation methods
 
-    /**
-     * split the text in this frame at the offset specified.  The remaining
-     * text is added a sibling frame following this one and is returned.
-     *
-     * @param $offset
-     * @return Frame|null
-     */
+    // split the text in this frame at the offset specified.  The remaining
+    // text is added a sibling frame following this one and is returned.
     function split_text($offset)
     {
         if ($offset == 0) {
@@ -184,20 +165,18 @@ class Text extends AbstractFrameDecorator
         return $deco;
     }
 
-    /**
-     * @param $offset
-     * @param $count
-     */
+    //........................................................................
+
     function delete_text($offset, $count)
     {
         $this->_frame->get_node()->deleteData($offset, $count);
     }
 
-    /**
-     * @param $text
-     */
+    //........................................................................
+
     function set_text($text)
     {
         $this->_frame->get_node()->data = $text;
     }
+
 }

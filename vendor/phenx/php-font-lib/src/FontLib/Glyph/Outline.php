@@ -42,7 +42,8 @@ class Outline extends BinaryStream {
    *
    * @return Outline
    */
-  static function init(glyf $table, $offset, $size, BinaryStream $font) {
+  static function init(glyf $table, $offset, $size) {
+    $font = $table->getFont();
     $font->seek($offset);
 
     if ($font->readInt16() > -1) {
@@ -54,7 +55,7 @@ class Outline extends BinaryStream {
       $glyph = new OutlineComposite($table, $offset, $size);
     }
 
-    $glyph->parse($font);
+    $glyph->parse();
 
     return $glyph;
   }
@@ -72,7 +73,8 @@ class Outline extends BinaryStream {
     $this->size   = $size;
   }
 
-  function parse(BinaryStream $font) {
+  function parse() {
+    $font = $this->getFont();
     $font->seek($this->offset);
 
     if (!$this->size) {

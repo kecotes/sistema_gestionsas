@@ -1,17 +1,40 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * @license Apache 2.0
  */
 
-namespace SwaggerTests;
+namespace OpenApiTests;
 
-class ResponseTest extends SwaggerTestCase
+class ResponseTest extends OpenApiTestCase
 {
     public function testMisspelledDefault()
     {
-        $annotations = $this->parseComment('@SWG\Get(@SWG\Response(response="Default", description="description"))');
-        $this->assertSwaggerLogEntryStartsWith('Invalid value "Default" for @SWG\Response()->response, expecting "default" or a HTTP Status Code in ');
+        $this->validateMisspelledAnnotation("Default");
+    }
+    
+    public function testMisspelledRangeDefinition()
+    {
+        $this->validateMisspelledAnnotation("5xX");
+    }
+    
+    public function testWrongRangeDefinition()
+    {
+        $this->validateMisspelledAnnotation("6XX");
+    }
+    
+    protected function validateMisspelledAnnotation(string $response = "")
+    {
+        $annotations = $this->parseComment(
+            '@OA\Get(@OA\Response(response="' . $response . '", description="description"))'
+        );
+        /**
+         * @see Annotations/Operation.php:187
+         */
+        $this->assertOpenApiLogEntryStartsWith(
+            'Invalid value "'.$response.'" for @OA\Response()->response, expecting "default"'
+            . ', a HTTP Status Code or HTTP '
+        );
         $annotations[0]->validate();
     }
 }

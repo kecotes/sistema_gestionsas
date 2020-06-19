@@ -12,8 +12,6 @@ use Yajra\Datatables\Contracts\DataTableScopeContract;
 use Yajra\Datatables\Datatables;
 use Yajra\Datatables\Transformers\DataTransformer;
 
-use SimpleXMLElement;
-
 /**
  * Class DataTable.
  *
@@ -75,13 +73,6 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
     protected $filename = '';
 
     /**
-     * Custom attributes set on the class.
-     *
-     * @var array
-     */
-    protected $attributes = [];
-
-    /**
      * DataTable constructor.
      *
      * @param \Yajra\Datatables\Datatables $datatables
@@ -99,7 +90,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
      * @param string $view
      * @param array $data
      * @param array $mergeData
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function render($view, $data = [], $mergeData = [])
     {
@@ -165,7 +156,7 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
     /**
      * Get columns definition from html builder.
      *
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
     protected function getColumnsFromBuilder()
     {
@@ -248,25 +239,6 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
         return $excel->create($this->getFilename(), function (LaravelExcelWriter $excel) {
             $excel->sheet('exported-data', function (LaravelExcelWorksheet $sheet) {
                 $sheet->fromArray($this->getDataForExport());
-                $highestColumn = $sheet->getHighestColumn();
-
-                for($row = 1; $row <= sizeof($sheet->data); $row++) {
-                    foreach (range('A', $highestColumn) as $column) {
-                        $cell = $sheet->getCell($column.$row);
-                        $cellValue = $cell->getValue();
-
-                        if($cellValue != strip_tags($cellValue)) {
-                            $tag = new SimpleXMLElement($cellValue);
-
-                            if($tag['href'] && filter_var($tag['href'], FILTER_VALIDATE_URL)) {
-                                $value = $tag->__toString() ? $tag->__toString() : $tag['href'];
-                                $cell->setValue($value)
-                                    ->getHyperlink()
-                                    ->setUrl($tag['href']);
-                            }
-                        }
-                    }
-                }
             });
         });
     }
@@ -387,39 +359,6 @@ abstract class DataTable implements DataTableContract, DataTableButtonsContract
         $this->scopes[] = $scope;
 
         return $this;
-    }
-
-    /**
-     * Set a custom class attribute.
-     *
-     * @param mixed $key
-     * @param mixed|null $value
-     * @return $this
-     */
-    public function with($key, $value = null)
-    {
-        if (is_array($key)) {
-            $this->attributes = array_merge($this->attributes, $key);
-        } else {
-            $this->attributes[$key] = $value;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Dynamically retrieve the value of an attribute.
-     *
-     * @param string $key
-     * @return mixed|null
-     */
-    public function __get($key)
-    {
-        if (array_key_exists($key, $this->attributes)) {
-            return $this->attributes[$key];
-        }
-
-        return null;
     }
 
     /**

@@ -142,51 +142,26 @@ interface Canvas
 
     /**
      * Rotate
-     *
-     * @param float $angle angle in degrees for counter-clockwise rotation
-     * @param float $x     Origin abscissa
-     * @param float $y     Origin ordinate
      */
     function rotate($angle, $x, $y);
 
     /**
      * Skew
-     *
-     * @param float $angle_x
-     * @param float $angle_y
-     * @param float $x Origin abscissa
-     * @param float $y Origin ordinate
      */
     function skew($angle_x, $angle_y, $x, $y);
 
     /**
      * Scale
-     *
-     * @param float $s_x scaling factor for width as percent
-     * @param float $s_y scaling factor for height as percent
-     * @param float $x   Origin abscissa
-     * @param float $y   Origin ordinate
      */
     function scale($s_x, $s_y, $x, $y);
 
     /**
      * Translate
-     *
-     * @param float $t_x movement to the right
-     * @param float $t_y movement to the bottom
      */
     function translate($t_x, $t_y);
 
     /**
      * Transform
-     *
-     * @param $a
-     * @param $b
-     * @param $c
-     * @param $d
-     * @param $e
-     * @param $f
-     * @return
      */
     function transform($a, $b, $c, $d, $e, $f);
 
@@ -261,6 +236,8 @@ interface Canvas
      * @param array $color Color
      * @param float $width
      * @param array $style
+     *
+     * @return void
      */
     function arc($x, $y, $r1, $r2, $astart, $aend, $color, $width, $style = array());
 
@@ -277,6 +254,8 @@ interface Canvas
      * @param float $word_space word spacing adjustment
      * @param float $char_space char spacing adjustment
      * @param float $angle angle
+     *
+     * @return void
      */
     function text($x, $y, $text, $font, $size, $color = array(0, 0, 0), $word_space = 0.0, $char_space = 0.0, $angle = 0.0);
 
@@ -295,6 +274,8 @@ interface Canvas
      * @param float $y The y position of the link
      * @param float $width The width of the link
      * @param float $height The height of the link
+     *
+     * @return void
      */
     function add_link($url, $x, $y, $width, $height);
 
@@ -338,21 +319,6 @@ interface Canvas
      * @return float
      */
     function get_font_baseline($font, $size);
-
-    /**
-     * Returns the PDF's width in points
-     *
-     * @return float
-     */
-    function get_width();
-
-
-    /**
-     * Return the image's height in pixels
-     *
-     * @return float
-     */
-    function get_height();
 
     /**
      * Returns the font x-height, in points
@@ -405,18 +371,18 @@ interface Canvas
     function new_page();
 
     /**
-     * Streams the PDF directly to the browser.
+     * Streams the PDF directly to the browser
      *
-     * @param string $filename The filename to present to the browser.
-     * @param array $options Associative array: 'compress' => 1 or 0 (default 1); 'Attachment' => 1 or 0 (default 1).
+     * @param string $filename the name of the PDF file
+     * @param array $options associative array, 'Attachment' => 0 or 1, 'compress' => 1 or 0
      */
-    function stream($filename, $options = array());
+    function stream($filename, $options = null);
 
     /**
-     * Returns the PDF as a string.
+     * Returns the PDF as a string
      *
-     * @param array $options Associative array: 'compress' => 1 or 0 (default 1).
+     * @param array $options associative array: 'compress' => 1 or 0
      * @return string
      */
-    function output($options = array());
+    function output($options = null);
 }

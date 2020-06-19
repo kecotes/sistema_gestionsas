@@ -18,8 +18,17 @@ use Dompdf\FrameDecorator\AbstractFrameDecorator;
  */
 class Block extends AbstractPositioner {
 
-    function position(AbstractFrameDecorator $frame)
+
+    function __construct(AbstractFrameDecorator $frame)
     {
+        parent::__construct($frame);
+    }
+
+    //........................................................................
+
+    function position()
+    {
+        $frame = $this->_frame;
         $style = $frame->get_style();
         $cb = $frame->get_containing_block();
         $p = $frame->find_block_parent();
@@ -40,10 +49,10 @@ class Block extends AbstractPositioner {
 
         // Relative positionning
         if ($style->position === "relative") {
-            $top = (float)$style->length_in_pt($style->top, $cb["h"]);
-            //$right =  (float)$style->length_in_pt($style->right,  $cb["w"]);
-            //$bottom = (float)$style->length_in_pt($style->bottom, $cb["h"]);
-            $left = (float)$style->length_in_pt($style->left, $cb["w"]);
+            $top = $style->length_in_pt($style->top, $cb["h"]);
+            //$right =  $style->length_in_pt($style->right,  $cb["w"]);
+            //$bottom = $style->length_in_pt($style->bottom, $cb["h"]);
+            $left = $style->length_in_pt($style->left, $cb["w"]);
 
             $x += $left;
             $y += $top;

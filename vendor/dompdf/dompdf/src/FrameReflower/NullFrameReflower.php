@@ -19,18 +19,11 @@ use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
 class NullFrameReflower extends AbstractFrameReflower
 {
 
-    /**
-     * NullFrameReflower constructor.
-     * @param Frame $frame
-     */
     function __construct(Frame $frame)
     {
         parent::__construct($frame);
     }
 
-    /**
-     * @param BlockFrameDecorator|null $block
-     */
     function reflow(BlockFrameDecorator $block = null)
     {
         return;

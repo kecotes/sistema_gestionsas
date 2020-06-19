@@ -12,7 +12,6 @@ class DefaultStyle extends Style
 {
     public $color = '';
     public $opacity = 1.0;
-    public $display = 'inline';
 
     public $fill = 'black';
     public $fillOpacity = 1.0;

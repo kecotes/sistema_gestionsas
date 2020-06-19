@@ -51,8 +51,7 @@ class HTML5_InputStream {
     public $errors = array();
 
     /**
-     * @param $data | Data to parse
-     * @throws Exception
+     * @param $data Data to parse
      */
     public function __construct($data) {
 
@@ -77,7 +76,7 @@ class HTML5_InputStream {
             $data = @iconv('UTF-8', 'UTF-8//IGNORE', $data);
         } else {
             // we can make a conforming native implementation
-            throw new Exception('Not implemented, please install iconv');
+            throw new Exception('Not implemented, please install mbstring or iconv');
         }
 
         /* One leading U+FEFF BYTE ORDER MARK character must be
@@ -162,12 +161,10 @@ class HTML5_InputStream {
 
     /**
      * Returns the current line that the tokenizer is at.
-     *
-     * @return int
      */
     public function getCurrentLine() {
         // Check the string isn't empty
-        if ($this->EOF) {
+        if($this->EOF) {
             // Add one to $this->char because we want the number for the next
             // byte to be processed.
             return substr_count($this->data, "\n", 0, min($this->char, $this->EOF)) + 1;
@@ -179,8 +176,6 @@ class HTML5_InputStream {
 
     /**
      * Returns the current column of the current line that the tokenizer is at.
-     *
-     * @return int
      */
     public function getColumnOffset() {
         // strrpos is weird, and the offset needs to be negative for what we
@@ -192,18 +187,18 @@ class HTML5_InputStream {
 
         // However, for here we want the length up until the next byte to be
         // processed, so add one to the current byte ($this->char).
-        if ($lastLine !== false) {
+        if($lastLine !== false) {
             $findLengthOf = substr($this->data, $lastLine + 1, $this->char - 1 - $lastLine);
         } else {
             $findLengthOf = substr($this->data, 0, $this->char);
         }
 
         // Get the length for the string we need.
-        if (extension_loaded('iconv')) {
+        if(extension_loaded('iconv')) {
             return iconv_strlen($findLengthOf, 'utf-8');
-        } elseif (extension_loaded('mbstring')) {
+        } elseif(extension_loaded('mbstring')) {
             return mb_strlen($findLengthOf, 'utf-8');
-        } elseif (extension_loaded('xml')) {
+        } elseif(extension_loaded('xml')) {
             return strlen(utf8_decode($findLengthOf));
         } else {
             $count = count_chars($findLengthOf);
@@ -217,8 +212,6 @@ class HTML5_InputStream {
     /**
      * Retrieve the currently consume character.
      * @note This performs bounds checking
-     *
-     * @return bool|string
      */
     public function char() {
         return ($this->char++ < $this->EOF)
@@ -229,11 +222,9 @@ class HTML5_InputStream {
     /**
      * Get all characters until EOF.
      * @note This performs bounds checking
-     *
-     * @return string|bool
      */
     public function remainingChars() {
-        if ($this->char < $this->EOF) {
+        if($this->char < $this->EOF) {
             $data = substr($this->data, $this->char);
             $this->char = $this->EOF;
             return $data;
@@ -245,10 +236,7 @@ class HTML5_InputStream {
     /**
      * Matches as far as possible until we reach a certain set of bytes
      * and returns the matched substring.
-     *
-     * @param $bytes | Bytes to match.
-     * @param null $max
-     * @return bool|string
+     * @param $bytes Bytes to match.
      */
     public function charsUntil($bytes, $max = null) {
         if ($this->char < $this->EOF) {
@@ -268,10 +256,7 @@ class HTML5_InputStream {
     /**
      * Matches as far as possible with a certain set of bytes
      * and returns the matched substring.
-     *
-     * @param $bytes | Bytes to match.
-     * @param null $max
-     * @return bool|string
+     * @param $bytes Bytes to match.
      */
     public function charsWhile($bytes, $max = null) {
         if ($this->char < $this->EOF) {

@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -256,11 +256,11 @@ class SurfaceGmagick implements SurfaceInterface
         $this->style = $style;
         $canvas = $this->canvas;
 
-        if (is_array($style->stroke) && $stroke = $style->stroke) {
+        if ($stroke = $style->stroke) {
             $canvas->setcolor("stroke", "rgb", $stroke[0] / 255, $stroke[1] / 255, $stroke[2] / 255, null);
         }
 
-        if (is_array($style->fill) && $fill = $style->fill) {
+        if ($fill = $style->fill) {
            // $canvas->setcolor("fill", "rgb", $fill[0] / 255, $fill[1] / 255, $fill[2] / 255, null);
         }
 
@@ -299,10 +299,5 @@ class SurfaceGmagick implements SurfaceInterface
         }
 
         return $this->canvas->load_font($family, "unicode", "fontstyle=$style");
-    }
-
-    public function setFont($family, $style, $weight)
-    {
-        // TODO: Implement setFont() method.
     }
 }

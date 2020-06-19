@@ -4,6 +4,7 @@ namespace Prettus\Repository\Contracts;
 /**
  * Interface RepositoryInterface
  * @package Prettus\Repository\Contracts
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 interface RepositoryInterface
 {
@@ -47,7 +48,7 @@ interface RepositoryInterface
      * @param $attributes
      * @return mixed
      */
-     public function syncWithoutDetaching($id, $relation, $attributes);
+    public function syncWithoutDetaching($id, $relation, $attributes);
 
     /**
      * Retrieve all data of repository
@@ -132,6 +133,17 @@ interface RepositoryInterface
     public function findWhereNotIn($field, array $values, $columns = ['*']);
 
     /**
+     * Find data by between values in one field
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhereBetween($field, array $values, $columns = ['*']);
+
+    /**
      * Save a new entity in repository
      *
      * @param array $attributes
@@ -189,7 +201,7 @@ interface RepositoryInterface
      * @return $this
      */
     public function with($relations);
-    
+
     /**
      * Load relation with closure
      *
@@ -199,7 +211,7 @@ interface RepositoryInterface
      * @return $this
      */
     public function whereHas($relation, $closure);
-    
+
     /**
      * Add subselect queries to count the relations.
      *
@@ -284,4 +296,24 @@ interface RepositoryInterface
      * @return mixed
      */
     public function firstOrCreate(array $attributes = []);
+
+    /**
+     * Trigger static method calls to the model
+     *
+     * @param $method
+     * @param $arguments
+     *
+     * @return mixed
+     */
+    public static function __callStatic($method, $arguments);
+
+    /**
+     * Trigger method calls to the model
+     *
+     * @param string $method
+     * @param array  $arguments
+     *
+     * @return mixed
+     */
+    public function __call($method, $arguments);
 }
